@@ -1,4 +1,4 @@
 package Backend.BuisnessObjects;
 
-public class Kategorie {
+public class Kategorie extends DatabaseItem{
 }

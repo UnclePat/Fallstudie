@@ -1,4 +1,4 @@
 package Backend.BuisnessObjects;
 
-public class AbrechnungItem {
+public class AbrechnungItem extends DatabaseItem{
 }
