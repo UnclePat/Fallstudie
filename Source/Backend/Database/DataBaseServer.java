@@ -1,7 +1,6 @@
 package Backend.Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class DataBaseServer
 {
@@ -32,5 +31,33 @@ public class DataBaseServer
     public static void main(String[] args)
     {
         DataBaseServer connServer = new DataBaseServer();
+    }
+
+    public ResultSet select(String query) throws SQLException {
+        Statement statement = this.databaseConnection.createStatement();
+
+        return statement.executeQuery(query);
+    }
+
+    public int update(String query) throws SQLException {
+        Statement statement = this.databaseConnection.createStatement();
+
+        return statement.executeUpdate(query);
+    }
+
+    public int insert(String query) throws SQLException {
+        Statement statement = this.databaseConnection.createStatement();
+
+        return statement.executeUpdate(query);
+    }
+
+    public int markAsDeleted(){
+        //ToDo String Tabelle, int Key -> Set DeletionFlag = true
+        return 0;
+    }
+
+    public int markAsNotDeleted(){
+        //ToDo String Tabelle, int Key -> Set DeletionFlag = false
+        return 0;
     }
 }
