@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Kategorie extends DatabaseItem{
 
+    private List<AbrechnungItem> AbrechnungsItems;
+
     @Override
     public void saveItem() {
 
