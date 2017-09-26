@@ -1,5 +1,8 @@
 package Backend.BuisnessObjects;
 
+import Backend.Database.DataBaseServer;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public abstract class DatabaseItem {
@@ -20,4 +23,14 @@ public abstract class DatabaseItem {
     protected abstract void updateItem();
 
     public abstract void loadItem();
+
+    public void markAsDeleted() throws SQLException {
+        DataBaseServer db = new DataBaseServer();
+        db.markAsDeleted(this.tableName, this.key);
+    }
+
+    public void markAsNotDeleted() throws SQLException {
+        DataBaseServer db = new DataBaseServer();
+        db.markAsNotDeleted(this.tableName, this.key);
+    }
 }

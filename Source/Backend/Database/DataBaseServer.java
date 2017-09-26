@@ -52,13 +52,21 @@ public class DataBaseServer
         return statement.executeUpdate(query);
     }
 
-    public int markAsDeleted(){
-        //ToDo String Tabelle, int Key -> Set DeletionFlag = true
-        return 0;
+    public int markAsDeleted(String table, int key) throws SQLException {
+        String sql = " UPDATE " + table +
+        " SET deletionFlag = true" +
+        " WHERE intKey = " + key;
+
+        Statement statement = this.databaseConnection.createStatement();
+        return statement.executeUpdate(sql);
     }
 
-    public int markAsNotDeleted(){
-        //ToDo String Tabelle, int Key -> Set DeletionFlag = false
-        return 0;
+    public int markAsNotDeleted(String table, int key) throws SQLException{
+        String sql = " UPDATE " + table +
+                " SET deletionFlag = false" +
+                " WHERE intKey = " + key;
+
+        Statement statement = this.databaseConnection.createStatement();
+        return statement.executeUpdate(sql);
     }
 }
