@@ -4,7 +4,8 @@ import java.sql.*;
 
 public class DataBaseServer
 {
-    Connection databaseConnection;
+    private Connection databaseConnection;
+    private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa";
 
     public void dbConnect(String db_connect_string)
     {
@@ -25,7 +26,7 @@ public class DataBaseServer
 
     public void DataBaseServer()
     {
-        this.dbConnect("jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa");
+        this.dbConnect(DB_CONNECTION_STRING);
     }
 
     public static void main(String[] args)
