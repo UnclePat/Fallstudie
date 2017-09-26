@@ -47,15 +47,19 @@ public class DataBaseServer
     }
 
     public int insert(String query) throws SQLException {
-        Statement statement = this.databaseConnection.createStatement();
+        Statement statement = this.databaseConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        statement.execute(query);
 
-        return statement.executeUpdate(query);
+        ResultSet rs = statement.getGeneratedKeys();
+        rs.next();
+
+        return rs.getInt(1);
     }
 
     public int markAsDeleted(String table, int key) throws SQLException {
         String sql = " UPDATE " + table +
-        " SET deletionFlag = true" +
-        " WHERE intKey = " + key;
+                " SET deletionFlag = true" +
+                " WHERE intKey = " + key;
 
         Statement statement = this.databaseConnection.createStatement();
         return statement.executeUpdate(sql);
