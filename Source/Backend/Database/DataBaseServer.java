@@ -7,10 +7,10 @@ public class DataBaseServer
     private Connection databaseConnection;
     private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa";
 
-    public void dbConnect(String db_connect_string)
+    public void dbConnect()
     {
         try {
-            String dbURL = db_connect_string;
+            String dbURL = DB_CONNECTION_STRING;
             Connection conn = DriverManager.getConnection(dbURL);
             if (conn != null) {
                 System.out.println("Connected");
@@ -26,7 +26,7 @@ public class DataBaseServer
 
     public void DataBaseServer()
     {
-        this.dbConnect(DB_CONNECTION_STRING);
+        this.dbConnect();
     }
 
     public static void main(String[] args)

@@ -1,7 +1,14 @@
 package Backend.BuisnessObjects;
 
+import Backend.User.User;
+
+import javax.print.DocFlavor;
+import java.sql.Date;
+
 public class AbrechnungItem extends DatabaseItem{
     private double rechnungsBetrag;
+    private String name;
+    private String beschreibung;
 
     public double getRechnungsBetrag() {
         return rechnungsBetrag = 0;
