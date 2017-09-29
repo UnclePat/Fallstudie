@@ -1,8 +1,14 @@
 package Backend.Base;
 
 import Backend.User.User;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class Application {
+public class Application extends javafx.application.Application {
     private static User currentUser;
 
     private void setCurrentUser(User _currentUser){
@@ -13,7 +19,28 @@ public class Application {
         return Application.currentUser;
     }
 
-    public static void Main(String[] args){
-        // Hier das LoginForm in einer Schleife aufrufen und den User setzen, anschließend die Kontrolle an das MainForm übergeben.
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World!");
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
+
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.show();
     }
 }
+
+
