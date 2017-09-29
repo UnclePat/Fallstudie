@@ -14,10 +14,11 @@ public class DataBaseServer
             Connection conn = DriverManager.getConnection(dbURL);
             if (conn != null) {
                 System.out.println("Connected");
+                this.databaseConnection = conn;
             }
             else
             {
-                this.databaseConnection = conn;
+                System.out.println("Connection attempt failed");
             }
         } catch (Exception e) {
             e.printStackTrace();

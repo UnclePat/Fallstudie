@@ -7,17 +7,18 @@ public class DatabaseConnectionTest {
     private Connection databaseConnection;
     private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa";
 
-    public void dbConnect()
+    public void DatabaseConnectionTest()
     {
         try {
             String dbURL = DB_CONNECTION_STRING;
             Connection conn = DriverManager.getConnection(dbURL);
             if (conn != null) {
-                System.out.println("Connected");
+                this.databaseConnection = conn;
+                System.out.println("Connection established");
             }
             else
             {
-                this.databaseConnection = conn;
+                System.out.println("Connection failed");
             }
         } catch (Exception e) {
             e.printStackTrace();
