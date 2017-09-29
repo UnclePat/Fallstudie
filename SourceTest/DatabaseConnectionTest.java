@@ -7,7 +7,7 @@ public class DatabaseConnectionTest {
     private Connection databaseConnection;
     private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa";
 
-    public void DatabaseConnectionTest()
+    public DatabaseConnectionTest()
     {
         try {
             String dbURL = DB_CONNECTION_STRING;
