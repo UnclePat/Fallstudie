@@ -25,7 +25,7 @@ public class DataBaseServer
         }
     }
 
-    public void DataBaseServer()
+    public DataBaseServer()
     {
         this.dbConnect();
     }
