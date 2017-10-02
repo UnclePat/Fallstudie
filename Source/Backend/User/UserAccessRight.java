@@ -2,7 +2,7 @@ package Backend.User;
 
 import Backend.BuisnessObjects.DatabaseItem;
 
-public class UserGroup extends DatabaseItem{
+public class UserAccessRight extends DatabaseItem{
     @Override
     public void saveItem() {
 

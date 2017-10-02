@@ -1,7 +1,9 @@
 package Backend.BuisnessObjects;
 
 import Backend.Database.DataBaseServer;
+import Backend.User.User;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -9,6 +11,12 @@ public abstract class DatabaseItem {
     int key;
     List<String> columnNames;
     String tableName;
+
+    private Date dateCreated;
+    private User createdBy;
+    private boolean deletionFlag;
+    private Date dateDeleted;
+    private User deletedBy;
 
     public void DatabaseItem(List<String> _columnNames, String _tableName, int _key){
 

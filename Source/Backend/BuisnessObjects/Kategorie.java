@@ -5,6 +5,7 @@ import java.util.List;
 public class Kategorie extends DatabaseItem{
 
     private List<AbrechnungItem> AbrechnungsItems;
+    private List<Kategorie> SubKategorien;
 
     @Override
     public void saveItem() {
@@ -28,6 +29,10 @@ public class Kategorie extends DatabaseItem{
 
     public double getSum(){
         double sum = 0;
+
+        for (Kategorie subKategorie : SubKategorien) {
+            sum += subKategorie.getSum();
+        }
 
         for (AbrechnungItem item : AbrechnungsItems) {
             sum += item.getRechnungsBetrag();
