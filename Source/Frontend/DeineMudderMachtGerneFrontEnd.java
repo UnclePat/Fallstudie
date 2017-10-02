@@ -1,6 +1,5 @@
 package Frontend;
 
-import com.intellij.ui.JBColor;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
