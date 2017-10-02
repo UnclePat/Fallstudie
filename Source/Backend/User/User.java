@@ -47,8 +47,27 @@ public class User extends DatabaseItem{
     @Override
     protected void updateItem() {
         try {
-            String query = "";
+            String query = "INSERT INTO [dbo].[User]\n" +
+                    "           ([strName]\n" +
+                    "           ,[boolAdmin]\n" +
+                    "           ,[strPassword]\n" +
+                    "           ,[dateCreated]\n" +
+                    "           ,[intFkeyUserCreatedBy]\n" +
+                    "           ,[boolDeletionFlag]\n" +
+                    "           ,[intFkeyUserDeletedBy]\n" +
+                    "           ,[dateDeleted])\n" +
+                    "     VALUES\n" +
+                    "           (?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?)\n" +
+                    "GO";
+
             List<String> values = new ArrayList<>();
+            values.add(this.getName());
 
             DataBaseServer connection = new DataBaseServer();
 
