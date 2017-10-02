@@ -5,6 +5,7 @@ import Backend.Database.DataBaseServer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class User extends DatabaseItem{
@@ -12,6 +13,79 @@ public class User extends DatabaseItem{
 
     public List<UserAccessRight> getUserGroups() {
         return userGroups;
+    }
+
+    String name;
+    boolean isAdmin;
+    String password;
+    Date dateCreated;
+    Integer FkeyUserCreated;
+    boolean DeletionFlag;
+    User DeletedByUser;
+    Date dateDeleted;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setDateCreated(Date dateCreated){
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setFkeyUserCreated(Integer FkeyUserCreated){
+        this.FkeyUserCreated = FkeyUserCreated;
+    }
+
+    public Integer getFkeyUserCreated() {
+        return FkeyUserCreated;
+    }
+
+    public void setdeletionFlag(boolean DeletionFlag){
+        this.DeletionFlag = DeletionFlag;
+    }
+
+    public boolean getDeletionFlag(){
+        return DeletionFlag;
+    }
+
+    public void setDeletedByUser(User FKeyUserDeleted){
+        this.DeletedByUser = FKeyUserDeleted;
+    }
+
+    public User getDeletedByUser() {
+        return DeletedByUser;
+    }
+
+    public void setDateDeleted(Date dateDeleted){
+        this.dateDeleted = dateDeleted;
+    }
+
+    public Date getDateDeleted() {
+        return dateDeleted;
     }
 
     private void setUserGroups(List<UserAccessRight> _userGroups){
@@ -51,13 +125,14 @@ public class User extends DatabaseItem{
                     "GO";
 
             List<String> values = new ArrayList<>();
-            values.add(this.getname());
-            values.add(this.Admin());
+            values.add(this.getName());
+            values.add(this.getAdmin() ? "1":"0");
             values.add(this.getPassword());
-            values.add(this.dateCreated());
-            values.add(this.FkeyUserCreated);
-            values.add(this.DeletionFlag());
-            values.add(this.dateDeleted());
+            values.add(this.getDateCreated().toString());
+            values.add(this.getFkeyUserCreated().toString());
+            values.add(this.getDeletionFlag() ? "1":"0");
+            values.add(this.getDeletedByUser().getKey().toString());
+            values.add(this.getDateDeleted().toString());
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -68,6 +143,8 @@ public class User extends DatabaseItem{
 
         return null;
     }
+
+
 
     @Override
     protected void updateItem() {
@@ -93,12 +170,13 @@ public class User extends DatabaseItem{
 
             List<String> values = new ArrayList<>();
             values.add(this.getName());
-            values.add(this.Admin());
+            values.add(this.getAdmin() ? "1":"0");
             values.add(this.getPassword());
-            values.add(this.dateCreated());
-            values.add(this.FkeyUserCreated);
-            values.add(this.DeletionFlag());
-            values.add(this.dateDeleted());
+            values.add(this.getDateCreated().toString());
+            values.add(this.getFkeyUserCreated().toString());
+            values.add(this.getDeletionFlag() ? "1":"0");
+            values.add(this.getDeletedByUser().getKey().toString());
+            values.add(this.getDateDeleted().toString());
 
             DataBaseServer connection = new DataBaseServer();
 

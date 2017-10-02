@@ -20,6 +20,7 @@ public class Kategorie extends DatabaseItem{
     @Override
     protected void updateItem() {
 
+
     }
 
     @Override
