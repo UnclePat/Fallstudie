@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class DatabaseItem {
-    int key;
+    Integer key;
     List<String> columnNames;
     String tableName;
 
@@ -25,20 +25,28 @@ public abstract class DatabaseItem {
         this.tableName = _tableName;
     }
 
+    public Integer getKey() {
+        return key;
+    }
+
+    public void setKey(Integer key) {
+        this.key = key;
+    }
+
     public abstract void saveItem();
 
-    protected abstract int createItem();
+    protected abstract Integer createItem();
     protected abstract void updateItem();
 
     public abstract void loadItem();
 
     public void markAsDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();
-        db.markAsDeleted(this.tableName, this.key);
+        db.markAsDeleted(this.tableName, this.key.intValue());
     }
 
     public void markAsNotDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();
-        db.markAsNotDeleted(this.tableName, this.key);
+        db.markAsNotDeleted(this.tableName, this.key.intValue());
     }
 }
