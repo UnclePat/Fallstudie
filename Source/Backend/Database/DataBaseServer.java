@@ -30,11 +30,6 @@ public class DataBaseServer
         this.dbConnect();
     }
 
-    public static void main(String[] args)
-    {
-        DataBaseServer connServer = new DataBaseServer();
-    }
-
     public ResultSet select(String query) throws SQLException {
         Statement statement = this.databaseConnection.createStatement();
 
