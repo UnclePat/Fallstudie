@@ -31,8 +31,33 @@ public class User extends DatabaseItem{
     @Override
     protected Integer createItem() {
         try {
-            String query = "";
+            String query = "INSERT INTO [dbo].[User]\n" +
+                    "           ([strName]\n" +
+                    "           ,[boolAdmin]\n" +
+                    "           ,[strPassword]\n" +
+                    "           ,[dateCreated]\n" +
+                    "           ,[intFkeyUserCreatedBy]\n" +
+                    "           ,[boolDeletionFlag]\n" +
+                    "           ,[intFkeyUserDeletedBy]\n" +
+                    "           ,[dateDeleted])\n" +
+                    "     VALUES\n" +
+                    "           (?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?\n" +
+                    "\t\t\t,?)\n" +
+                    "GO";
+
             List<String> values = new ArrayList<>();
+            values.add(this.getname());
+            values.add(this.Admin());
+            values.add(this.getPassword());
+            values.add(this.dateCreated());
+            values.add(this.FkeyUserCreated);
+            values.add(this.DeletionFlag());
+            values.add(this.dateDeleted());
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -68,6 +93,12 @@ public class User extends DatabaseItem{
 
             List<String> values = new ArrayList<>();
             values.add(this.getName());
+            values.add(this.Admin());
+            values.add(this.getPassword());
+            values.add(this.dateCreated());
+            values.add(this.FkeyUserCreated);
+            values.add(this.DeletionFlag());
+            values.add(this.dateDeleted());
 
             DataBaseServer connection = new DataBaseServer();
 
