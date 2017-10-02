@@ -20,6 +20,32 @@ public class User extends DatabaseItem{
 
     @Override
     public void saveItem() {
+        if (this.getKey() == null){
+            this.setKey(createItem());
+        }
+        else{
+            updateItem();
+        }
+    }
+
+    @Override
+    protected Integer createItem() {
+        try {
+            String query = "";
+            List<String> values = new ArrayList<>();
+
+            DataBaseServer connection = new DataBaseServer();
+
+            return connection.insert(query, values);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    protected void updateItem() {
         try {
             String query = "";
             List<String> values = new ArrayList<>();
@@ -30,16 +56,6 @@ public class User extends DatabaseItem{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected int createItem() {
-        return 0;
-    }
-
-    @Override
-    protected void updateItem() {
-
     }
 
     @Override
