@@ -13,6 +13,7 @@ public abstract class DatabaseItem {
     String tableName;
 
     private Date dateCreated;
+    private User createdBy;
     private boolean deletionFlag;
     private Date dateDeleted;
     private User deletedBy;
