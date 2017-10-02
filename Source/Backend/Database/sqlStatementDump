@@ -1,0 +1,79 @@
+/*    ==Skriptparameter==
+
+    Quellserverversion : SQL Server 2016 (13.0.4001)
+    Edition des Quelldatenbankmoduls : Microsoft SQL Server Express Edition
+    Typ des Quelldatenbankmoduls : Eigenständige SQL Server-Instanz
+
+    Zielserverversion : SQL Server 2016
+    Edition des Zieldatenbankmoduls : Microsoft SQL Server Express Edition
+    Typ des Zieldatenbankmoduls : Eigenständige SQL Server-Instanz
+*/
+
+USE [Haushaltsbuch]
+GO
+
+/****** Object:  Table [dbo].[Kategorie]    Script Date: 02.10.2017 09:12:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Kategorie](
+	[intKey] [int] IDENTITY(1,1) NOT NULL,
+	[dateCreated] [date] NOT NULL,
+	[intFkeyUserCreatedBy] [int] NOT NULL,
+	[boolDeletionFlag] [bit] NOT NULL,
+	[intFkeyUserDeletedBy] [int] NULL,
+	[dateDeleted] [date] NULL,
+	[strName] [nvarchar](50) NOT NULL,
+	[strBeschreibung] [nvarchar](50) NULL,
+	[intFkeyKategorieParent] [int] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Kategorie] ADD  CONSTRAINT [DF_Kategorie_boolDeletionFlag]  DEFAULT ((0)) FOR [boolDeletionFlag]
+GO
+
+
+/*    ==Skriptparameter==
+
+    Quellserverversion : SQL Server 2016 (13.0.4001)
+    Edition des Quelldatenbankmoduls : Microsoft SQL Server Express Edition
+    Typ des Quelldatenbankmoduls : Eigenständige SQL Server-Instanz
+
+    Zielserverversion : SQL Server 2016
+    Edition des Zieldatenbankmoduls : Microsoft SQL Server Express Edition
+    Typ des Zieldatenbankmoduls : Eigenständige SQL Server-Instanz
+*/
+
+USE [Haushaltsbuch]
+GO
+
+/****** Object:  Table [dbo].[User]    Script Date: 02.10.2017 09:12:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[User](
+	[intKey] [int] IDENTITY(1,1) NOT NULL,
+	[strName] [nvarchar](50) NOT NULL,
+	[boolAdmin] [bit] NOT NULL,
+	[strPassword] [nvarchar](50) NOT NULL,
+	[dateCreated] [date] NOT NULL,
+	[intFkeyUserCreatedBy] [int] NULL,
+	[boolDeletionFlag] [bit] NOT NULL,
+	[intFkeyUserDeletedBy] [int] NULL,
+	[dateDeleted] [date] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_boolDeletionFlag]  DEFAULT ((0)) FOR [boolDeletionFlag]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'User'
+GO
+
+
