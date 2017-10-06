@@ -5,7 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class UserklasseTest {
-  public static void main(String[] args) {
+
+  public void test() {
     User testUser = new User();
 
     testUser.setAdmin(true);
@@ -14,11 +15,8 @@ public class UserklasseTest {
     testUser.setDateCreated(LocalDate.now());
     testUser.setFkeyUserCreated(1);
 
-    testUser.saveItem();
-
-    testUser.setName("Updated");
 
     testUser.saveItem();
   }
-}
 
+}
