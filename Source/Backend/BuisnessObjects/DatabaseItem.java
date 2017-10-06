@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class DatabaseItem {
-    Integer key;
+    Integer key = null;
     List<String> columnNames;
     String tableName;
 

@@ -21,7 +21,7 @@ public class User extends DatabaseItem{
     Date dateCreated;
     Integer FkeyUserCreated = null;
     boolean DeletionFlag;
-    User DeletedByUser;
+    User DeletedByUser = null;
     Date dateDeleted;
 
     public void setName(String name) {
