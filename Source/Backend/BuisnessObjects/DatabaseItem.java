@@ -5,18 +5,60 @@ import Backend.User.User;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public abstract class DatabaseItem {
-    Integer key;
+    Integer key = null;
     List<String> columnNames;
     String tableName;
 
-    private Date dateCreated;
+    private LocalDate dateDeleted;
+    private User deletedBy;
+
+    private LocalDate dateCreated;
     private User createdBy;
     private boolean deletionFlag;
-    private Date dateDeleted;
-    private User deletedBy;
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public boolean isDeletionFlag() {
+        return deletionFlag;
+    }
+
+    public void setDeletionFlag(boolean deletionFlag) {
+        this.deletionFlag = deletionFlag;
+    }
+
+    public LocalDate getDateDeleted() {
+        return dateDeleted;
+    }
+
+    public void setDateDeleted(LocalDate dateDeleted) {
+        this.dateDeleted = dateDeleted;
+    }
+
+    public User getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(User deletedBy) {
+        this.deletedBy = deletedBy;
+    }
 
     public void DatabaseItem(List<String> _columnNames, String _tableName, int _key){
 

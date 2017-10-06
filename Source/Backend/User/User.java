@@ -18,11 +18,9 @@ public class User extends DatabaseItem{
     String name;
     boolean isAdmin;
     String password;
-    Date dateCreated;
-    Integer FkeyUserCreated;
-    boolean DeletionFlag;
-    User DeletedByUser;
-    Date dateDeleted;
+    Integer FkeyUserCreated = null;
+    boolean DeletionFlag = false;
+    User DeletedByUser = null;
 
     public void setName(String name) {
         this.name = name;
@@ -46,14 +44,6 @@ public class User extends DatabaseItem{
 
     public String getPassword() {
         return password;
-    }
-
-    public void setDateCreated(Date dateCreated){
-        this.dateCreated = dateCreated;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
     }
 
     public void setFkeyUserCreated(Integer FkeyUserCreated){
@@ -80,14 +70,6 @@ public class User extends DatabaseItem{
         return DeletedByUser;
     }
 
-    public void setDateDeleted(Date dateDeleted){
-        this.dateDeleted = dateDeleted;
-    }
-
-    public Date getDateDeleted() {
-        return dateDeleted;
-    }
-
     private void setUserGroups(List<UserAccessRight> _userGroups){
         this.userGroups = _userGroups;
     }
@@ -105,34 +87,29 @@ public class User extends DatabaseItem{
     @Override
     protected Integer createItem() {
         try {
-            String query = "INSERT INTO [dbo].[User]\n" +
-                    "           ([strName]\n" +
-                    "           ,[boolAdmin]\n" +
-                    "           ,[strPassword]\n" +
-                    "           ,[dateCreated]\n" +
-                    "           ,[intFkeyUserCreatedBy]\n" +
-                    "           ,[boolDeletionFlag]\n" +
-                    "           ,[intFkeyUserDeletedBy]\n" +
-                    "           ,[dateDeleted])\n" +
-                    "     VALUES\n" +
-                    "           (?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?)\n" +
-                    "GO";
+            String query = "INSERT INTO [dbo].[User]" +
+                    "           (strName" +
+                    "           ,boolAdmin" +
+                    "           ,strPassword" +
+                    "           ,dateCreated" +
+                    "           ,intFkeyUserCreatedBy" +
+                    "           ,boolDeletionFlag" +
+                    "           )" +
+                    "     VALUES" +
+                    "           (?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?)";
 
             List<String> values = new ArrayList<>();
             values.add(this.getName());
             values.add(this.getAdmin() ? "1":"0");
             values.add(this.getPassword());
-            values.add(this.getDateCreated().toString());
+            values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
-            values.add(this.getDeletedByUser().getKey().toString());
-            values.add(this.getDateDeleted().toString());
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -149,34 +126,34 @@ public class User extends DatabaseItem{
     @Override
     protected void updateItem() {
         try {
-            String query = "INSERT INTO [dbo].[User]\n" +
-                    "           ([strName]\n" +
-                    "           ,[boolAdmin]\n" +
-                    "           ,[strPassword]\n" +
-                    "           ,[dateCreated]\n" +
-                    "           ,[intFkeyUserCreatedBy]\n" +
-                    "           ,[boolDeletionFlag]\n" +
-                    "           ,[intFkeyUserDeletedBy]\n" +
-                    "           ,[dateDeleted])\n" +
-                    "     VALUES\n" +
-                    "           (?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?)\n" +
-                    "GO";
+            String query = "UPDATE [dbo].[User]" +
+                    "   SET strName = ?" +
+                    "      ,boolAdmin = ?" +
+                    "      ,strPassword = ?" +
+                    "      ,dateCreated = ?" +
+                    "      ,intFkeyUserCreatedBy = ?" +
+                    "      ,boolDeletionFlag = ?" +
+                    "      ,intFkeyUserDeletedBy = ?" +
+                    "      ,dateDeleted = ?" +
+                    " WHERE intKey = ?";
 
             List<String> values = new ArrayList<>();
             values.add(this.getName());
             values.add(this.getAdmin() ? "1":"0");
             values.add(this.getPassword());
-            values.add(this.getDateCreated().toString());
+            values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
-            values.add(this.getDeletedByUser().getKey().toString());
-            values.add(this.getDateDeleted().toString());
+            if (this.getDeletedByUser() == null){
+                values.add(null);
+                values.add(null);
+            }
+            else{
+                values.add(this.getDeletedByUser().getKey().toString());
+                values.add(this.getDateDeleted().toString());
+            }
+
+            values.add(this.getKey().toString());
 
             DataBaseServer connection = new DataBaseServer();
 

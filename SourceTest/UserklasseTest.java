@@ -1,23 +1,24 @@
 import Backend.User.User;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 public class UserklasseTest {
-
-  public void test() {
+  public static void main(String[] args) {
     User testUser = new User();
 
     testUser.setAdmin(true);
     testUser.setName("Hans");
-    testUser.setPassword("pwd4sa");
-    testUser.setDateCreated(new Date("2017-10-01"));
-    testUser.setFkeyUserCreated(2);
-    testUser.setdeletionFlag(false);
-    testUser.setDeletedByUser(testUser);
-    testUser.setDateDeleted(new Date("2017-10-01"));
+    testUser.setPassword("test");
+    testUser.setDateCreated(LocalDate.now());
+    testUser.setFkeyUserCreated(1);
 
+    testUser.saveItem();
+
+    testUser.setName("Updated");
 
     testUser.saveItem();
   }
-
 }
+
