@@ -24,7 +24,7 @@ public class AbrechnungItem extends DatabaseItem{
     }
 
     @Override
-    protected int createItem() {
+    protected Integer createItem() {
         return 0;
     }
 
