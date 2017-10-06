@@ -3,6 +3,7 @@ package Backend.User;
 import Backend.BuisnessObjects.DatabaseItem;
 import Backend.Database.DataBaseServer;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class User extends DatabaseItem{
     String password;
     Integer FkeyUserCreated = null;
     boolean DeletionFlag = false;
-    User DeletedByUser = null;
+    Integer FkeyUserDeleted = null;
 
     public void setName(String name) {
         this.name = name;
@@ -62,12 +63,12 @@ public class User extends DatabaseItem{
         return DeletionFlag;
     }
 
-    public void setDeletedByUser(User FKeyUserDeleted){
-        this.DeletedByUser = FKeyUserDeleted;
+    public void setDeletedByUser(Integer FKeyUserDeleted){
+        this.FkeyUserDeleted = FKeyUserDeleted;
     }
 
-    public User getDeletedByUser() {
-        return DeletedByUser;
+    public Integer getDeletedByUser() {
+        return FkeyUserDeleted;
     }
 
     private void setUserGroups(List<UserAccessRight> _userGroups){
@@ -149,7 +150,7 @@ public class User extends DatabaseItem{
                 values.add(null);
             }
             else{
-                values.add(this.getDeletedByUser().getKey().toString());
+                values.add(this.getDeletedByUser().toString());
                 values.add(this.getDateDeleted().toString());
             }
 
@@ -166,5 +167,44 @@ public class User extends DatabaseItem{
     @Override
     public void loadItem() {
 
+    }
+
+    public static User loadItemLogin(String userName, String password) {
+        String query = "SELECT [intKey]" +
+                "      ,[strName]" +
+                "      ,[boolAdmin]" +
+                "      ,[strPassword]" +
+                "      ,[dateCreated]" +
+                "      ,[intFkeyUserCreatedBy]" +
+                "      ,[boolDeletionFlag]" +
+                "      ,[intFkeyUserDeletedBy]" +
+                "      ,[dateDeleted]" +
+                "  FROM [dbo].[User]";
+
+        DataBaseServer connection = new DataBaseServer();
+
+        ResultSet result = null;
+
+        try {
+            result = connection.select(query);
+
+            User user = new User();
+
+            user.setKey(result.getInt("intKey"));
+            user.setName(result.getString("strName"));
+            user.setAdmin(result.getBoolean("boolAdmin"));
+            user.setPassword(result.getString("strPassword"));
+            user.setDateCreated(result.getDate("dateCreated").toLocalDate());
+            user.setFkeyUserCreated(result.getInt("intFkeyUserCreatedBy"));
+            user.setDeletionFlag(result.getBoolean("boolDeletionFlag"));
+            user.setDeletedByUser(result.getInt("intUserFkeyUserDeletedBy"));
+            user.setDateDeleted(result.getDate("dateDeleted").toLocalDate());
+
+            return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
