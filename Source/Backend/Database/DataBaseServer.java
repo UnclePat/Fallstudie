@@ -54,7 +54,7 @@ public class DataBaseServer
             statement.setString(i + 1, values.get(i));
         }
 
-        statement.execute(query);
+        statement.execute();
 
         ResultSet rs = statement.getGeneratedKeys();
         rs.next();

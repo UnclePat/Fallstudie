@@ -19,7 +19,7 @@ public class User extends DatabaseItem{
     boolean isAdmin;
     String password;
     Date dateCreated;
-    Integer FkeyUserCreated;
+    Integer FkeyUserCreated = null;
     boolean DeletionFlag;
     User DeletedByUser;
     Date dateDeleted;
@@ -105,23 +105,22 @@ public class User extends DatabaseItem{
     @Override
     protected Integer createItem() {
         try {
-            String query = "INSERT INTO [dbo].[User]\n" +
-                    "           ([strName]\n" +
-                    "           ,[boolAdmin]\n" +
-                    "           ,[strPassword]\n" +
-                    "           ,[dateCreated]\n" +
-                    "           ,[intFkeyUserCreatedBy]\n" +
-                    "           ,[boolDeletionFlag]\n" +
-                    "           ,[intFkeyUserDeletedBy]\n" +
-                    "           ,[dateDeleted])\n" +
-                    "     VALUES\n" +
-                    "           (?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?)\n" +
+            String query = "INSERT INTO [dbo].[User]" +
+                    "           ([strName]" +
+                    "           ,[boolAdmin]" +
+                    "           ,[strPassword]" +
+                    "           ,[dateCreated]" +
+                    "           ,[intFkeyUserCreatedBy]" +
+                    "           ,[boolDeletionFlag]" +
+                    "           )" +
+                    "     VALUES" +
+                    "           (?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?)" +
                     "GO";
 
             List<String> values = new ArrayList<>();
@@ -131,8 +130,6 @@ public class User extends DatabaseItem{
             values.add(this.getDateCreated().toString());
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
-            values.add(this.getDeletedByUser().getKey().toString());
-            values.add(this.getDateDeleted().toString());
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -149,23 +146,23 @@ public class User extends DatabaseItem{
     @Override
     protected void updateItem() {
         try {
-            String query = "INSERT INTO [dbo].[User]\n" +
-                    "           ([strName]\n" +
-                    "           ,[boolAdmin]\n" +
-                    "           ,[strPassword]\n" +
-                    "           ,[dateCreated]\n" +
-                    "           ,[intFkeyUserCreatedBy]\n" +
-                    "           ,[boolDeletionFlag]\n" +
-                    "           ,[intFkeyUserDeletedBy]\n" +
-                    "           ,[dateDeleted])\n" +
-                    "     VALUES\n" +
-                    "           (?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?\n" +
-                    "\t\t\t,?)\n" +
+            String query = "INSERT INTO [dbo].[User]" +
+                    "           ([strName]" +
+                    "           ,[boolAdmin]" +
+                    "           ,[strPassword]" +
+                    "           ,[dateCreated]" +
+                    "           ,[intFkeyUserCreatedBy]" +
+                    "           ,[boolDeletionFlag]" +
+                    "           ,[intFkeyUserDeletedBy]" +
+                    "           ,[dateDeleted])" +
+                    "     VALUES" +
+                    "           (?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    " ,?" +
+                    ")" +
                     "GO";
 
             List<String> values = new ArrayList<>();
@@ -175,8 +172,14 @@ public class User extends DatabaseItem{
             values.add(this.getDateCreated().toString());
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
-            values.add(this.getDeletedByUser().getKey().toString());
-            values.add(this.getDateDeleted().toString());
+            if (this.getDeletedByUser() == null){
+                values.add(null);
+                values.add(null);
+            }
+            else{
+                values.add(this.getDeletedByUser().getKey().toString());
+                values.add(this.getDateDeleted().toString());
+            }
 
             DataBaseServer connection = new DataBaseServer();
 
