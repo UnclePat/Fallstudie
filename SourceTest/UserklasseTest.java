@@ -15,8 +15,9 @@ public class UserklasseTest {
     testUser.setdeletionFlag(false);
     testUser.setDeletedByUser(testUser);
     testUser.setDateDeleted(new Date("2017-10-01"));
-  }
+
 
     testUser.saveItem();
   }
 
+}
