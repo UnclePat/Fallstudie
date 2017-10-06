@@ -6,7 +6,7 @@ import java.util.List;
 public class DataBaseServer
 {
     private Connection databaseConnection;
-    private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa";
+    private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa;databaseName=Haushaltsbuch;";
 
     public void dbConnect(){
         try {
@@ -40,6 +40,9 @@ public class DataBaseServer
 
         int maxI = values.size();
         for (int i = 0; i < maxI; i++){
+            if (values.get(i) == null)
+                statement.setNull(i + 1, 1);
+
             statement.setString(i + 1, values.get(i));
         }
 
@@ -51,6 +54,9 @@ public class DataBaseServer
 
         int maxI = values.size();
         for (int i = 0; i < maxI; i++){
+            if (values.get(i) == null)
+                statement.setNull(i + 1, 1);
+
             statement.setString(i + 1, values.get(i));
         }
 

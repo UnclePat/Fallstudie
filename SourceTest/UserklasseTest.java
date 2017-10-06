@@ -1,5 +1,6 @@
 import Backend.User.User;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,9 +11,7 @@ public class UserklasseTest {
     testUser.setAdmin(true);
     testUser.setName("Hans");
     testUser.setPassword("test");
-    Calendar temp = Calendar.getInstance();
-    temp.set(2017, 10, 18);
-    testUser.setDateCreated(temp.getTime());
+    testUser.setDateCreated(LocalDate.now());
     testUser.setFkeyUserCreated(1);
 
     testUser.saveItem();
