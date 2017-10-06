@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.application.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,11 +29,11 @@ import javafx.scene.Scene;
         }
 
 
+        @FXML private Button actionTarget;
+
         public void handleSubmitButtonaction(ActionEvent actionEvent) {
 
-
-
-
-
+            actionTarget.setStyle("-fx-border-color: blue;");
+            
         }
     }
