@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <TabPane layoutX="0.0" layoutY="-2.0" prefHeight="400.0" prefWidth="599.9999000000025" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Home">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
+              <children>
+                <SplitPane dividerPositions="0.6070175438596491" focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="341.0000999999975" prefWidth="572.0">
+                  <items>
+                    <AnchorPane disable="false" minHeight="0.0" minWidth="0.0" prefHeight="367.0000999999975" prefWidth="273.9999000000025" style="-fx-background-color: gainsboro">
+                      <children>
+                        <Text layoutX="66.0" layoutY="46.0" scaleX="1.9511232475886398" scaleY="2.0108585129631695" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="10 recently entries" />
+                        <GridPane disable="false" focusTraversable="false" gridLinesVisible="true" prefHeight="205.0" prefWidth="314.0" style="-fx-background-color: white" visible="true" AnchorPane.bottomAnchor="59.06" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="75.94">
+                          <children>
+                            <Text scaleX="1.0903476173432385" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Description" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Ammount" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Date" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Categorie" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="0.0" prefWidth="89.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="98.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="98.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="98.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                      </children>
+                    </AnchorPane>
+                    <SplitPane dividerPositions="0.5473372781065089" focusTraversable="true" orientation="VERTICAL" prefHeight="354.0" prefWidth="330.0">
+                      <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: gainsboro" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: gainsboro">
+                          <children>
+                            <BarChart layoutX="-10.0" layoutY="0.0" minHeight="105.0" minWidth="160.0" prefHeight="167.0" prefWidth="240.0">
+                              <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                              </xAxis>
+                              <yAxis>
+                                <NumberAxis side="LEFT" />
+                              </yAxis>
+                            </BarChart>
+                          </children>
+                        </AnchorPane>
+                      </items>
+                    </SplitPane>
+                  </items>
+                </SplitPane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Settings">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
+              <children>
+                <SplitPane dividerPositions="0.5" focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="341.0000999999975" prefWidth="572.0">
+                  <items>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="222.0" style="-fx-background-color: gainsboro;">
+                      <children>
+                        <CheckBox layoutX="158.0" layoutY="115.0" mnemonicParsing="false" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="Activate" />
+                        <CheckBox layoutX="158.0" layoutY="151.0" mnemonicParsing="false" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="Activate" />
+                        <Text layoutX="38.0" layoutY="128.0" scaleX="1.0510990187634093" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="1.1 User" />
+                        <Text layoutX="39.0" layoutY="164.0" scaleX="1.0461312230197743" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="1.2 God-Mode" />
+                        <Text layoutX="28.0" layoutY="87.0" scaleX="1.151558325627332" scaleY="1.3132648024892564" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="1. Benutzerrollen" />
+                        <Text layoutX="54.0" layoutY="46.0" scaleX="2.44244496414717" scaleY="2.0651003641660894" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;&#10;" text="Settings">
+                          <font>
+                            <Font name="Arial" size="12.0" />
+                          </font>
+                        </Text>
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="261.0" prefWidth="219.99990000000253" style="-fx-background-color: gainsboro;" />
+                  </items>
+                </SplitPane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Haushaltsbuch">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="311.0" style="-fx-background-color: gainsboro" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
