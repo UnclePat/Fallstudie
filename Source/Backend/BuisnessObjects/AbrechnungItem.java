@@ -7,7 +7,6 @@ import java.sql.Date;
 
 public class AbrechnungItem extends DatabaseItem{
     private double rechnungsBetrag;
-    private String name;
     private String beschreibung;
 
     public double getRechnungsBetrag() {
@@ -34,7 +33,7 @@ public class AbrechnungItem extends DatabaseItem{
     }
 
     @Override
-    public void loadItem() {
-
+    public AbrechnungItem loadItem(Integer key) {
+        return new AbrechnungItem();
     }
 }

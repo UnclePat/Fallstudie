@@ -165,12 +165,52 @@ public class User extends DatabaseItem{
     }
 
     @Override
-    public void loadItem() {
+    public User loadItem(Integer key) {
+        try {
+            String query = "SELECT [intKey]" +
+                    "      ,[strName]" +
+                    "      ,[boolAdmin]" +
+                    "      ,[strPassword]" +
+                    "      ,[dateCreated]" +
+                    "      ,[intFkeyUserCreatedBy]" +
+                    "      ,[boolDeletionFlag]" +
+                    "      ,[intFkeyUserDeletedBy]" +
+                    "      ,[dateDeleted]" +
+                    "  FROM [dbo].[User]" +
+                    "  WHERE [intKey] = ? ";
 
+            DataBaseServer connection = new DataBaseServer();
+
+            ResultSet result = null;
+
+            List<String> values = new ArrayList<>();
+            values.add(key.toString());
+
+            result = connection.select(query, values);
+
+            User user = new User();
+
+            user.setKey(result.getInt("intKey"));
+            user.setName(result.getString("strName"));
+            user.setAdmin(result.getBoolean("boolAdmin"));
+            user.setPassword(result.getString("strPassword"));
+            user.setDateCreated(result.getDate("dateCreated").toLocalDate());
+            user.setFkeyUserCreated(result.getInt("intFkeyUserCreatedBy"));
+            user.setDeletionFlag(result.getBoolean("boolDeletionFlag"));
+            user.setDeletedByUser(result.getInt("intUserFkeyUserDeletedBy"));
+            user.setDateDeleted(result.getDate("dateDeleted").toLocalDate());
+
+            return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static User loadItemLogin(String userName, String password) {
-        String query = "SELECT [intKey]" +
+        try {
+            String query = "SELECT [intKey]" +
                 "      ,[strName]" +
                 "      ,[boolAdmin]" +
                 "      ,[strPassword]" +
@@ -179,14 +219,18 @@ public class User extends DatabaseItem{
                 "      ,[boolDeletionFlag]" +
                 "      ,[intFkeyUserDeletedBy]" +
                 "      ,[dateDeleted]" +
-                "  FROM [dbo].[User]";
+                "  FROM [dbo].[User]" +
+                "  WHERE [strName] = ? AND [strPassword] = ?";
 
-        DataBaseServer connection = new DataBaseServer();
+            DataBaseServer connection = new DataBaseServer();
 
-        ResultSet result = null;
+            ResultSet result = null;
 
-        try {
-            result = connection.select(query);
+            List<String> values = new ArrayList<>();
+            values.add(userName);
+            values.add(password);
+
+            result = connection.select(query, values);
 
             User user = new User();
 

@@ -19,7 +19,7 @@ public class UserAccessRight extends DatabaseItem{
     }
 
     @Override
-    public void loadItem() {
-
+    public UserAccessRight loadItem(Integer key) {
+        return new UserAccessRight();
     }
 }

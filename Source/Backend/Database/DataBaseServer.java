@@ -29,10 +29,18 @@ public class DataBaseServer
         this.dbConnect();
     }
 
-    public ResultSet select(String query) throws SQLException {
-        Statement statement = this.databaseConnection.createStatement();
+    public ResultSet select(String query, List<String> values) throws SQLException {
+        PreparedStatement statement = this.databaseConnection.prepareStatement(query);
 
-        return statement.executeQuery(query);
+        int maxI = values.size();
+        for (int i = 0; i < maxI; i++){
+            if (values.get(i) == null)
+                statement.setNull(i + 1, 1);
+
+            statement.setString(i + 1, values.get(i));
+        }
+
+        return statement.executeQuery();
     }
 
     public int update(String query, List<String> values) throws SQLException {

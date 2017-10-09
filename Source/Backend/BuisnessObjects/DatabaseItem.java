@@ -80,7 +80,7 @@ public abstract class DatabaseItem {
     protected abstract Integer createItem();
     protected abstract void updateItem();
 
-    public abstract void loadItem();
+    public abstract DatabaseItem loadItem(Integer key);
 
     public void markAsDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();

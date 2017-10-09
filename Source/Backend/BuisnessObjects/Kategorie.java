@@ -1,15 +1,24 @@
 package Backend.BuisnessObjects;
 
+import Backend.User.User;
+
 import java.util.List;
 
 public class Kategorie extends DatabaseItem{
 
+    private String name;
+    private User user;
     private List<AbrechnungItem> AbrechnungsItems;
     private List<Kategorie> SubKategorien;
 
     @Override
     public void saveItem() {
-
+        if (this.getKey() == null){
+            this.setKey(createItem());
+        }
+        else{
+            updateItem();
+        }
     }
 
     @Override
@@ -24,8 +33,8 @@ public class Kategorie extends DatabaseItem{
     }
 
     @Override
-    public void loadItem() {
-
+    public Kategorie loadItem(Integer key) {
+        return  new Kategorie();
     }
 
     public double getSum(){
@@ -40,5 +49,21 @@ public class Kategorie extends DatabaseItem{
         }
 
         return sum;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
