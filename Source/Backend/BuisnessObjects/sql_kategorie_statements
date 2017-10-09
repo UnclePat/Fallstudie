@@ -1,0 +1,57 @@
+//Update
+
+USE [Haushaltsbuch]
+GO
+
+UPDATE [dbo].[Kategorie]
+   SET [dateCreated] = ?
+      ,[intFkeyUserCreatedBy] = ?
+      ,[boolDeletionFlag] = ?
+      ,[intFkeyUserDeletedBy] = ?
+      ,[dateDeleted] = ?
+      ,[strName] = ?
+      ,[strBeschreibung] = ?
+      ,[intFkeyKategorieParent] = ?
+ WHERE ?
+GO
+
+//Create
+
+USE [Haushaltsbuch]
+GO
+
+INSERT INTO [dbo].[Kategorie]
+           ([dateCreated]
+           ,[intFkeyUserCreatedBy]
+           ,[boolDeletionFlag]
+           ,[intFkeyUserDeletedBy]
+           ,[dateDeleted]
+           ,[strName]
+           ,[strBeschreibung]
+           ,[intFkeyKategorieParent])
+     VALUES
+           ?,
+           ?,
+           ?,
+           ?,
+           ?,
+           ?,
+           ?,
+           ?)
+GO
+//Load
+
+USE [Haushaltsbuch]
+GO
+
+SELECT [intKey]
+      ,[dateCreated]
+      ,[intFkeyUserCreatedBy]
+      ,[boolDeletionFlag]
+      ,[intFkeyUserDeletedBy]
+      ,[dateDeleted]
+      ,[strName]
+      ,[strBeschreibung]
+      ,[intFkeyKategorieParent]
+  FROM [dbo].[Kategorie]
+GO
