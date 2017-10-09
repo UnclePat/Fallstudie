@@ -19,9 +19,6 @@ public class User extends DatabaseItem{
     String name;
     boolean isAdmin;
     String password;
-    Integer FkeyUserCreated = null;
-    boolean DeletionFlag = false;
-    Integer FkeyUserDeleted = null;
 
     public void setName(String name) {
         this.name = name;
@@ -45,30 +42,6 @@ public class User extends DatabaseItem{
 
     public String getPassword() {
         return password;
-    }
-
-    public void setFkeyUserCreated(Integer FkeyUserCreated){
-        this.FkeyUserCreated = FkeyUserCreated;
-    }
-
-    public Integer getFkeyUserCreated() {
-        return FkeyUserCreated;
-    }
-
-    public void setdeletionFlag(boolean DeletionFlag){
-        this.DeletionFlag = DeletionFlag;
-    }
-
-    public boolean getDeletionFlag(){
-        return DeletionFlag;
-    }
-
-    public void setDeletedByUser(Integer FKeyUserDeleted){
-        this.FkeyUserDeleted = FKeyUserDeleted;
-    }
-
-    public Integer getDeletedByUser() {
-        return FkeyUserDeleted;
     }
 
     private void setUserGroups(List<UserAccessRight> _userGroups){

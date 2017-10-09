@@ -14,7 +14,8 @@ public abstract class DatabaseItem {
     String tableName;
 
     private LocalDate dateDeleted;
-    private User deletedBy;
+    private Integer fkeyUserDeleted = null;
+    private Integer fkeyUserCreated = null;
 
     private LocalDate dateCreated;
     private User createdBy;
@@ -28,15 +29,7 @@ public abstract class DatabaseItem {
         this.dateCreated = dateCreated;
     }
 
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public boolean isDeletionFlag() {
+    public boolean getDeletionFlag(){
         return deletionFlag;
     }
 
@@ -52,12 +45,20 @@ public abstract class DatabaseItem {
         this.dateDeleted = dateDeleted;
     }
 
-    public User getDeletedBy() {
-        return deletedBy;
+    public void setDeletedByUser(Integer FKeyUserDeleted){
+        this.fkeyUserDeleted = FKeyUserDeleted;
     }
 
-    public void setDeletedBy(User deletedBy) {
-        this.deletedBy = deletedBy;
+    public Integer getDeletedByUser() {
+        return fkeyUserDeleted;
+    }
+
+    public void setFkeyUserCreated(Integer FkeyUserCreated){
+        this.fkeyUserCreated = FkeyUserCreated;
+    }
+
+    public Integer getFkeyUserCreated() {
+        return fkeyUserCreated;
     }
 
     public void DatabaseItem(List<String> _columnNames, String _tableName, int _key){
@@ -71,7 +72,7 @@ public abstract class DatabaseItem {
         return key;
     }
 
-    public void setKey(Integer key) {
+    protected void setKey(Integer key) {
         this.key = key;
     }
 
