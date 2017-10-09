@@ -36,7 +36,7 @@
                 <TextField fx:id="amountInput" prefHeight="22.0" prefWidth="97.0" promptText="Amount" />
               </children>
             </HBox>
-            <Button fx:id="add" layoutX="330.0" layoutY="13.0" mnemonicParsing="false" onAction="#  onAddItemS" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Add" />
+            <Button fx:id="add" layoutX="330.0" layoutY="13.0" mnemonicParsing="false" onAction="#onAddItem" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Add" />
           </children>
         </AnchorPane>
       </items>

@@ -1,8 +1,7 @@
 package Frontend.Adder;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.*;
@@ -62,7 +61,7 @@ public class MainController implements Initializable {
     private int number = 1;
 
 
-    public void onAddItemS(ActionEvent actionEvent){
+    public void onAddItem(ActionEvent actionEvent){
 
             Table entry = new Table(number, dateInput.getText(), descriptionInput.getText(), Integer.parseInt(amountInput.getText()));
             number++;
