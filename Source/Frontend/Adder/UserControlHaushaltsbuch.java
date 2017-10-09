@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
-public class MainController implements Initializable {
+public class UserControlHaushaltsbuch implements Initializable {
 
 
     @FXML
@@ -63,15 +63,13 @@ public class MainController implements Initializable {
 
     public void onAddItem(ActionEvent actionEvent){
 
-            Table entry = new Table(number, dateInput.getText(), descriptionInput.getText(), Integer.parseInt(amountInput.getText()));
-            number++;
+        Table entry = new Table(number, dateInput.getText(), descriptionInput.getText(), Integer.parseInt(amountInput.getText()));
+        number++;
 
-            data.add(entry);
+        data.add(entry);
 
-            clearForm();
+        clearForm();
     }
-
-
 
 
     private void clearForm() {
