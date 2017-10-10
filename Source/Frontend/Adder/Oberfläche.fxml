@@ -85,7 +85,7 @@
                 <Line endX="1090.0" endY="0.0" layoutX="136.0" layoutY="475.0" startX="-100.0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="322.0001220703125" layoutX="35.0" layoutY="490.0" stroke="BLACK" strokeType="INSIDE" width="421.0" />
                 <PieChart id="PieChart" layoutX="57.0" layoutY="504.0" prefHeight="289.0" prefWidth="360.0" />
-                <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="17.0">
+                <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
                     <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
                   </image>
