@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,6 +41,7 @@ public class DerLoginStarter extends Application {
         @FXML private Button actionTarget;
         @FXML private TextField passwortField;
         @FXML private TextField textField;
+        @FXML private Text Fehler;
 
         public void buttonPressed(ActionEvent actionEvent){
 
@@ -100,6 +102,7 @@ public class DerLoginStarter extends Application {
                 actionTarget.setStyle("-fx-border-color: red;");
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
 
+                Fehler.setVisible(true);
 
             }//try
 
