@@ -14,14 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class DerLoginStarter extends Application {
-        /*
-        static String userAbfrage;
-        ResultSet resultset;
-        Statement stmt = null;
-        public String unser;
-        String userName;
-        String userPassword;
-        */
+
         @Override
         public void start(Stage primaryStage) {
             try {
@@ -72,7 +65,7 @@ public class DerLoginStarter extends Application {
             catch(Exception s){
                 actionTarget.setStyle("-fx-border-color: red;");
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
-               
+
 
             }//try
 
