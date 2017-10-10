@@ -35,25 +35,16 @@ public class DerLoginStarter extends Application {
                 e.printStackTrace();
 
             }//try
-
-
-
         }//start
-
 
         @FXML private Button actionTarget;
         @FXML private TextField passwortField;
         @FXML private TextField textField;
 
-        public void handleSubmitButtonaction(ActionEvent actionEvent) {
-
-            actionTarget.setStyle("-fx-border-color: blue;");
-
-        }
-
         public void buttonPressed(ActionEvent actionEvent){
 
-
+            //Button verfärbung
+            actionTarget.setStyle("-fx-border-color: blue;");
             /*
             //DB-Verbindung herstellen
             try {
@@ -98,15 +89,16 @@ public class DerLoginStarter extends Application {
                 */
 
                 if(user == null){
-                    //Stuff mit Exceptions machen, Zeuch rot anmalen
+                    actionTarget.setStyle("-fx-border-color: red;");
+                    System.out.println("Login war nicht erfolgreich");
                 }
                 else{
-                    //Tolles Weiterleiten auf MainForm
+                    System.out.println("Login war erfolgreich");
                 }
             }
             catch(Exception s){
                 actionTarget.setStyle("-fx-border-color: red;");
-                System.out.println(s.toString() + "Login war nicht erfolgreich");
+                System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
 
 
             }//try
