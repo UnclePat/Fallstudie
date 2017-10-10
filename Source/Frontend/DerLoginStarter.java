@@ -1,6 +1,8 @@
 package Frontend;
 
 import Backend.Database.DataBaseServer;
+import Backend.User.User;
+import Backend.User.UserUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +53,8 @@ public class DerLoginStarter extends Application {
 
         public void buttonPressed(ActionEvent actionEvent){
 
+
+            /*
             //DB-Verbindung herstellen
             try {
                 DataBaseServer connection = new DataBaseServer();
@@ -59,26 +63,29 @@ public class DerLoginStarter extends Application {
             }
             catch(Exception s) {
                 System.out.println(s.toString() + "Verbindung zur DB war nicht erfolgreich");
-            }//try
+            }//try*/
 
             //Login
             try {
                 //Username aus TextField wird ausgelesen
-               String userTextField = textField.getText();
+               String username = textField.getText();
                //Passwort aus PasswortField wird ausgelesen
-                String userPasswortField = passwortField.getText();
+                String password = passwortField.getText();
 
+                User user = UserUtils.authenticateUser(username, password);
+
+                /*
                 //DB inhalt wird ausgelesen
                 userAbfrage = new String ("Select strName, strPassword from Haushaltsbuch");
-                resultset = stmt.executeQuery(userAbfrage);
+                           resultset = stmt.executeQuery(userAbfrage);
 
                 while (resultset.next()){
                     userName = resultset.getString("userName");
                     userPassword = resultset.getString("userPassword");
                 }
 
-                boolean vergleichUser = userName.equals(userTextField);
-                boolean vergleichPassword = userPassword.equals(userPasswortField);
+                boolean vergleichUser = userName.equals(username);
+                boolean vergleichPassword = userPassword.equals(password);
 
                 if (vergleichUser == true || vergleichPassword == true ){
                     actionTarget.setStyle("-fx-border-color: green;");
@@ -88,7 +95,14 @@ public class DerLoginStarter extends Application {
                     actionTarget.setStyle("-fx-border-color: red;");
                     System.out.println("Login war nicht erfolgreich");
                 }
+                */
 
+                if(user == null){
+                    //Stuff mit Exceptions machen, Zeuch rot anmalen
+                }
+                else{
+                    //Tolles Weiterleiten auf MainForm
+                }
             }
             catch(Exception s){
                 actionTarget.setStyle("-fx-border-color: red;");
