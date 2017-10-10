@@ -11,8 +11,8 @@ import java.util.List;
 public class Kategorie extends DatabaseItem{
 
     private User user;
-    private List<AbrechnungItem> AbrechnungsItems;
-    private List<Kategorie> SubKategorien;
+    private List<AbrechnungItem> abrechnungsItems = new ArrayList<AbrechnungItem>();
+    private List<Kategorie> subKategorien = new ArrayList<Kategorie>();
 
     private String Kname;
     private String Kbeschreibung;
@@ -152,8 +152,10 @@ public class Kategorie extends DatabaseItem{
             kategorie.setKbeschreibung(result.getString("strBeschreibung"));
             kategorie.setFkeyKategorieParent(result.getInt("intFkeyKategorieParent"));
 
-            return kategorie;
+            loadAbrechnungsItems();
+            loadSubKategorien();
 
+            return kategorie;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -163,15 +165,63 @@ public class Kategorie extends DatabaseItem{
     public double getSum(){
         double sum = 0;
 
-        for (Kategorie subKategorie : SubKategorien) {
+        for (Kategorie subKategorie : subKategorien) {
             sum += subKategorie.getSum();
         }
 
-        for (AbrechnungItem item : AbrechnungsItems) {
+        for (AbrechnungItem item : abrechnungsItems) {
             sum += item.getRechnungsBetrag();
         }
 
         return sum;
+    }
+
+    private void loadSubKategorien(){
+        try {
+            String query = "SELECT [intKey]" +
+                "  FROM [dbo].[Kategorie]" +
+                "  WHERE [intFkeyKategorieParent] = ?";
+
+            List<String> values = new ArrayList<String>();
+            values.add(this.key.toString());
+
+            DataBaseServer connection = new DataBaseServer();
+
+            ResultSet result = connection.select(query, values);
+
+            while (result.next()) {
+
+                int key= result.getInt("intKey");
+                Kategorie kat = new Kategorie().loadItem(key);
+                subKategorien.add(kat);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAbrechnungsItems(){
+        try {
+            String query = "SELECT [intKey]" +
+                    "  FROM [dbo].[AbrechnungsItem]" +
+                    "  WHERE [intFkeyKategorieParent] = ?";
+
+            List<String> values = new ArrayList<String>();
+            values.add(this.key.toString());
+
+            DataBaseServer connection = new DataBaseServer();
+
+            ResultSet result = connection.select(query, values);
+
+            while (result.next()) {
+
+                int key= result.getInt("intKey");
+                AbrechnungItem abrechnungsItem = new AbrechnungItem().loadItem(key);
+                abrechnungsItems.add(abrechnungsItem);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public User getUser() {
