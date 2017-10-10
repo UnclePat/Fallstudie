@@ -46,7 +46,7 @@ public class DerLoginStarter extends Application {
         public void handleSubmitButtonaction(ActionEvent actionEvent) {
 
             actionTarget.setStyle("-fx-border-color: blue;");
-            
+
         }
 
         public void buttonPressed(ActionEvent actionEvent){

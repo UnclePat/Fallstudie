@@ -1,10 +1,6 @@
 package Backend.BuisnessObjects;
 
 import Backend.Database.DataBaseServer;
-import Backend.User.User;
-
-import javax.print.DocFlavor;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
