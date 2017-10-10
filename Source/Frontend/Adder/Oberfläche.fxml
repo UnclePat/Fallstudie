@@ -1,120 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.util.*?>
 <?import javafx.scene.chart.*?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: aliceblue;&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <TabPane layoutX="0.0" layoutY="-2.0" prefHeight="400.0" prefWidth="599.9999000000025" tabClosingPolicy="UNAVAILABLE">
+    <TabPane layoutX="0.0" layoutY="0.0" prefHeight="864.0" prefWidth="1259.0001220703125" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab text="Home">
+        <Tab style="" text="Start">
           <content>
-            <AnchorPane id="ContentHome" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
-                <SplitPane dividerPositions="0.6070175438596491" focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="341.0000999999975" prefWidth="572.0">
-                  <items>
-                    <AnchorPane disable="false" minHeight="0.0" minWidth="0.0" prefHeight="367.0000999999975" prefWidth="273.9999000000025" style="-fx-background-color: gainsboro">
-                      <children>
-                        <Text layoutX="66.0" layoutY="46.0" scaleX="1.9511232475886398" scaleY="2.0108585129631695" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="10 recently entries" />
-                        <GridPane disable="false" focusTraversable="false" gridLinesVisible="true" prefHeight="205.0" prefWidth="314.0" style="-fx-background-color: white" visible="true" AnchorPane.bottomAnchor="59.06" AnchorPane.leftAnchor="13.5" AnchorPane.rightAnchor="14.5" AnchorPane.topAnchor="75.94">
-                          <children>
-                            <Text scaleX="1.0903476173432385" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Description" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Ammount" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Date" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Categorie" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-                          </children>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="0.0" prefWidth="87.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="77.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="70.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="81.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                      </children>
-                    </AnchorPane>
-                    <SplitPane dividerPositions="0.5473372781065089" focusTraversable="true" orientation="VERTICAL" prefHeight="354.0" prefWidth="330.0">
-                      <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: gainsboro" />
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: gainsboro">
-                          <children>
-                            <BarChart layoutX="-10.0" layoutY="0.0" minHeight="105.0" minWidth="160.0" prefHeight="167.0" prefWidth="240.0">
-                              <xAxis>
-                                <CategoryAxis side="BOTTOM" />
-                              </xAxis>
-                              <yAxis>
-                                <NumberAxis prefHeight="154.0" prefWidth="32.0" side="LEFT" />
-                              </yAxis>
-                            </BarChart>
-                          </children>
-                        </AnchorPane>
-                      </items>
-                    </SplitPane>
-                  </items>
-                </SplitPane>
-                <PieChart id="PieChart" layoutX="358.0" layoutY="14.0" prefHeight="162.0" prefWidth="243.0" />
+                <Text layoutX="35.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten 10 Einträge">
+                  <font>
+                    <Font size="20.0" fx:id="x3" />
+                  </font>
+                </Text>
+                <Text layoutX="39.0" layoutY="71.0" scaleX="1.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" text="Willkommen!">
+                  <font>
+                    <Font name="System Bold" size="25.0" fx:id="x2" />
+                  </font>
+                </Text>
+                <ListView layoutX="39.0" layoutY="146.0" prefHeight="596.0" prefWidth="621.0" />
+                <StackedBarChart layoutX="789.0" layoutY="457.0" prefHeight="285.0" prefWidth="341.0">
+                  <xAxis>
+                    <CategoryAxis side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis side="LEFT" />
+                  </yAxis>
+                </StackedBarChart>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="290.0" layoutX="771.0" layoutY="146.0" stroke="BLACK" strokeType="INSIDE" style="" visible="true" width="361.0" />
+                <PieChart id="PieChart" layoutX="829.0" layoutY="175.0" prefHeight="237.0" prefWidth="262.0" visible="true" />
+                <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
+                  <image>
+                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                  </image>
+                </ImageView>
+                <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Settings">
+        <Tab style=" " text="Auswertung">
           <content>
-            <AnchorPane id="ContentSettings" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
-                <SplitPane dividerPositions="0.5" focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="341.0000999999975" prefWidth="572.0">
+                <TextField layoutX="189.0" layoutY="152.0" prefWidth="187.00009999999747" promptText="TT.MM.JJJJ" text="" />
+                <Text layoutX="37.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zeitraum:">
+                  <font>
+                    <Font size="14.0" fx:id="x1" />
+                  </font>
+                </Text>
+                <Text font="$x3" layoutX="35.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter" />
+                <Text font="$x1" layoutX="154.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Von" />
+                <Text font="$x1" layoutX="471.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bis" />
+                <TextField layoutX="496.0" layoutY="154.0" prefWidth="186.0" promptText="TT.MM.JJJJ" />
+                <Text font="$x1" layoutX="37.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorie:" />
+                <Text font="$x1" layoutX="37.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Betrag:" />
+                <TextField layoutX="188.0" layoutY="259.0" prefWidth="187.00009999999747" promptText="00,00 €" />
+                <Text font="$x1" layoutX="154.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Von" />
+                <Text font="$x1" layoutX="471.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bis" />
+                <TextField layoutX="496.0" layoutY="259.0" prefWidth="186.0" promptText="00,00 €" />
+                <Text font="$x1" layoutX="37.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suche:" />
+                <TextField layoutX="189.0" layoutY="312.0" prefWidth="186.0078125" promptText="Suchbegriff eingeben" />
+                <Button layoutX="188.0" layoutY="374.0" mnemonicParsing="false" text="Filter zurücksetzen" />
+                <Button layoutX="381.0" layoutY="374.0" mnemonicParsing="false" text="speichern" />
+                <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
+                <Text font="$x2" layoutX="45.0" layoutY="70.0" scaleX="1.1212764138874183" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auswertung" />
+                <SplitMenuButton layoutX="189.0" layoutY="206.0" mnemonicParsing="false" text="Auswählen">
                   <items>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="222.0" style="-fx-background-color: gainsboro;">
-                      <children>
-                        <CheckBox layoutX="158.0" layoutY="115.0" mnemonicParsing="false" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="Activate" />
-                        <CheckBox layoutX="158.0" layoutY="151.0" mnemonicParsing="false" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="Activate" />
-                        <Text layoutX="38.0" layoutY="128.0" scaleX="1.0510990187634093" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="1.1 User" />
-                        <Text layoutX="39.0" layoutY="164.0" scaleX="1.0461312230197743" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="1.2 God-Mode" />
-                        <Text layoutX="28.0" layoutY="87.0" scaleX="1.151558325627332" scaleY="1.3132648024892564" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="1. Benutzerrollen" />
-                        <Text layoutX="54.0" layoutY="46.0" scaleX="2.44244496414717" scaleY="2.0651003641660894" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;&#10;" text="Settings">
-                          <font>
-                            <Font name="Arial" size="12.0" />
-                          </font>
-                        </Text>
-                      </children>
-                    </AnchorPane>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="261.0" prefWidth="219.99990000000253" style="-fx-background-color: gainsboro;" />
+                    <MenuItem mnemonicParsing="false" text="Auto" />
+                    <MenuItem mnemonicParsing="false" text="Haushalt" />
                   </items>
-                </SplitPane>
+                </SplitMenuButton>
+                <Text font="$x3" layoutX="35.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
+                <Line endX="1090.0" endY="0.0" layoutX="136.0" layoutY="475.0" startX="-100.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="322.0001220703125" layoutX="35.0" layoutY="490.0" stroke="BLACK" strokeType="INSIDE" width="421.0" />
+                <PieChart id="PieChart" layoutX="57.0" layoutY="504.0" prefHeight="289.0" prefWidth="360.0" />
+                <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="17.0">
+                  <image>
+                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                  </image>
+                </ImageView>
+                <ScrollBar layoutX="1238.0" layoutY="4.0" orientation="VERTICAL" prefHeight="819.0" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Haushaltsbuch">
+        <Tab style=" " text="Haushaltsbuch">
           <content>
-            <AnchorPane id="ContentHaushaltsbuch" fx:id="HaushaltsbuchContentpane" minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="311.0" style="-fx-background-color: gainsboro" />
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
+              <children>
+                <Text font="$x2" layoutX="37.0" layoutY="70.0" scaleX="1.0" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Haushaltsbuch" />
+                <Text font="$x3" layoutX="35.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorien" />
+                <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
+                <TreeView layoutX="37.0" layoutY="136.0" prefHeight="654.0" prefWidth="474.0" />
+                <ListView layoutX="629.0" layoutY="136.0" prefHeight="435.0" prefWidth="584.0" />
+                <Text font="$x3" layoutX="629.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neuer Eintrag" />
+                <Line endX="494.0" endY="0.0" layoutX="730.0" layoutY="620.0" startX="-100.0" />
+                <TextField layoutX="739.0" layoutY="639.0" prefWidth="200.0" promptText="TT.MM.JJJJ" />
+                <Text layoutX="629.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum:" />
+                <Text layoutX="629.0" layoutY="695.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beschreibung:" />
+                <TextField layoutX="739.0" layoutY="682.0" prefWidth="200.0" promptText="Beschreibung eingeben" />
+                <TextField layoutX="739.0" layoutY="725.0" prefWidth="200.0" promptText="Menge eingeben" />
+                <Text layoutX="630.0" layoutY="741.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menge:" />
+                <Button layoutX="739.0" layoutY="769.0" mnemonicParsing="false" text="speichern" />
+                <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
+                  <image>
+                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                  </image>
+                </ImageView>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab style="" text="Einstellungen">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
+              <children>
+                <Text font="$x2" layoutX="35.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Einstellungen" />
+                <Text font="$x3" layoutX="35.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort ändern" />
+                <Line endX="1094.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
+                <Text font="$x1" layoutX="35.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
+                <Text font="$x1" layoutX="35.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="altes Passwort:" />
+                <Text font="$x1" layoutX="36.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neues Passwort:" />
+                <Text font="$x1" layoutX="36.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neues Passwort bestätigen:" />
+                <TextField layoutX="263.0" layoutY="159.0" prefWidth="200.0" promptText="Benutzername eingeben" />
+                <PasswordField layoutX="263.0" layoutY="210.0" prefWidth="200.0" promptText="Passwort eingeben" />
+                <PasswordField layoutX="263.0" layoutY="259.0" prefWidth="200.0" promptText="Passwort eingeben" />
+                <PasswordField layoutX="263.0" layoutY="309.0" prefWidth="200.0" promptText="Passwort eingeben" />
+                <Button layoutX="263.0" layoutY="360.0" mnemonicParsing="false" text="speichern" />
+                <Text font="$x3" layoutX="35.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzer anlegen" />
+                <Line endX="1092.0" endY="0.0" layoutX="137.0" layoutY="445.0" startX="-100.0" />
+                <Text font="$x1" layoutX="36.0" layoutY="506.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
+                <Text font="$x1" layoutX="37.0" layoutY="564.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort:" />
+                <TextField layoutX="263.0" layoutY="491.0" prefWidth="200.0" promptText="Benutzername erstellen" />
+                <PasswordField layoutX="263.0" layoutY="549.0" prefWidth="200.0" promptText="Passwort erstellen" />
+                <Text font="$x3" layoutX="35.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dateien sichern" />
+                <Line endX="1088.0" endY="0.0" layoutX="137.0" layoutY="646.0" startX="-100.0" />
+                <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
+                  <image>
+                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                  </image>
+                </ImageView>
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
       </tabs>
