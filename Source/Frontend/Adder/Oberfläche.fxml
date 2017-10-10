@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.chart.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
@@ -21,7 +32,7 @@
                     <AnchorPane disable="false" minHeight="0.0" minWidth="0.0" prefHeight="367.0000999999975" prefWidth="273.9999000000025" style="-fx-background-color: gainsboro">
                       <children>
                         <Text layoutX="66.0" layoutY="46.0" scaleX="1.9511232475886398" scaleY="2.0108585129631695" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="10 recently entries" />
-                        <GridPane disable="false" focusTraversable="false" gridLinesVisible="true" prefHeight="205.0" prefWidth="314.0" style="-fx-background-color: white" visible="true" AnchorPane.bottomAnchor="59.06" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="75.94">
+                        <GridPane disable="false" focusTraversable="false" gridLinesVisible="true" prefHeight="205.0" prefWidth="314.0" style="-fx-background-color: white" visible="true" AnchorPane.bottomAnchor="59.06" AnchorPane.leftAnchor="13.5" AnchorPane.rightAnchor="14.5" AnchorPane.topAnchor="75.94">
                           <children>
                             <Text scaleX="1.0903476173432385" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Description" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Ammount" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -29,13 +40,13 @@
                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Categorie" GridPane.columnIndex="3" GridPane.rowIndex="0" />
                           </children>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="0.0" prefWidth="89.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="98.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="98.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="98.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="0.0" prefWidth="87.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="77.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="70.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="81.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="18.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
@@ -60,7 +71,7 @@
                                 <CategoryAxis side="BOTTOM" />
                               </xAxis>
                               <yAxis>
-                                <NumberAxis side="LEFT" />
+                                <NumberAxis prefHeight="154.0" prefWidth="32.0" side="LEFT" />
                               </yAxis>
                             </BarChart>
                           </children>
@@ -69,6 +80,7 @@
                     </SplitPane>
                   </items>
                 </SplitPane>
+                <PieChart id="PieChart" layoutX="358.0" layoutY="14.0" prefHeight="162.0" prefWidth="243.0" />
               </children>
             </AnchorPane>
           </content>
@@ -102,7 +114,7 @@
         </Tab>
         <Tab text="Haushaltsbuch">
           <content>
-            <AnchorPane fx:id="HaushaltsbuchContentpane" id="ContentHaushaltsbuch" minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="311.0" style="-fx-background-color: gainsboro" />
+            <AnchorPane id="ContentHaushaltsbuch" fx:id="HaushaltsbuchContentpane" minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="311.0" style="-fx-background-color: gainsboro" />
           </content>
         </Tab>
       </tabs>
