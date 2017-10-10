@@ -21,7 +21,7 @@ public class OberflächeController extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Oberfläche.fxml"));
-            Scene scene = new Scene(root, 785, 475);
+            Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.setResizable(false);
