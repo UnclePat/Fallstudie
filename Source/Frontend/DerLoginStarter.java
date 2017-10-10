@@ -15,14 +15,14 @@ import javafx.scene.Scene;
 import java.sql.*;
 
 public class DerLoginStarter extends Application {
-
+        /*
         static String userAbfrage;
         ResultSet resultset;
         Statement stmt = null;
         public String unser;
         String userName;
         String userPassword;
-
+        */
         @Override
         public void start(Stage primaryStage) {
             try {
