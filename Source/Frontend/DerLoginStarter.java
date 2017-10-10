@@ -66,6 +66,7 @@ public class DerLoginStarter extends Application {
                 actionTarget.setStyle("-fx-border-color: red;");
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
 
+               s.printStackTrace();
 
             }//try
 
