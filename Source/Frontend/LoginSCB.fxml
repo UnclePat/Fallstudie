@@ -12,9 +12,9 @@
   <children>
     <Pane id="" layoutX="0.0" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="497.0001220703125" prefWidth="262.0" style="-fx-background-color:darkgray">
       <children>
-        <ImageView id="Logo.jpeg" fitHeight="77.0" fitWidth="109.00634765625" layoutX="76.0" layoutY="202.0" style="-fx-background-color:darkgrey;">
+        <ImageView id="Logo.png" fitHeight="77.0" fitWidth="109.00634765625" layoutX="76.0" layoutY="202.0" style="-fx-background-color:darkgrey;">
           <image>
-            <Image url="@Logo.jpeg" preserveRatio="true" smooth="true" />
+            <Image url="@Logo.png" preserveRatio="true" smooth="true" />
           </image>
         </ImageView>
       </children>
