@@ -14,7 +14,7 @@
       <tabs>
         <Tab text="Home">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
+            <AnchorPane id="ContentHome" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
               <children>
                 <SplitPane dividerPositions="0.6070175438596491" focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="341.0000999999975" prefWidth="572.0">
                   <items>
@@ -75,7 +75,7 @@
         </Tab>
         <Tab text="Settings">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
+            <AnchorPane id="ContentSettings" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gainsboro">
               <children>
                 <SplitPane dividerPositions="0.5" focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="341.0000999999975" prefWidth="572.0">
                   <items>
@@ -102,7 +102,7 @@
         </Tab>
         <Tab text="Haushaltsbuch">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="311.0" style="-fx-background-color: gainsboro" />
+            <AnchorPane fx:id="HaushaltsbuchContentpane" id="ContentHaushaltsbuch" minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="311.0" style="-fx-background-color: gainsboro" />
           </content>
         </Tab>
       </tabs>

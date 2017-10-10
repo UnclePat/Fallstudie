@@ -21,14 +21,15 @@ public class OberflächeController extends Application {
             Scene scene = new Scene(root, 785, 475);
             primaryStage.setScene(scene);
             primaryStage.show();
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true);
 
-            Node node;
-            node = (Node)FXMLLoader.load(getClass().getResource("/Frontend/Adder/UserControlHaushaltsbuch.fxml"));
-            HaushaltsbuchContentpane.getChildren().setAll(node);
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/Frontend/Adder/UserControlHaushaltsbuch.fxml"));
+            HaushaltsbuchContentpane.getChildren().clear();
+            HaushaltsbuchContentpane.getChildren().setAll(pane.getChildren());
 
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
 
         }
