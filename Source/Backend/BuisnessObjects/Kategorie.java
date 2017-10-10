@@ -1,26 +1,22 @@
 package Backend.BuisnessObjects;
 
 import Backend.User.User;
-import Backend.BuisnessObjects.DatabaseItem;
 import Backend.Database.DataBaseServer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import java.util.List;
 
 public class Kategorie extends DatabaseItem{
 
-    private String name;
     private User user;
     private List<AbrechnungItem> AbrechnungsItems;
     private List<Kategorie> SubKategorien;
 
-    String Kname;
-    String Kbeschreibung;
-    Integer FkeyKategorieParent = null;
+    private String Kname;
+    private String Kbeschreibung;
+    private Integer FkeyKategorieParent = null;
 
     public void setKname(String Kname) {
         this.Kname = Kname;
@@ -184,13 +180,5 @@ public class Kategorie extends DatabaseItem{
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
