@@ -9,11 +9,15 @@ import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.*;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+
 public class DerLoginStarter extends Application {
+
+        private Stage stage;
 
         @Override
         public void start(Stage primaryStage) {
@@ -59,14 +63,17 @@ public class DerLoginStarter extends Application {
                     Fehler.setVisible(true);
                 }
                 else{
+                    Parent root = FXMLLoader.load(getClass().getResource("/Adder/Oberfläche.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
                     System.out.println("Login war erfolgreich");
                 }
             }
             catch(Exception s){
                 actionTarget.setStyle("-fx-border-color: red;");
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
-
-               s.printStackTrace();
+                s.printStackTrace();
 
             }//try
 
