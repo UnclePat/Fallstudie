@@ -6,9 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainFormController extends Application {
+    @FXML
+    private TextField txtBackupPath;
+    @FXML
+    private Text Status;
     @FXML
     private TreeView kategorieTree;
 
@@ -75,16 +82,20 @@ public class MainFormController extends Application {
 
     public void btnBackupPressed(ActionEvent actionEvent){
         System.out.println("Backup started.");
-
+        String path = txtBackupPath.getText();
         DataBaseServer connection = new DataBaseServer();
-        String backupPath = "C:\\Users\\patri\\Documents\\Lool";
+        String backupPath = path +"\\Backup.bak";
 
         try {
             connection.executeBackup(backupPath);
             System.out.println("Backup successful.");
+            Status.setVisible(true);
+            Status.setText("Backup erfolgreich");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Backup failed.");
+            Status.setVisible(true);
+            Status.setText("Backup fehlerhaft");
         }
 
     }
