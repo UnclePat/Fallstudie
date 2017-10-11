@@ -51,8 +51,8 @@ public class LoginController extends Application {
             //Login
             try {
                 //Username aus TextField wird ausgelesen
-               String username = textField.getText();
-               //Passwort aus PasswortField wird ausgelesen
+                String username = textField.getText();
+                //Passwort aus PasswortField wird ausgelesen
                 String password = passwordField.getText();
                 //Parameter werden Übergeben
                 User user = UserUtils.authenticateUser(username, password);
