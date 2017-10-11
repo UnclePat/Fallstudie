@@ -95,8 +95,7 @@ public class DataBaseServer
     }
 
     public void executeBackup(String path) throws SQLException {
-        String backupStatement = "BACKUP DATABASE [Haushaltsbuch] TO DISK = '" + path + "'";
-
+        String backupStatement = "BACKUP DATABASE [Haushaltsbuch] TO DISK = '" + path + "' with INIT, NAME = N'SQL Voll'";
         Statement statement = this.databaseConnection.createStatement();
         statement.execute(backupStatement);
     }

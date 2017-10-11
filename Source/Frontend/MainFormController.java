@@ -55,7 +55,7 @@ public class MainFormController extends Application {
         System.out.println("Backup started.");
 
         DataBaseServer connection = new DataBaseServer();
-        String backupPath = "C:\\Users\\patri\\Documents\\Lool";
+        String backupPath = "C:\\Users\\Marius\\Documents\\HouseBook"+"\\Backup.bak";
 
         try {
             connection.executeBackup(backupPath);
