@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +21,9 @@ public class MainFormController extends Application {
 
     @FXML
     private AnchorPane HaushaltsbuchContentpane;
+
+    @FXML
+    private TextField txtBackupPath;
 
     @Override
     public void start(Stage primaryStage) {
@@ -53,9 +58,9 @@ public class MainFormController extends Application {
 
     public void btnBackupPressed(ActionEvent actionEvent){
         System.out.println("Backup started.");
-
+        String path = txtBackupPath.getText();
         DataBaseServer connection = new DataBaseServer();
-        String backupPath = "C:\\Users\\Marius\\Documents\\HouseBook"+"\\Backup.bak";
+        String backupPath = path +"\\Backup.bak";
 
         try {
             connection.executeBackup(backupPath);

@@ -151,9 +151,8 @@
                     <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
-                <Button fx:id = "btnBackup" layoutX="390.0" layoutY="698.0" mnemonicParsing="false" prefWidth="73.0" text="Sichern" onAction="#btnBackupPressed"/>
-                <Text font="$x1" layoutX="36.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sicherungspfad" />
-                <PasswordField layoutX="263.0" layoutY="662.0" prefWidth="200.0" promptText="Sicherungspfad eingeben" />
+                <Button fx:id="btnBackup" layoutX="390.0" layoutY="698.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="73.0" text="Sichern" />
+                <TextField fx:id="txtBackupPath" layoutX="263.0" layoutY="658.0" prefWidth="200.0" promptText="Backuppfad angeben" />
               </children>
             </AnchorPane>
           </content>
