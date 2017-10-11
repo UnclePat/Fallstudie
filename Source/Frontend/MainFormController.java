@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -57,6 +58,7 @@ public class MainFormController extends Application {
 
     public void btnBackupPressed(ActionEvent actionEvent){
         System.out.println("Backup started.");
+        Status.setVisible(false);
         String path = txtBackupPath.getText();
         DataBaseServer connection = new DataBaseServer();
         String backupPath = path +"\\Backup.bak";
@@ -64,13 +66,15 @@ public class MainFormController extends Application {
         try {
             connection.executeBackup(backupPath);
             System.out.println("Backup successful.");
-            Status.setVisible(true);
+            Status.setFill(Paint.valueOf("Green"));
             Status.setText("Backup erfolgreich");
+            Status.setVisible(true);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Backup failed.");
-            Status.setVisible(true);
             Status.setText("Backup fehlerhaft");
+            Status.setFill(Paint.valueOf("Red"));
+            Status.setVisible(true);
         }
 
     }

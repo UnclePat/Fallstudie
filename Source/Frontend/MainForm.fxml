@@ -154,8 +154,8 @@
                 <Button fx:id="btnBackup" layoutX="371.0" layoutY="698.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="92.0" text="Sichern" />
                 <TextField fx:id="txtBackupPath" layoutX="263.0" layoutY="658.0" prefWidth="200.0" promptText="Backuppfad angeben" />
                 <Text layoutX="38.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backuppfad:" />
-                <Text fx:id="Status" layoutX="263.0" layoutY="717.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
-                <Text fill="#808080" layoutX="509.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: C:\Program Files\Microsoft SQL Server\MSSQL13.SQLEXPRESS\MSSQL\Backup" />
+                <Text fx:id="Status" layoutX="509.0" layoutY="717.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+                <Text fill="GREY" layoutX="509.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: [installpath]\SSQL13.SQLEXPRESS\MSSQL\Backup" />
               </children>
             </AnchorPane>
           </content>
