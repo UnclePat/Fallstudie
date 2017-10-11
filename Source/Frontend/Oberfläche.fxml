@@ -41,7 +41,7 @@
                 <PieChart id="PieChart" layoutX="829.0" layoutY="175.0" prefHeight="237.0" prefWidth="262.0" visible="true" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
                 <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
@@ -87,7 +87,7 @@
                 <PieChart id="PieChart" layoutX="57.0" layoutY="504.0" prefHeight="289.0" prefWidth="360.0" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
                 <ScrollBar layoutX="1238.0" layoutY="4.0" orientation="VERTICAL" prefHeight="819.0" />
@@ -115,7 +115,7 @@
                 <Button layoutX="739.0" layoutY="769.0" mnemonicParsing="false" text="speichern" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
               </children>
@@ -148,7 +148,7 @@
                 <Line endX="1088.0" endY="0.0" layoutX="137.0" layoutY="646.0" startX="-100.0" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
               </children>

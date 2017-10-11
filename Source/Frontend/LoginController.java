@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -15,18 +16,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
-public class DerLoginStarter extends Application {
+public class LoginController extends Application {
 
-        private Stage stage;
+        private User currentUser = null;
 
         @Override
-        public void start(Stage primaryStage) {
+        public void start(Stage loginStage) {
             try {
+
                 Parent root = FXMLLoader.load(getClass().getResource("LoginSCB.fxml"));
                 Scene scene = new Scene(root, 785, 475);
-                primaryStage.setScene(scene);
-                primaryStage.show();
-                primaryStage.setResizable(false);
+                loginStage.setScene(scene);
+                loginStage.setResizable(false);
+                loginStage.showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -63,11 +65,16 @@ public class DerLoginStarter extends Application {
                     Fehler.setVisible(true);
                 }
                 else{
-                    Parent root = FXMLLoader.load(getClass().getResource("/Adder/Oberfläche.fxml"));
+                    /*Parent root = FXMLLoader.load(getClass().getResource("/Adder/Oberfläche.fxml"));
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
-                    stage.show();
+                    stage.show();*/
                     System.out.println("Login war erfolgreich");
+                    setCurrentUser(user);
+
+                    Node source = (Node) actionEvent.getSource();
+                    Stage stage = (Stage) source.getScene().getWindow();
+                    stage.close();
                 }
             }
             catch(Exception s){
@@ -80,4 +87,12 @@ public class DerLoginStarter extends Application {
 
 
         }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
+
+    private void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+}
