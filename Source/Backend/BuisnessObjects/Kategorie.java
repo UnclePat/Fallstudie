@@ -10,13 +10,13 @@ import java.util.List;
 
 public class Kategorie extends DatabaseItem{
 
-    private User user;
     private List<AbrechnungItem> abrechnungsItems = new ArrayList<AbrechnungItem>();
     private List<Kategorie> subKategorien = new ArrayList<Kategorie>();
 
     private String Kname;
     private String Kbeschreibung;
     private Integer FkeyKategorieParent = null;
+    private Integer FkeyUser = null;
 
     public void setKname(String Kname) {
         this.Kname = Kname;
@@ -28,6 +28,12 @@ public class Kategorie extends DatabaseItem{
     public String getKbeschreibung() { return Kbeschreibung; }
     public void setFkeyKategorieParent(Integer KFkeyKategorieParent) { this.FkeyKategorieParent = FkeyKategorieParent;}
     public Integer getFkeyKategorieParent(){ return FkeyKategorieParent; }
+    public Integer getFkeyUser() {
+        return FkeyUser;
+    }
+    public void setFkeyUser(Integer fkeyUser) {
+        FkeyUser = fkeyUser;
+    }
 
     @Override
     public void saveItem() {
@@ -50,8 +56,10 @@ public class Kategorie extends DatabaseItem{
                     "           ,[dateDeleted]" +
                     "           ,[strName]" +
                     "           ,[strBeschreibung]" +
-                    "           ,[intFkeyKategorieParent])" +
+                    "           ,[intFkeyKategorieParent]" +
+                    "           ,[intFkeyUser])" +
                     "     VALUES" +
+                    "           ?," +
                     "           ?," +
                     "           ?," +
                     "           ?," +
@@ -71,6 +79,7 @@ public class Kategorie extends DatabaseItem{
             values.add(this.getKname());
             values.add(this.getKbeschreibung());
             values.add(this.getFkeyKategorieParent().toString());
+            values.add(this.getFkeyUser().toString());
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -93,6 +102,7 @@ public class Kategorie extends DatabaseItem{
                     "      ,[strName] = ?" +
                     "      ,[strBeschreibung] = ?" +
                     "      ,[intFkeyKategorieParent] = ?" +
+                    "      ,[intFkeyUser] = ?" +
                     " WHERE ?";
 
             List<String> values = new ArrayList<>();
@@ -104,6 +114,7 @@ public class Kategorie extends DatabaseItem{
             values.add(this.getKname());
             values.add(this.getKbeschreibung());
             values.add(this.getFkeyKategorieParent().toString());
+            values.add(this.getFkeyUser().toString());
 
             values.add(this.getKey().toString());
 
@@ -127,6 +138,7 @@ public class Kategorie extends DatabaseItem{
                     "      ,[strName]" +
                     "      ,[strBeschreibung]" +
                     "      ,[intFkeyKategorieParent]" +
+                    "      ,[intFkeyUser]" +
                     "  FROM [dbo].[Kategorie] " +
                     "   WHERE [intKey] = ?";
 
@@ -151,6 +163,7 @@ public class Kategorie extends DatabaseItem{
             kategorie.setKname(result.getString("strName"));
             kategorie.setKbeschreibung(result.getString("strBeschreibung"));
             kategorie.setFkeyKategorieParent(result.getInt("intFkeyKategorieParent"));
+            kategorie.setFkeyUser(result.getInt("intFkeyUser"));
 
             loadAbrechnungsItems();
             loadSubKategorien();
@@ -222,13 +235,5 @@ public class Kategorie extends DatabaseItem{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

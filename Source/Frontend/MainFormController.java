@@ -34,5 +34,18 @@ public class MainFormController extends Application {
 
         }
     }
+
+    public void refresh(){
+        refreshKategorieView();
+        refreshAbrechnungsItemView();
+    }
+
+    public void refreshKategorieView(){
+
+    }
+
+    public void refreshAbrechnungsItemView(){
+
+    }
 }
 
