@@ -14,7 +14,6 @@ public class Kategorie extends DatabaseItem{
     private List<Kategorie> subKategorien = new ArrayList<Kategorie>();
 
     private String Kname;
-    private String Kbeschreibung;
     private Integer FkeyKategorieParent = null;
     private Integer FkeyUser = null;
 
@@ -24,8 +23,6 @@ public class Kategorie extends DatabaseItem{
     public String getKname() {
         return Kname;
     }
-    public void setKbeschreibung(String Kbeschreibung) { this.Kbeschreibung = Kbeschreibung; }
-    public String getKbeschreibung() { return Kbeschreibung; }
     public void setFkeyKategorieParent(Integer KFkeyKategorieParent) { this.FkeyKategorieParent = FkeyKategorieParent;}
     public Integer getFkeyKategorieParent(){ return FkeyKategorieParent; }
     public Integer getFkeyUser() {
@@ -55,11 +52,9 @@ public class Kategorie extends DatabaseItem{
                     "           ,[intFkeyUserDeletedBy]" +
                     "           ,[dateDeleted]" +
                     "           ,[strName]" +
-                    "           ,[strBeschreibung]" +
                     "           ,[intFkeyKategorieParent]" +
                     "           ,[intFkeyUser])" +
                     "     VALUES" +
-                    "           ?," +
                     "           ?," +
                     "           ?," +
                     "           ?," +
@@ -77,7 +72,6 @@ public class Kategorie extends DatabaseItem{
             values.add(this.getDeletedByUser().toString());
             values.add(java.sql.Date.valueOf(this.getDateDeleted()).toString());
             values.add(this.getKname());
-            values.add(this.getKbeschreibung());
             values.add(this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
 
@@ -100,7 +94,6 @@ public class Kategorie extends DatabaseItem{
                     "      ,[intFkeyUserDeletedBy] = ?" +
                     "      ,[dateDeleted] = ?" +
                     "      ,[strName] = ?" +
-                    "      ,[strBeschreibung] = ?" +
                     "      ,[intFkeyKategorieParent] = ?" +
                     "      ,[intFkeyUser] = ?" +
                     " WHERE ?";
@@ -112,7 +105,6 @@ public class Kategorie extends DatabaseItem{
             values.add(this.getDeletedByUser().toString());
             values.add(java.sql.Date.valueOf(this.getDateDeleted()).toString());
             values.add(this.getKname());
-            values.add(this.getKbeschreibung());
             values.add(this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
 
@@ -126,6 +118,29 @@ public class Kategorie extends DatabaseItem{
         }
     }
 
+    public static List<Integer> getKategorieKeysForUser(User user) throws SQLException {
+        List<Integer> returnList = new ArrayList<Integer>();
+
+        String query = "SELECT [intKey]" +
+                "  FROM [dbo].[Kategorie]" +
+                "  WHERE [intFkeyUser] = ?";
+
+        DataBaseServer connection = new DataBaseServer();
+
+        List<String> values = new ArrayList<String>();
+        values.add(user.getKey().toString());
+
+        ResultSet result = connection.select(query, values);
+
+        while (result.next()) {
+
+            int key= result.getInt("intKey");
+            returnList.add(key);
+        }
+
+        return returnList;
+    }
+
     @Override
     public Kategorie loadItem(Integer key) {
         try {
@@ -136,7 +151,6 @@ public class Kategorie extends DatabaseItem{
                     "      ,[intFkeyUserDeletedBy]" +
                     "      ,[dateDeleted]" +
                     "      ,[strName]" +
-                    "      ,[strBeschreibung]" +
                     "      ,[intFkeyKategorieParent]" +
                     "      ,[intFkeyUser]" +
                     "  FROM [dbo].[Kategorie] " +
@@ -151,22 +165,22 @@ public class Kategorie extends DatabaseItem{
 
 
             result = connection.select(query, values);
+            result.next();
 
             Kategorie kategorie = new Kategorie();
 
             kategorie.setKey(result.getInt("intKey"));
             kategorie.setDateCreated(result.getDate("dateCreated").toLocalDate());
             kategorie.setFkeyUserCreated(result.getInt("intFkeyUserCreatedBy"));
-            kategorie.setDateDeleted(result.getDate("dateDeleted").toLocalDate());
+            kategorie.setDateDeleted(result.getDate("dateDeleted") == null ? null : result.getDate("dateDeleted").toLocalDate());
             kategorie.setDeletedByUser(result.getInt("intFkeyUserDeletedBy"));
             kategorie.setDeletionFlag(result.getBoolean("boolDeletionFlag"));
             kategorie.setKname(result.getString("strName"));
-            kategorie.setKbeschreibung(result.getString("strBeschreibung"));
             kategorie.setFkeyKategorieParent(result.getInt("intFkeyKategorieParent"));
             kategorie.setFkeyUser(result.getInt("intFkeyUser"));
 
-            loadAbrechnungsItems();
-            loadSubKategorien();
+            loadAbrechnungsItems(kategorie);
+            loadSubKategorien(kategorie);
 
             return kategorie;
         } catch (SQLException e) {
@@ -189,14 +203,14 @@ public class Kategorie extends DatabaseItem{
         return sum;
     }
 
-    private void loadSubKategorien(){
+    private void loadSubKategorien(Kategorie kategorie){
         try {
             String query = "SELECT [intKey]" +
                 "  FROM [dbo].[Kategorie]" +
                 "  WHERE [intFkeyKategorieParent] = ?";
 
             List<String> values = new ArrayList<String>();
-            values.add(this.key.toString());
+            values.add(kategorie.key.toString());
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -213,14 +227,14 @@ public class Kategorie extends DatabaseItem{
         }
     }
 
-    private void loadAbrechnungsItems(){
+    private void loadAbrechnungsItems(Kategorie kategorie){
         try {
             String query = "SELECT [intKey]" +
                     "  FROM [dbo].[AbrechnungsItem]" +
                     "  WHERE [intFkeyKategorieParent] = ?";
 
             List<String> values = new ArrayList<String>();
-            values.add(this.key.toString());
+            values.add(kategorie.key.toString());
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -228,7 +242,7 @@ public class Kategorie extends DatabaseItem{
 
             while (result.next()) {
 
-                int key= result.getInt("intKey");
+                int key = result.getInt("intKey");
                 AbrechnungItem abrechnungsItem = new AbrechnungItem().loadItem(key);
                 abrechnungsItems.add(abrechnungsItem);
             }
