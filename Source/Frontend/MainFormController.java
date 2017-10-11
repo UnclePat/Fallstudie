@@ -20,10 +20,9 @@ import java.sql.SQLException;
 public class MainFormController extends Application {
 
     @FXML
-    private AnchorPane HaushaltsbuchContentpane;
-
-    @FXML
     private TextField txtBackupPath;
+    @FXML
+    private Text Status;
 
     @Override
     public void start(Stage primaryStage) {
@@ -65,9 +64,13 @@ public class MainFormController extends Application {
         try {
             connection.executeBackup(backupPath);
             System.out.println("Backup successful.");
+            Status.setVisible(true);
+            Status.setText("Backup erfolgreich");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Backup failed.");
+            Status.setVisible(true);
+            Status.setText("Backup fehlerhaft");
         }
 
     }

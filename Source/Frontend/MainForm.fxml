@@ -137,7 +137,7 @@
                 <PasswordField layoutX="263.0" layoutY="210.0" prefWidth="200.0" promptText="Passwort eingeben" />
                 <PasswordField layoutX="263.0" layoutY="259.0" prefWidth="200.0" promptText="Passwort eingeben" />
                 <PasswordField layoutX="263.0" layoutY="309.0" prefWidth="200.0" promptText="Passwort eingeben" />
-                <Button layoutX="390.0" layoutY="346.0" mnemonicParsing="false" text="Speichern" />
+                <Button layoutX="371.0" layoutY="346.0" mnemonicParsing="false" text="Speichern" />
                 <Text font="$x3" layoutX="35.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzer anlegen" />
                 <Line endX="1092.0" endY="0.0" layoutX="137.0" layoutY="445.0" startX="-100.0" />
                 <Text font="$x1" layoutX="36.0" layoutY="506.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
@@ -151,8 +151,11 @@
                     <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
-                <Button fx:id="btnBackup" layoutX="390.0" layoutY="698.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="73.0" text="Sichern" />
+                <Button fx:id="btnBackup" layoutX="371.0" layoutY="698.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="92.0" text="Sichern" />
                 <TextField fx:id="txtBackupPath" layoutX="263.0" layoutY="658.0" prefWidth="200.0" promptText="Backuppfad angeben" />
+                <Text layoutX="38.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backuppfad:" />
+                <Text fx:id="Status" layoutX="263.0" layoutY="717.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+                <Text fill="#808080" layoutX="509.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: C:\Program Files\Microsoft SQL Server\MSSQL13.SQLEXPRESS\MSSQL\Backup" />
               </children>
             </AnchorPane>
           </content>
