@@ -93,4 +93,11 @@ public class DataBaseServer
         Statement statement = this.databaseConnection.createStatement();
         return statement.executeUpdate(sql);
     }
+
+    public void executeBackup(String path) throws SQLException {
+        String backupStatement = "BACKUP DATABASE [Haushaltsbuch] TO DISK = '" + path + "'";
+
+        Statement statement = this.databaseConnection.createStatement();
+        statement.execute(backupStatement);
+    }
 }

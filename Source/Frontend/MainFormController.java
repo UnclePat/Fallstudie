@@ -1,12 +1,19 @@
 package Frontend;
 
+import Backend.Database.DataBaseServer;
+import Backend.User.User;
+import Backend.User.UserUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
+import java.sql.SQLException;
 
 public class MainFormController extends Application {
 
@@ -21,10 +28,6 @@ public class MainFormController extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.setResizable(false);
-
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/Frontend/UserControlHaushaltsbuchController.fxml"));
-            HaushaltsbuchContentpane.getChildren().clear();
-            HaushaltsbuchContentpane.getChildren().add(pane);
 
 
 
@@ -45,6 +48,22 @@ public class MainFormController extends Application {
     }
 
     public void refreshAbrechnungsItemView(){
+
+    }
+
+    public void btnBackupPressed(ActionEvent actionEvent){
+        System.out.println("Backup started.");
+
+        DataBaseServer connection = new DataBaseServer();
+        String backupPath = "C:\\Users\\patri\\Documents\\Lool";
+
+        try {
+            connection.executeBackup(backupPath);
+            System.out.println("Backup successful.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Backup failed.");
+        }
 
     }
 }
