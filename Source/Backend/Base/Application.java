@@ -2,18 +2,8 @@ package Backend.Base;
 
 import Backend.User.User;
 import Frontend.LoginController;
-import Frontend.OberflächeController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
+import Frontend.MainFormController;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class Application extends javafx.application.Application {
     private static User currentUser;
@@ -38,7 +28,7 @@ public class Application extends javafx.application.Application {
 
 
         this.setCurrentUser(controller.getCurrentUser());
-        OberflächeController mainController = new OberflächeController();
+        MainFormController mainController = new MainFormController();
         mainController.start(primaryStage);
     }
 }

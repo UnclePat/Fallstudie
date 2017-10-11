@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-public class OberflächeController extends Application {
+public class MainFormController extends Application {
 
     @FXML
     private AnchorPane HaushaltsbuchContentpane;
@@ -16,7 +16,7 @@ public class OberflächeController extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Oberfläche.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("MainForm.fxml"));
             Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             primaryStage.setScene(scene);
             primaryStage.show();
