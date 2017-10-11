@@ -70,7 +70,7 @@ public class LoginController extends Application {
                     stage.setScene(scene);
                     stage.show();*/
                     System.out.println("Login war erfolgreich");
-                    setCurrentUser(user);
+                    Backend.Base.Application.setCurrentUser(user);
 
                     Node source = (Node) actionEvent.getSource();
                     Stage stage = (Stage) source.getScene().getWindow();

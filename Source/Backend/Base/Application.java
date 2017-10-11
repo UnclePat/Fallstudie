@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Application extends javafx.application.Application {
     private static User currentUser;
 
-    private void setCurrentUser(User _currentUser){
+    public static void setCurrentUser(User _currentUser){
         Application.currentUser = _currentUser;
     }
 
@@ -27,9 +27,10 @@ public class Application extends javafx.application.Application {
         controller.start(login);
 
 
-        this.setCurrentUser(controller.getCurrentUser());
-        MainFormController mainController = new MainFormController();
-        mainController.start(primaryStage);
+        if (Application.currentUser != null){
+            MainFormController mainController = new MainFormController();
+            mainController.start(primaryStage);
+        }
     }
 }
 
