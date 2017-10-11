@@ -1,4 +1,4 @@
-package Frontend.Adder;
+package Frontend;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +7,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import sun.plugin.javascript.navig.Anchor;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class OberflächeController extends Application {
 
@@ -26,7 +22,7 @@ public class OberflächeController extends Application {
             primaryStage.show();
             primaryStage.setResizable(false);
 
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/Frontend/Adder/UserControlHaushaltsbuchController.fxml"));
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/Frontend/UserControlHaushaltsbuchController.fxml"));
             HaushaltsbuchContentpane.getChildren().clear();
             HaushaltsbuchContentpane.getChildren().add(pane);
 

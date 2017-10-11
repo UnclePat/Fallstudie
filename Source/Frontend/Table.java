@@ -1,4 +1,4 @@
-package Frontend.Adder;
+package Frontend;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

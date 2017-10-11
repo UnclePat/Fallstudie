@@ -1,4 +1,4 @@
-package Frontend.Adder;
+package Frontend;
 
 import javafx.event.ActionEvent;
 import java.net.URL;
