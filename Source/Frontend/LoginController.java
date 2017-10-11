@@ -61,6 +61,7 @@ public class LoginController extends Application {
                     actionTarget.setStyle("-fx-border-color: red;");
                     textField.setStyle("-fx-border-color: red;");
                     passwordField.setStyle("-fx-border-color: red;");
+                    Fehler.setText("Benutzername und Passwort sind ungültig.");
                     System.out.println("Login war nicht erfolgreich");
                     Fehler.setVisible(true);
                 }
@@ -82,6 +83,12 @@ public class LoginController extends Application {
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
                 s.printStackTrace();
 
+                actionTarget.setStyle("-fx-border-color: red;");
+                textField.setStyle("-fx-border-color: red;");
+                passwordField.setStyle("-fx-border-color: red;");
+                System.out.println("Login war nicht erfolgreich");
+                Fehler.setText("Es konnte keine Verbindung zur Datenbank aufgebaut werden.");
+                Fehler.setVisible(true);
             }//try
 
 
