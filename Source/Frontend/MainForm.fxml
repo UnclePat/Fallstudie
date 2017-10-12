@@ -12,9 +12,9 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: aliceblue;&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Frontend.MainFormController">
   <children>
-    <TabPane layoutX="0.0" layoutY="0.0" prefHeight="864.0" prefWidth="1259.0001220703125" tabClosingPolicy="UNAVAILABLE">
+    <TabPane layoutX="0.0" layoutY="0.0" prefHeight="864.0" prefWidth="1259.0001220703125" tabClosingPolicy="UNAVAILABLE" fx:id="mainTabControl">
       <tabs>
-        <Tab style="" text="Start" onSelectionChanged="#refreshAbrechnungsItemView">
+        <Tab style="" text="Start" fx:id="tabStart">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -56,7 +56,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab style=" " text="Auswertung">
+        <Tab style=" " text="Auswertung" fx:id="tabAuswertung">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -102,7 +102,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab fx:id="tab_haushaltsbuch" onSelectionChanged="#refreshKategorieView" style=" " text="Haushaltsbuch">
+        <Tab fx:id="tabHaushaltsbuch" style=" " text="Haushaltsbuch">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -119,17 +119,21 @@
                 <TextField layoutX="739.0" layoutY="682.0" prefWidth="200.0" promptText="Beschreibung eingeben" />
                 <TextField layoutX="739.0" layoutY="725.0" prefWidth="200.0" promptText="Menge eingeben" />
                 <Text layoutX="630.0" layoutY="741.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menge:" />
-                <Button layoutX="739.0" layoutY="769.0" mnemonicParsing="false" text="speichern" />
+                <Button layoutX="868.0" layoutY="763.0" mnemonicParsing="false" text="Speichern" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
                     <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
+                <Button fx:id="btnKategorieEdit" layoutX="434.0" layoutY="798.0" mnemonicParsing="false" text="Bearbeiten" />
+                <Button fx:id="btnKategorieNew" layoutX="384.0" layoutY="798.0" mnemonicParsing="false" text="Neu" />
+                <TableView fx:id="KategorieItemTabView" layoutX="629.0" layoutY="136.0" prefHeight="431.0" prefWidth="581.5">
+                </TableView>
               </children>
             </AnchorPane>
           </content>
         </Tab>
-        <Tab style="" text="Einstellungen">
+        <Tab style="" text="Einstellungen" fx:id="tabEinstellungen">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>

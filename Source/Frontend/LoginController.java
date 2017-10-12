@@ -2,6 +2,7 @@ package Frontend;
 
 import Backend.User.User;
 import Backend.User.UserUtils;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +10,13 @@ import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.util.Duration;
 
 
 public class LoginController extends Application {
@@ -39,14 +42,12 @@ public class LoginController extends Application {
         @FXML private TextField passwordField;
         @FXML private TextField textField;
         @FXML private Text Fehler;
+        @FXML private Pane pane;
 
 
 
 
     public void buttonPressed(ActionEvent actionEvent){
-
-            //Button verfärbung
-            actionTarget.setStyle("-fx-border-color: blue;");
 
             //Login
             try {
@@ -66,10 +67,6 @@ public class LoginController extends Application {
                     Fehler.setVisible(true);
                 }
                 else{
-                    /*Parent root = FXMLLoader.load(getClass().getResource("/Adder/Oberfläche.fxml"));
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();*/
                     System.out.println("Login war erfolgreich");
                     Backend.Base.Application.setCurrentUser(user);
 

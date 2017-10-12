@@ -6,21 +6,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 
 public class MainFormController extends Application {
-    private boolean tabSelection = false;
     @FXML
     private TextField txtBackupPath;
     @FXML
@@ -31,16 +28,29 @@ public class MainFormController extends Application {
     @FXML
     private TableView RecentEntryTabView;
 
+    @FXML
+    private TabPane mainTabControl;
+
+    @FXML
+    private Tab tabStart;
+    @FXML
+    private Tab tabAuswertungen;
+    @FXML
+    private Tab tabHaushaltsbuch;
+    @FXML
+    private Tab tabEinstellungen;
+
     @Override
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainForm.fxml"));
             Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             primaryStage.setScene(scene);
+            DataBaseServer.dbConnect();
             primaryStage.show();
             primaryStage.setResizable(false);
 
-            refresh();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -48,95 +58,78 @@ public class MainFormController extends Application {
         }
     }
 
-    public void refresh(){
-        //refreshAbrechnungsItemView();
+    @FXML
+    protected void initialize(){
+        mainTabControl.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
+            if (newTab == tabHaushaltsbuch){
+                refreshHaushaltsbuch();
+                return;
+            }
+
+            if (newTab == tabStart){
+                refreshStart();
+                return;
+            }
+        });
+        kategorieTree.getSelectionModel().selectedItemProperty().addListener((observable, oldTreeItem, newTreeItem) -> {
+            TreeItem<Kategorie> item = (TreeItem<Kategorie>) newTreeItem;
+            System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
+            refreshAbrechnungsItemView(item.getValue());
+        });
     }
 
-    private boolean checkTab() {
-        tabSelection = !tabSelection;
-        return tabSelection;
+
+    public void refreshHaushaltsbuch(){
+        System.out.println("Call tab Haushaltsbuch");
+        refreshKategorieView();
     }
 
     // Is here to build a tree item
     private TreeItem<Kategorie> makeTreeItem(Kategorie item) {
         TreeItem<Kategorie> node = new TreeItem<Kategorie>(item);
         return node;
+
     }
 
+    void refreshAbrechnungsItemView(Kategorie kategorie){
+        System.out.println("Call refreshAbrechnungsItemView");
+        kategorie.getAbrechnungsItems();
+    }
 
     @FXML void refreshKategorieView(){
-        if(checkTab()) {
-            // if tab selected do something
+        List<Integer> test = null;
 
-            // Debug
-            System.out.println("Call tab haushaltsbuch");
+        try {
+            test = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
+            TreeItem<Kategorie> dummyRoot = new TreeItem<>();
 
+            for(Integer item : test) {
 
+                Kategorie kat = new Kategorie();
+                kat = kat.loadItem(item);
 
-            List<Integer> test = null;
+                // Debug
+                System.out.println(item);
+                System.out.println("Kategoriename: " + kat.getName());
 
-            try {
-                test = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
-                TreeItem<Kategorie> dummyRoot = new TreeItem<>();
+                dummyRoot.getChildren().add(makeTreeItem(kat));
 
-                for(Integer item : test) {
-
-                    Kategorie kat = new Kategorie();
-                    kat = kat.loadItem(item);
-
-                    // Debug
-                    System.out.println(item);
-                    System.out.println("Kategoriename: " + kat.getName());
-
-                    dummyRoot.getChildren().add(makeTreeItem(kat));
-
-                }
-
-                kategorieTree.setShowRoot(false);
-                kategorieTree.setRoot(dummyRoot);
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
 
-
-
+            kategorieTree.setShowRoot(false);
+            kategorieTree.setRoot(dummyRoot);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void refreshStart() {
+        System.out.println("Call tab Start");
     }
 
     public void refreshAbrechnungsItemView(){
-      /*  if(checkTab()) {
-            // if tab selected do something
-
-            // Debug
-            System.out.println("Call tab Haushaltsbuch");
-            AbrechnungItem AI = new AbrechnungItem();
-            Double Test = null;
-
-            try {
-                Test = AI.getRechnungsBetrag();
-                TableView<Double> Dummy = new TableView<>();
-
-                Dummy.getColumns().add(makeTreeItem(item_name));
-                ObservableList E = new ObservableList() {
-                }
-
-
-                kategorieTree.setShowRoot(false);
-                Dummy.setEditable(false);
-                Dummy.setItems(E);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        /*if(checkTab()) {
-            // if tab clicked do something
-            System.out.println("Call tab Start");
-            {Datum, Rechnung, Kategorie, Beschreibung},
-            {Datum, Rechnung, Kategorie, Beschreibung},
-            ArrayList<String,Date, String, String> test = null;
-
-        }
-*/
+        // if tab clicked do something
+        System.out.println("Call tab Haushaltsbuch");
     }
 
     public void btnBackupPressed(ActionEvent actionEvent){
