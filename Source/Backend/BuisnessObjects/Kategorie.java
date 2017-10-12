@@ -13,15 +13,15 @@ public class Kategorie extends DatabaseItem{
     private List<AbrechnungItem> abrechnungsItems = new ArrayList<AbrechnungItem>();
     private List<Kategorie> subKategorien = new ArrayList<Kategorie>();
 
-    private String Kname;
+    private String name;
     private Integer FkeyKategorieParent = null;
     private Integer FkeyUser = null;
 
-    public void setKname(String Kname) {
-        this.Kname = Kname;
+    public void setName(String Kname) {
+        this.name = Kname;
     }
-    public String getKname() {
-        return Kname;
+    public String getName() {
+        return name;
     }
     public void setFkeyKategorieParent(Integer KFkeyKategorieParent) { this.FkeyKategorieParent = FkeyKategorieParent;}
     public Integer getFkeyKategorieParent(){ return FkeyKategorieParent; }
@@ -71,7 +71,7 @@ public class Kategorie extends DatabaseItem{
             values.add(this.getDeletionFlag() ? "1":"0");
             values.add(this.getDeletedByUser().toString());
             values.add(java.sql.Date.valueOf(this.getDateDeleted()).toString());
-            values.add(this.getKname());
+            values.add(this.getName());
             values.add(this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
 
@@ -104,7 +104,7 @@ public class Kategorie extends DatabaseItem{
             values.add(this.getDeletionFlag() ? "1" : "0");
             values.add(this.getDeletedByUser().toString());
             values.add(java.sql.Date.valueOf(this.getDateDeleted()).toString());
-            values.add(this.getKname());
+            values.add(this.getName());
             values.add(this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
 
@@ -175,7 +175,7 @@ public class Kategorie extends DatabaseItem{
             kategorie.setDateDeleted(result.getDate("dateDeleted") == null ? null : result.getDate("dateDeleted").toLocalDate());
             kategorie.setDeletedByUser(result.getInt("intFkeyUserDeletedBy"));
             kategorie.setDeletionFlag(result.getBoolean("boolDeletionFlag"));
-            kategorie.setKname(result.getString("strName"));
+            kategorie.setName(result.getString("strName"));
             kategorie.setFkeyKategorieParent(result.getInt("intFkeyKategorieParent"));
             kategorie.setFkeyUser(result.getInt("intFkeyUser"));
 
@@ -249,5 +249,10 @@ public class Kategorie extends DatabaseItem{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString(){
+        return this.getName();
     }
 }

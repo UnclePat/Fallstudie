@@ -1,29 +1,22 @@
 package Frontend;
 
-import Backend.BuisnessObjects.AbrechnungItem;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import sun.reflect.generics.scope.DummyScope;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainFormController extends Application {
@@ -65,10 +58,9 @@ public class MainFormController extends Application {
     }
 
     // Is here to build a tree item
-    private TreeItem<String> makeTreeItem(String item) {
-        TreeItem<String> dummyRoot = new TreeItem<String>(item);
-        return dummyRoot;
-
+    private TreeItem<Kategorie> makeTreeItem(Kategorie item) {
+        TreeItem<Kategorie> node = new TreeItem<Kategorie>(item);
+        return node;
     }
 
 
@@ -80,23 +72,23 @@ public class MainFormController extends Application {
             System.out.println("Call tab haushaltsbuch");
 
 
-            Kategorie kat = new Kategorie();
+
             List<Integer> test = null;
 
             try {
-                test = kat.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
-                TreeItem<String> dummyRoot = new TreeItem<>();
+                test = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
+                TreeItem<Kategorie> dummyRoot = new TreeItem<>();
 
                 for(Integer item : test) {
 
-
-                    String item_name = kat.loadItem(item).getKname();
+                    Kategorie kat = new Kategorie();
+                    kat = kat.loadItem(item);
 
                     // Debug
                     System.out.println(item);
-                    System.out.println("Kategoriename: " + item_name);
+                    System.out.println("Kategoriename: " + kat.getName());
 
-                    dummyRoot.getChildren().add(makeTreeItem(item_name));
+                    dummyRoot.getChildren().add(makeTreeItem(kat));
 
                 }
 
@@ -167,6 +159,10 @@ public class MainFormController extends Application {
             Status.setFill(Paint.valueOf("Red"));
             Status.setVisible(true);
         }
+
+    }
+
+    public void btnSelectUser(ActionEvent actionEvent){
 
     }
 }
