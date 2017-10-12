@@ -6,9 +6,9 @@ import java.util.List;
 public class DataBaseServer
 {
     private static Connection databaseConnection = null;
-    private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa;databaseName=Haushaltsbuch;";
+    private static final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa;databaseName=Haushaltsbuch;";
 
-    public void dbConnect(){
+    public static void dbConnect(){
         try {
             if (databaseConnection != null){
                 return;
@@ -30,11 +30,11 @@ public class DataBaseServer
     }
 
     public DataBaseServer(){
-        this.dbConnect();
+        DataBaseServer.dbConnect();
     }
 
     public ResultSet select(String query, List<String> values) throws SQLException {
-        PreparedStatement statement = this.databaseConnection.prepareStatement(query);
+        PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query);
 
         int maxI = values.size();
         for (int i = 0; i < maxI; i++){
@@ -48,7 +48,7 @@ public class DataBaseServer
     }
 
     public int update(String query, List<String> values) throws SQLException {
-        PreparedStatement statement = this.databaseConnection.prepareStatement(query);
+        PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query);
 
         int maxI = values.size();
         for (int i = 0; i < maxI; i++){
@@ -62,7 +62,7 @@ public class DataBaseServer
     }
 
     public int insert(String query, List<String> values) throws SQLException {
-        PreparedStatement statement = this.databaseConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
         int maxI = values.size();
         for (int i = 0; i < maxI; i++){
@@ -85,7 +85,7 @@ public class DataBaseServer
                 " SET boolDeletionFlag = true" +
                 " WHERE intKey = " + key;
 
-        Statement statement = this.databaseConnection.createStatement();
+        Statement statement = DataBaseServer.databaseConnection.createStatement();
         return statement.executeUpdate(sql);
     }
 
@@ -94,13 +94,13 @@ public class DataBaseServer
                 " SET boolDeletionFlag = false" +
                 " WHERE intKey = " + key;
 
-        Statement statement = this.databaseConnection.createStatement();
+        Statement statement = DataBaseServer.databaseConnection.createStatement();
         return statement.executeUpdate(sql);
     }
 
     public void executeBackup(String path) throws SQLException {
         String backupStatement = "BACKUP DATABASE [Haushaltsbuch] TO DISK = '" + path + "' with INIT, NAME = N'SQL Voll'";
-        Statement statement = this.databaseConnection.createStatement();
+        Statement statement = DataBaseServer.databaseConnection.createStatement();
         statement.execute(backupStatement);
     }
 }
