@@ -110,6 +110,16 @@
                 <Text font="$x3" layoutX="35.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorien" />
                 <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
                 <TreeView fx:id="kategorieTree" layoutX="37.0" layoutY="136.0" prefHeight="654.0" prefWidth="474.0" />
+                <ListView layoutX="629.0" layoutY="136.0" prefHeight="435.0" prefWidth="584.0" />
+                <Text font="$x3" layoutX="629.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neuer Eintrag" />
+                <Line endX="494.0" endY="0.0" layoutX="730.0" layoutY="620.0" startX="-100.0" />
+                <TextField layoutX="739.0" layoutY="639.0" prefWidth="200.0" promptText="TT.MM.JJJJ" />
+                <Text layoutX="629.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum:" />
+                <Text layoutX="629.0" layoutY="695.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beschreibung:" />
+                <TextField layoutX="739.0" layoutY="682.0" prefWidth="200.0" promptText="Beschreibung eingeben" />
+                <TextField layoutX="739.0" layoutY="725.0" prefWidth="200.0" promptText="Menge eingeben" />
+                <Text layoutX="630.0" layoutY="741.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menge:" />
+                <Button layoutX="868.0" layoutY="763.0" mnemonicParsing="false" text="Speichern" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
                     <Image url="@Logo.png" preserveRatio="true" smooth="true" />
@@ -117,8 +127,6 @@
                 </ImageView>
                 <Button fx:id="btnKategorieEdit" layoutX="434.0" layoutY="798.0" mnemonicParsing="false" text="Bearbeiten" />
                 <Button fx:id="btnKategorieNew" layoutX="384.0" layoutY="798.0" mnemonicParsing="false" text="Neu" />
-                <Button fx:id="btnAbrechnungsItemEdit" layoutX="1136.0" layoutY="584.0" mnemonicParsing="false" text="Bearbeiten" />
-                <Button fx:id="btnAbrechnungsItemNew" layoutX="1086.0" layoutY="584.0" mnemonicParsing="false" text="Neu" />
                 <TableView layoutX="629.0" layoutY="136.0" prefHeight="431.0" prefWidth="581.5">
                   <columns>
                     <TableColumn prefWidth="75.0" text="Column X" />
