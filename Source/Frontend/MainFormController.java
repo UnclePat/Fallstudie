@@ -37,6 +37,7 @@ public class MainFormController extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("MainForm.fxml"));
             Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             primaryStage.setScene(scene);
+            DataBaseServer.dbConnect();
             primaryStage.show();
             primaryStage.setResizable(false);
 
