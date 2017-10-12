@@ -1,12 +1,16 @@
 package Frontend;
 
+import Backend.BuisnessObjects.AbrechnungItem;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Node;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -16,18 +20,23 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import sun.reflect.generics.scope.DummyScope;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainFormController extends Application {
+    private boolean tabSelection = false;
     @FXML
     private TextField txtBackupPath;
     @FXML
     private Text Status;
     @FXML
     private TreeView kategorieTree;
+
+    @FXML
+    private TableView RecentEntryTabView;
 
     @Override
     public void start(Stage primaryStage) {
@@ -47,38 +56,95 @@ public class MainFormController extends Application {
     }
 
     public void refresh(){
-        refreshKategorieView();
-        refreshAbrechnungsItemView();
+        //refreshAbrechnungsItemView();
     }
 
-    public void refreshKategorieView(){
-        try {
-            List<Kategorie> kategorien = new ArrayList<Kategorie>();
-            List<Integer> kategorieKeys = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
+    private boolean checkTab() {
+        tabSelection = !tabSelection;
+        return tabSelection;
+    }
 
-            TreeItem<String> root = new TreeItem<>();
-            root.setValue(Backend.Base.Application.getCurrentUser().getName());
+    // Is here to build a tree item
+    private TreeItem<String> makeTreeItem(String item) {
+        TreeItem<String> dummyRoot = new TreeItem<String>(item);
+        return dummyRoot;
 
-            for (Integer key : kategorieKeys) {
-                Kategorie kategorie = new Kategorie().loadItem(key);
-                kategorien.add(kategorie);
+    }
 
-                root.getChildren().add(new TreeItem<String>(kategorie.getKname()));
+
+    @FXML void refreshKategorieView(){
+        if(checkTab()) {
+            // if tab selected do something
+
+            // Debug
+            System.out.println("Call tab haushaltsbuch");
+
+
+            Kategorie kat = new Kategorie();
+            List<Integer> test = null;
+
+            try {
+                test = kat.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
+                TreeItem<String> dummyRoot = new TreeItem<>();
+
+                for(Integer item : test) {
+
+
+                    String item_name = kat.loadItem(item).getKname();
+
+                    // Debug
+                    System.out.println(item);
+                    System.out.println("Kategoriename: " + item_name);
+
+                    dummyRoot.getChildren().add(makeTreeItem(item_name));
+
+                }
+
+                kategorieTree.setShowRoot(false);
+                kategorieTree.setRoot(dummyRoot);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
-            TreeItem<String> dummyRoot = new TreeItem<>();
-            dummyRoot.getChildren().addAll(root);
-            kategorieTree.setShowRoot(false);
-            kategorieTree.setRoot(dummyRoot);
-        }
-        catch(SQLException ex){
-            ex.printStackTrace();
-        }
 
+
+        }
     }
 
     public void refreshAbrechnungsItemView(){
+      /*  if(checkTab()) {
+            // if tab selected do something
 
+            // Debug
+            System.out.println("Call tab Haushaltsbuch");
+            AbrechnungItem AI = new AbrechnungItem();
+            Double Test = null;
+
+            try {
+                Test = AI.getRechnungsBetrag();
+                TableView<Double> Dummy = new TableView<>();
+
+                Dummy.getColumns().add(makeTreeItem(item_name));
+                ObservableList E = new ObservableList() {
+                }
+
+
+                kategorieTree.setShowRoot(false);
+                Dummy.setEditable(false);
+                Dummy.setItems(E);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        /*if(checkTab()) {
+            // if tab clicked do something
+            System.out.println("Call tab Start");
+            {Datum, Rechnung, Kategorie, Beschreibung},
+            {Datum, Rechnung, Kategorie, Beschreibung},
+            ArrayList<String,Date, String, String> test = null;
+
+        }
+*/
     }
 
     public void btnBackupPressed(ActionEvent actionEvent){
