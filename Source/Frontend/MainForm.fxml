@@ -12,9 +12,9 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: aliceblue;&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Frontend.MainFormController">
   <children>
-    <TabPane layoutX="0.0" layoutY="0.0" prefHeight="864.0" prefWidth="1259.0001220703125" tabClosingPolicy="UNAVAILABLE">
+    <TabPane layoutX="0.0" layoutY="0.0" prefHeight="864.0" prefWidth="1259.0001220703125" tabClosingPolicy="UNAVAILABLE" fx:id="mainTabControl">
       <tabs>
-        <Tab onSelectionChanged="#refreshStart" style="" text="Start">
+        <Tab style="" text="Start" fx:id="tabStart">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -56,7 +56,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab style=" " text="Auswertung">
+        <Tab style=" " text="Auswertung" fx:id="tabAuswertung">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -102,7 +102,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab fx:id="tab_haushaltsbuch" onSelectionChanged="#refreshHaushaltsbuch" style=" " text="Haushaltsbuch">
+        <Tab fx:id="tabHaushaltsbuch" style=" " text="Haushaltsbuch">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -137,7 +137,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab style="" text="Einstellungen">
+        <Tab style="" text="Einstellungen" fx:id="tabEinstellungen">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
