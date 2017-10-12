@@ -44,8 +44,6 @@ public class MainFormController extends Application {
             DataBaseServer.dbConnect();
             primaryStage.show();
             primaryStage.setResizable(false);
-
-            refresh();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -53,8 +51,9 @@ public class MainFormController extends Application {
         }
     }
 
-    public void refresh(){
-        //refreshAbrechnungsItemView();
+    public void refreshHaushaltsbuch(){
+        refreshKategorieView();
+        refreshAbrechnungsItemView();
     }
 
     private boolean checkTab() {
@@ -68,9 +67,6 @@ public class MainFormController extends Application {
         return node;
     }
 
-    /**
-     *
-     */
     @FXML void refreshKategorieView(){
         if(checkTab()) {
 
@@ -110,40 +106,16 @@ public class MainFormController extends Application {
         }
     }
 
+    public void refreshStart() {
+
+    }
+
     public void refreshAbrechnungsItemView(){
-      /*  if(checkTab()) {
-            // if tab selected do something
-
-            // Debug
-            System.out.println("Call tab Haushaltsbuch");
-            AbrechnungItem AI = new AbrechnungItem();
-            Double Test = null;
-
-            try {
-                Test = AI.getRechnungsBetrag();
-                TableView<Double> Dummy = new TableView<>();
-
-                Dummy.getColumns().add(makeTreeItem(item_name));
-                ObservableList E = new ObservableList() {
-                }
-
-
-                kategorieTree.setShowRoot(false);
-                Dummy.setEditable(false);
-                Dummy.setItems(E);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        /*if(checkTab()) {
+        if(checkTab()) {
             // if tab clicked do something
-            System.out.println("Call tab Start");
-            {Datum, Rechnung, Kategorie, Beschreibung},
-            {Datum, Rechnung, Kategorie, Beschreibung},
-            ArrayList<String,Date, String, String> test = null;
+            System.out.println("Call tab Haushaltsbuch");
 
         }
-*/
     }
 
     public void btnBackupPressed(ActionEvent actionEvent){

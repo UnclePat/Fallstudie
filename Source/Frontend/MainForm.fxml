@@ -14,7 +14,7 @@
   <children>
     <TabPane layoutX="0.0" layoutY="0.0" prefHeight="864.0" prefWidth="1259.0001220703125" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab onSelectionChanged="#refreshAbrechnungsItemView" style="" text="Start">
+        <Tab onSelectionChanged="#refreshStart" style="" text="Start">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -102,7 +102,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab fx:id="tab_haushaltsbuch" onSelectionChanged="#refreshKategorieView" style=" " text="Haushaltsbuch">
+        <Tab fx:id="tab_haushaltsbuch" onSelectionChanged="#refreshHaushaltsbuch" style=" " text="Haushaltsbuch">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
