@@ -29,7 +29,7 @@ public class Table {
         ID.set(v);
     }
 
-    public String getDate() {
+    public String dataProperty() {
         return Date.get();
     }
 
