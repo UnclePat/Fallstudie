@@ -163,6 +163,16 @@
                 <Text layoutX="38.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backuppfad:" />
                 <Text fx:id="Status" layoutX="509.0" layoutY="717.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
                 <Text fill="GREY" layoutX="509.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: [installpath]\SSQL13.SQLEXPRESS\MSSQL\Backup" />
+                <Button fx:id="btnSelectUser" layoutX="494.0" layoutY="161.0" mnemonicParsing="false" onAction="#btnSelectUser" text="Benutzer Auswählen..." />
+                <TableView fx:id="tblUserAccessRights" layoutX="659.0" layoutY="159.0" prefHeight="200.0" prefWidth="509.0">
+                  <columns>
+                    <TableColumn prefWidth="75.0" text="Column X" />
+                    <TableColumn prefWidth="75.0" text="Column X" />
+                  </columns>
+                </TableView>
+                <Button fx:id="btnNewAccessRight" layoutX="1037.0" layoutY="368.0" mnemonicParsing="false" text="Neu" />
+                <Button fx:id="btnEditUserAcessRight" layoutX="1091.0" layoutY="368.0" mnemonicParsing="false" text="Bearbeiten" />
+                <Button fx:id="btnNewUser" layoutX="494.0" layoutY="493.0" mnemonicParsing="false" text="Speichern" />
               </children>
             </AnchorPane>
           </content>
