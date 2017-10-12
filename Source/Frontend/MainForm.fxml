@@ -127,11 +127,7 @@
                 </ImageView>
                 <Button fx:id="btnKategorieEdit" layoutX="434.0" layoutY="798.0" mnemonicParsing="false" text="Bearbeiten" />
                 <Button fx:id="btnKategorieNew" layoutX="384.0" layoutY="798.0" mnemonicParsing="false" text="Neu" />
-                <TableView layoutX="629.0" layoutY="136.0" prefHeight="431.0" prefWidth="581.5">
-                  <columns>
-                    <TableColumn prefWidth="75.0" text="Column X" />
-                    <TableColumn prefWidth="75.0" text="Column X" />
-                  </columns>
+                <TableView fx:id="KategorieItemTabView" layoutX="629.0" layoutY="136.0" prefHeight="431.0" prefWidth="581.5">
                 </TableView>
               </children>
             </AnchorPane>
