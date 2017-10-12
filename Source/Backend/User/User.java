@@ -204,7 +204,7 @@ public class User extends DatabaseItem{
             values.add(password);
 
             result = connection.select(query, values);
-
+            result.next();
             User user = new User();
 
             user.setKey(result.getInt("intKey"));
@@ -214,8 +214,8 @@ public class User extends DatabaseItem{
             user.setDateCreated(result.getDate("dateCreated").toLocalDate());
             user.setFkeyUserCreated(result.getInt("intFkeyUserCreatedBy"));
             user.setDeletionFlag(result.getBoolean("boolDeletionFlag"));
-            user.setDeletedByUser(result.getInt("intUserFkeyUserDeletedBy"));
-            user.setDateDeleted(result.getDate("dateDeleted").toLocalDate());
+            user.setDeletedByUser(result.getInt("intFkeyUserDeletedBy"));
+            user.setDateDeleted(result.getDate("dateDeleted") == null ? null : result.getDate("dateDeleted").toLocalDate());
 
             return user;
 

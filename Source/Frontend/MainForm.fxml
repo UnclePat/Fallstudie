@@ -10,11 +10,11 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: aliceblue;&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: aliceblue;&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Frontend.MainFormController">
   <children>
     <TabPane layoutX="0.0" layoutY="0.0" prefHeight="864.0" prefWidth="1259.0001220703125" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab style="" text="Start">
+        <Tab style="" text="Start" onSelectionChanged="#refreshAbrechnungsItemView">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
@@ -28,7 +28,6 @@
                     <Font name="System Bold" size="25.0" fx:id="x2" />
                   </font>
                 </Text>
-                <ListView layoutX="39.0" layoutY="146.0" prefHeight="596.0" prefWidth="621.0" />
                 <StackedBarChart layoutX="789.0" layoutY="457.0" prefHeight="285.0" prefWidth="341.0">
                   <xAxis>
                     <CategoryAxis side="BOTTOM" />
@@ -41,10 +40,18 @@
                 <PieChart id="PieChart" layoutX="829.0" layoutY="175.0" prefHeight="237.0" prefWidth="262.0" visible="true" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
                 <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
+                <TableView fx:id="RecentEntryTabView" layoutX="39.0" layoutY="146.0" prefHeight="596.0" prefWidth="687.0">
+                  <columns>
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="165.0" text="Date" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="175.0" text="Description" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="175.0" text="Category" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="175.0" text="Amount" />
+                  </columns>
+                </TableView>
               </children>
             </AnchorPane>
           </content>
@@ -87,7 +94,7 @@
                 <PieChart id="PieChart" layoutX="57.0" layoutY="504.0" prefHeight="289.0" prefWidth="360.0" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
                 <ScrollBar layoutX="1238.0" layoutY="4.0" orientation="VERTICAL" prefHeight="819.0" />
@@ -95,14 +102,14 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab style=" " text="Haushaltsbuch">
+        <Tab fx:id="tab_haushaltsbuch" onSelectionChanged="#refreshKategorieView" style=" " text="Haushaltsbuch">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: aliceblue ">
               <children>
                 <Text font="$x2" layoutX="37.0" layoutY="70.0" scaleX="1.0" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Haushaltsbuch" />
                 <Text font="$x3" layoutX="35.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorien" />
                 <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="119.0" startX="-100.0" />
-                <TreeView layoutX="37.0" layoutY="136.0" prefHeight="654.0" prefWidth="474.0" />
+                <TreeView fx:id="kategorieTree" layoutX="37.0" layoutY="136.0" prefHeight="654.0" prefWidth="474.0" />
                 <ListView layoutX="629.0" layoutY="136.0" prefHeight="435.0" prefWidth="584.0" />
                 <Text font="$x3" layoutX="629.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neuer Eintrag" />
                 <Line endX="494.0" endY="0.0" layoutX="730.0" layoutY="620.0" startX="-100.0" />
@@ -115,7 +122,7 @@
                 <Button layoutX="739.0" layoutY="769.0" mnemonicParsing="false" text="speichern" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
               </children>
@@ -137,7 +144,7 @@
                 <PasswordField layoutX="263.0" layoutY="210.0" prefWidth="200.0" promptText="Passwort eingeben" />
                 <PasswordField layoutX="263.0" layoutY="259.0" prefWidth="200.0" promptText="Passwort eingeben" />
                 <PasswordField layoutX="263.0" layoutY="309.0" prefWidth="200.0" promptText="Passwort eingeben" />
-                <Button layoutX="263.0" layoutY="360.0" mnemonicParsing="false" text="speichern" />
+                <Button layoutX="371.0" layoutY="346.0" mnemonicParsing="false" text="Speichern" />
                 <Text font="$x3" layoutX="35.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzer anlegen" />
                 <Line endX="1092.0" endY="0.0" layoutX="137.0" layoutY="445.0" startX="-100.0" />
                 <Text font="$x1" layoutX="36.0" layoutY="506.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
@@ -148,9 +155,24 @@
                 <Line endX="1088.0" endY="0.0" layoutX="137.0" layoutY="646.0" startX="-100.0" />
                 <ImageView id="Logo.png" fitHeight="72.0" fitWidth="104.0" layoutX="1154.0" layoutY="18.0">
                   <image>
-                    <Image url="@../Logo.png" preserveRatio="true" smooth="true" />
+                    <Image url="@Logo.png" preserveRatio="true" smooth="true" />
                   </image>
                 </ImageView>
+                <Button fx:id="btnBackup" layoutX="371.0" layoutY="698.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="92.0" text="Sichern" />
+                <TextField fx:id="txtBackupPath" layoutX="263.0" layoutY="658.0" prefWidth="200.0" promptText="Backuppfad angeben" />
+                <Text layoutX="38.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backuppfad:" />
+                <Text fx:id="Status" layoutX="509.0" layoutY="717.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+                <Text fill="GREY" layoutX="509.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: [installpath]\SSQL13.SQLEXPRESS\MSSQL\Backup" />
+                <Button fx:id="btnSelectUser" layoutX="494.0" layoutY="161.0" mnemonicParsing="false" onAction="#btnSelectUser" text="Benutzer Auswählen..." />
+                <TableView fx:id="tblUserAccessRights" layoutX="659.0" layoutY="159.0" prefHeight="200.0" prefWidth="509.0">
+                  <columns>
+                    <TableColumn prefWidth="75.0" text="Column X" />
+                    <TableColumn prefWidth="75.0" text="Column X" />
+                  </columns>
+                </TableView>
+                <Button fx:id="btnNewAccessRight" layoutX="1037.0" layoutY="368.0" mnemonicParsing="false" text="Neu" />
+                <Button fx:id="btnEditUserAcessRight" layoutX="1091.0" layoutY="368.0" mnemonicParsing="false" text="Bearbeiten" />
+                <Button fx:id="btnNewUser" layoutX="494.0" layoutY="493.0" mnemonicParsing="false" text="Speichern" />
               </children>
             </AnchorPane>
           </content>

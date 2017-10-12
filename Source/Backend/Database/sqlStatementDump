@@ -12,7 +12,7 @@
 USE [Haushaltsbuch]
 GO
 
-/****** Object:  Table [dbo].[Kategorie]    Script Date: 09.10.2017 09:00:18 ******/
+/****** Object:  Table [dbo].[Kategorie]    Script Date: 11.10.2017 09:33:07 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -27,12 +27,19 @@ CREATE TABLE [dbo].[Kategorie](
 	[intFkeyUserDeletedBy] [int] NULL,
 	[dateDeleted] [date] NULL,
 	[strName] [nvarchar](50) NOT NULL,
-	[intFkeyKategorieParent] [int] NULL
+	[intFkeyKategorieParent] [int] NULL,
+	[intFkeyUser] [int] NOT NULL
 ) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Kategorie] ADD  CONSTRAINT [DF_Kategorie_boolDeletionFlag]  DEFAULT ((0)) FOR [boolDeletionFlag]
 GO
+
+ALTER TABLE [dbo].[Kategorie] ADD  CONSTRAINT [DF_Kategorie_intFkeyUser]  DEFAULT ((1)) FOR [intFkeyUser]
+GO
+
+
+
 
 
 

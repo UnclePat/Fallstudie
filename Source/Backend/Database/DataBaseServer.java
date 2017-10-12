@@ -5,16 +5,20 @@ import java.util.List;
 
 public class DataBaseServer
 {
-    private Connection databaseConnection;
+    private static Connection databaseConnection = null;
     private final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa;databaseName=Haushaltsbuch;";
 
     public void dbConnect(){
         try {
+            if (databaseConnection != null){
+                return;
+            }
+
             String dbURL = DB_CONNECTION_STRING;
             Connection conn = DriverManager.getConnection(dbURL);
             if (conn != null) {
                 System.out.println("Connected");
-                this.databaseConnection = conn;
+                DataBaseServer.databaseConnection = conn;
             }
             else
             {
@@ -92,5 +96,11 @@ public class DataBaseServer
 
         Statement statement = this.databaseConnection.createStatement();
         return statement.executeUpdate(sql);
+    }
+
+    public void executeBackup(String path) throws SQLException {
+        String backupStatement = "BACKUP DATABASE [Haushaltsbuch] TO DISK = '" + path + "' with INIT, NAME = N'SQL Voll'";
+        Statement statement = this.databaseConnection.createStatement();
+        statement.execute(backupStatement);
     }
 }
