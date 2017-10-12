@@ -31,6 +31,10 @@ public class MainFormController extends Application {
     @FXML
     private TableView RecentEntryTabView;
 
+    /**
+     * Blabla
+     * @param primaryStage deine mudder
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -64,10 +68,12 @@ public class MainFormController extends Application {
         return node;
     }
 
-
+    /**
+     *
+     */
     @FXML void refreshKategorieView(){
         if(checkTab()) {
-            // if tab selected do something
+
 
             // Debug
             System.out.println("Call tab haushaltsbuch");
