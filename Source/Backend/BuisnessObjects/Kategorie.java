@@ -9,7 +9,6 @@ import java.util.List;
 
 
 public class Kategorie extends DatabaseItem{
-
     private List<AbrechnungItem> abrechnungsItems = new ArrayList<AbrechnungItem>();
     private List<Kategorie> subKategorien = new ArrayList<Kategorie>();
 
@@ -30,6 +29,12 @@ public class Kategorie extends DatabaseItem{
     }
     public void setFkeyUser(Integer fkeyUser) {
         FkeyUser = fkeyUser;
+    }
+    public List<AbrechnungItem> getAbrechnungsItems() {
+        return abrechnungsItems;
+    }
+    public List<Kategorie> getSubKategorien() {
+        return subKategorien;
     }
 
     @Override

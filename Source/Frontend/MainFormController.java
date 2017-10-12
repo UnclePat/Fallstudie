@@ -71,16 +71,17 @@ public class MainFormController extends Application {
                 return;
             }
         });
-        kategorieTree.getSelectionModel()
-                .selectedItemProperty()
-                .addListener((observable, oldTreeItem, newTreeItem) -> System.out.println("Selected Text : " + (Kategorie)newTreeItem.ge);
+        kategorieTree.getSelectionModel().selectedItemProperty().addListener((observable, oldTreeItem, newTreeItem) -> {
+            TreeItem<Kategorie> item = (TreeItem<Kategorie>) newTreeItem;
+            System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
+            refreshAbrechnungsItemView(item.getValue());
+        });
     }
 
 
     public void refreshHaushaltsbuch(){
         System.out.println("Call tab Haushaltsbuch");
         refreshKategorieView();
-        refreshKategorieItemView();
     }
 
     // Is here to build a tree item
@@ -89,8 +90,10 @@ public class MainFormController extends Application {
         return node;
 
     }
-    @FXML void refreshKategorieItemView(){
-        System.out.println("Call RefreshKategorieItemTabView");
+
+    void refreshAbrechnungsItemView(Kategorie kategorie){
+        System.out.println("Call refreshAbrechnungsItemView");
+        kategorie.getAbrechnungsItems();
     }
 
     @FXML void refreshKategorieView(){
