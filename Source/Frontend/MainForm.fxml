@@ -175,7 +175,7 @@
     </Text>
     <ImageView id="sign-out-logout-icon-0.png" fitHeight="50.41796875" fitWidth="50.0" layoutX="1177.0" layoutY="38.0">
       <image>
-        <Image url="@../../../../Documents/DHBW/2.Studienjahr/Fallstudie/sign-out-logout-icon-0.png" preserveRatio="true" smooth="true" />
+        <Image url="@sign-out-logout-icon-0.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
   </children>
