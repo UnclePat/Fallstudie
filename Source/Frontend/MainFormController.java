@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Collections;
 
 public class MainFormController extends Application {
     @FXML
@@ -84,7 +85,7 @@ public class MainFormController extends Application {
             MainFormController.currentKategorie = item.getValue();
         });
 
-        //Init tblAbrechnungsItmes
+        //Init tblAbrechnungsItems
         TableColumn dateColumn = new TableColumn("Datum");
         TableColumn beschreibungColumn = new TableColumn("Beschreibung");
         TableColumn betragColumn = new TableColumn("Betrag");
@@ -92,6 +93,8 @@ public class MainFormController extends Application {
         objectColumn.setVisible(false);
 
         tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn, objectColumn);
+        beschreibungColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("firstName"));
+
     }
 
 
@@ -111,9 +114,8 @@ public class MainFormController extends Application {
         System.out.println("Call refreshAbrechnungsItemView");
         List<AbrechnungsItem> abrechnungsItems = kategorie.getAbrechnungsItems();
 
-        /*for (AbrechnungsItem item : abrechnungsItems) {
-            tblAbrechnungsItems.getItems().add()
-        }*/
+            tblAbrechnungsItems.setItems(abrechnungsItems);
+
     }
 
     @FXML void refreshKategorieView(){
