@@ -3,11 +3,13 @@ package Frontend;
 import Backend.BuisnessObjects.AbrechnungsItem;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -89,18 +91,28 @@ public class MainFormController extends Application {
         TableColumn dateColumn = new TableColumn("Datum");
         TableColumn beschreibungColumn = new TableColumn("Beschreibung");
         TableColumn betragColumn = new TableColumn("Betrag");
-        TableColumn objectColumn = new TableColumn("Object");
-        objectColumn.setVisible(false);
+        //TableColumn objectColumn = new TableColumn("Object");
+        //objectColumn.setVisible(false);
 
-        tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn, objectColumn);
-        beschreibungColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("firstName"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,LocalDate>("belegDatum"));
+        beschreibungColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
+        betragColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,Double>("rechnungsBetrag"));
+        //objectColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
 
+        tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
     }
 
 
     public void refreshHaushaltsbuch(){
         System.out.println("Call tab Haushaltsbuch");
         refreshKategorieView();
+        clearTblAbrechnungsItems();
+}
+
+    private void clearTblAbrechnungsItems() {
+        for ( int i = 0; i < tblAbrechnungsItems.getItems().size(); i++) {
+            tblAbrechnungsItems.getItems().clear();
+        }
     }
 
     // Is here to build a tree item
@@ -112,26 +124,28 @@ public class MainFormController extends Application {
 
     void refreshAbrechnungsItemView(Kategorie kategorie){
         System.out.println("Call refreshAbrechnungsItemView");
+        clearTblAbrechnungsItems();
+
         List<AbrechnungsItem> abrechnungsItems = kategorie.getAbrechnungsItems();
 
-            tblAbrechnungsItems.setItems(abrechnungsItems);
+        tblAbrechnungsItems.setItems(FXCollections.observableArrayList(abrechnungsItems));
 
     }
 
     @FXML void refreshKategorieView(){
-        List<Integer> test = null;
+        List<Integer> kategorieKeys;
 
         try {
-            test = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
+            kategorieKeys = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
             TreeItem<Kategorie> dummyRoot = new TreeItem<>();
 
-            for(Integer item : test) {
+            for(Integer key : kategorieKeys) {
 
                 Kategorie kat = new Kategorie();
-                kat = kat.loadItem(item);
+                kat = kat.loadItem(key);
 
                 // Debug
-                System.out.println(item);
+                System.out.println(key);
                 System.out.println("Kategoriename: " + kat.getName());
 
                 dummyRoot.getChildren().add(makeTreeItem(kat));

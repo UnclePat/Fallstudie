@@ -9,7 +9,6 @@ import java.util.List;
 
 public abstract class DatabaseItem {
     Integer key = null;
-    List<String> columnNames;
     String tableName;
 
     private LocalDate dateDeleted;
@@ -17,7 +16,6 @@ public abstract class DatabaseItem {
     private Integer fkeyUserCreated = null;
 
     private LocalDate dateCreated;
-    private User createdBy;
     private boolean deletionFlag;
 
     public LocalDate getDateCreated() {

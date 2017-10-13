@@ -249,7 +249,7 @@ public class Kategorie extends DatabaseItem{
 
                 int key = result.getInt("intKey");
                 AbrechnungsItem abrechnungsItem = new AbrechnungsItem().loadItem(key);
-                abrechnungsItems.add(abrechnungsItem);
+                kategorie.abrechnungsItems.add(abrechnungsItem);
             }
         } catch (SQLException e) {
             e.printStackTrace();
