@@ -60,14 +60,10 @@ public class Kategorie extends DatabaseItem{
                     "           ([dateCreated]" +
                     "           ,[intFkeyUserCreatedBy]" +
                     "           ,[boolDeletionFlag]" +
-                    "           ,[intFkeyUserDeletedBy]" +
-                    "           ,[dateDeleted]" +
                     "           ,[strName]" +
                     "           ,[intFkeyKategorieParent]" +
                     "           ,[intFkeyUser])" +
                     "     VALUES" +
-                    "           ?," +
-                    "           ?," +
                     "           ?," +
                     "           ?," +
                     "           ?," +
@@ -80,8 +76,6 @@ public class Kategorie extends DatabaseItem{
             values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
-            values.add(this.getDeletedByUser().toString());
-            values.add(java.sql.Date.valueOf(this.getDateDeleted()).toString());
             values.add(this.getName());
             values.add(this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
