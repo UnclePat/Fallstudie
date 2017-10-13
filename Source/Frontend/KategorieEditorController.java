@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backend.BuisnessObjects.Kategorie;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +13,18 @@ import javafx.stage.Stage;
 
 public class KategorieEditorController extends Application {
     @FXML
-    private TableView tableUserSelector;
+    private Button btnKategorieSave;
     @FXML
-    private Button btnSelectUser;
+    private Button btnCancel;
+
+    private static Kategorie kategorie;
+
+    public static Kategorie getKategorie() {
+        return kategorie;
+    }
+    public static void setKategorie(Kategorie kategorie) {
+        KategorieEditorController.kategorie = kategorie;
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -22,8 +32,9 @@ public class KategorieEditorController extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("KategorieEditor.fxml"));
             Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             primaryStage.setScene(scene);
-            primaryStage.show();
             primaryStage.setResizable(false);
+            primaryStage.showAndWait();
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
