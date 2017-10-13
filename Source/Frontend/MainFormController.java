@@ -3,11 +3,8 @@ package Frontend;
 import Backend.BuisnessObjects.AbrechnungsItem;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
@@ -229,9 +226,10 @@ public class MainFormController extends Application {
         Stage kategorieEditor = new Stage();
         editor.start(kategorieEditor);
 
-        KategorieEditorController.getKategorie().saveItem();
+        Kategorie kat = KategorieEditorController.getKategorie();
+        kat.saveItem();
         refreshKategorieView();
-        kategorieTreeReselectLastItem();
+        selectKategorie(kat);
     }
 
     public void btnKategorieNewPressed(ActionEvent actionEvent){
@@ -329,6 +327,28 @@ public class MainFormController extends Application {
         TreeItem<Kategorie> selectedItem = currentItemKategorieTree;
         int row = kategorieTree.getRow( selectedItem);
         kategorieTree.getSelectionModel().select( row );
+    }
+
+    private void selectKategorie(Kategorie kategorie){
+        TreeItem<Kategorie> nodeToSelect = searchKategorieInTree(kategorieTree.getRoot(), kategorie);
+
+        int row = kategorieTree.getRow(nodeToSelect);
+        kategorieTree.getSelectionModel().select( row );
+    }
+
+    TreeItem<Kategorie> searchKategorieInTree(TreeItem<Kategorie> item, Kategorie searchedKategorie) {
+
+        if(item.getValue().equals(searchedKategorie)) return item; // hit!
+
+        // continue on the children:
+        TreeItem<Kategorie> result = null;
+        for(TreeItem<Kategorie> child : item.getChildren()){
+            result = searchKategorieInTree(child, searchedKategorie);
+            if(result != null) return result; // hit!
+        }
+
+        //no hit:
+        return null;
     }
 }
 

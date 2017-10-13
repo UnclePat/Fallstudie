@@ -100,14 +100,14 @@ public class Kategorie extends DatabaseItem{
                     "      ,[strName] = ?" +
                     "      ,[intFkeyKategorieParent] = ?" +
                     "      ,[intFkeyUser] = ?" +
-                    " WHERE ?";
+                    " WHERE [intKey] = ?";
 
             List<String> values = new ArrayList<>();
             values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
 
-            if (this.getDeletedByUser() == null){
+            if (!this.getDeletionFlag()){
                 values.add(null);
                 values.add(null);
             }
@@ -117,7 +117,7 @@ public class Kategorie extends DatabaseItem{
             }
 
             values.add(this.getName());
-            values.add(this.getFkeyKategorieParent().toString());
+            values.add(this.getFkeyKategorieParent() == null ? null : this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
 
             values.add(this.getKey().toString());

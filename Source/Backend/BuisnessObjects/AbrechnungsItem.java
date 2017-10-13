@@ -122,7 +122,7 @@ public class AbrechnungsItem extends DatabaseItem{
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
 
-            if (this.getDeletedByUser() == null){
+            if (!this.getDeletionFlag()){
                 values.add(null);
                 values.add(null);
             }
