@@ -105,9 +105,17 @@ public class Kategorie extends DatabaseItem{
             List<String> values = new ArrayList<>();
             values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
             values.add(this.getFkeyUserCreated().toString());
-            values.add(this.getDeletionFlag() ? "1" : "0");
-            values.add(this.getDeletedByUser().toString());
-            values.add(java.sql.Date.valueOf(this.getDateDeleted()).toString());
+            values.add(this.getDeletionFlag() ? "1":"0");
+
+            if (this.getDeletedByUser() == null){
+                values.add(null);
+                values.add(null);
+            }
+            else{
+                values.add(this.getDeletedByUser().toString());
+                values.add(this.getDateDeleted().toString());
+            }
+
             values.add(this.getName());
             values.add(this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
