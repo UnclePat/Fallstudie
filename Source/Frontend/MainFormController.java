@@ -55,6 +55,9 @@ public class MainFormController extends Application {
     @FXML
     private Tab tabEinstellungen;
 
+    @FXML
+    private Button btnAbrechnungsItemSave;
+
     private static Kategorie currentKategorie = null;
 
     @Override
@@ -225,7 +228,7 @@ public class MainFormController extends Application {
         editor.start(kategorieEditor);
     }
 
-    public void btnAbrechnungsItemSave(ActionEvent actionEvent) {
+    public void btnAbrechnungsItemSavePressed(ActionEvent actionEvent) {
         System.out.println("Call btnAbrechnungsItemSave");
         if (txtBelegBeschreibung.getText() == "" || txtBelegBetrag.getText() == "" || txtBelegdatum.getText() == ""){
             System.out.println("Could not save. Fields are empty.");
