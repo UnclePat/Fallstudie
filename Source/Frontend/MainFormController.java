@@ -264,6 +264,7 @@ public class MainFormController extends Application {
         item.setFkeyUserCreated(Backend.Base.Application.getCurrentUser().getKey());
         item.saveItem();
         tblAbrechnungsItems.getItems().add(item);
+        tblAbrechnungsItems.getItems().add(item);
     }
 }
 
