@@ -5,10 +5,12 @@ import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -24,6 +26,12 @@ import java.util.Collections;
 public class MainFormController extends Application {
     @FXML
     private TextField txtBackupPath;
+    @FXML
+    private TextField txtBelegdatum;
+    @FXML
+    private TextField txtBelegBeschreibung;
+    @FXML
+    private TextField txtBelegBetrag;
     @FXML
     private Text Status;
 
@@ -73,6 +81,8 @@ public class MainFormController extends Application {
             if (newTab == tabHaushaltsbuch){
                 refreshHaushaltsbuch();
                 return;
+            }else {
+                currentKategorie = null;
             }
 
             if (newTab == tabStart){
@@ -213,6 +223,59 @@ public class MainFormController extends Application {
 
         Stage kategorieEditor = new Stage();
         editor.start(kategorieEditor);
+    }
+
+    public void btnAbrechnungsItemSave(ActionEvent actionEvent) {
+        System.out.println("Call btnAbrechnungsItemSave");
+        if (txtBelegBeschreibung.getText() == "" || txtBelegBetrag.getText() == "" || txtBelegdatum.getText() == ""){
+            System.out.println("Could not save. Fields are empty.");
+            //Meldung Produzieren
+            return;
+        }
+
+        double betrag = 0.0;
+        String beschreibung = "";
+        LocalDate belegdatum = LocalDate.now();
+
+        try{
+            betrag = Double.parseDouble(txtBelegBetrag.getText());
+        }catch(Exception ex){
+            System.out.println("Invalid betrag. Could not parse.");
+        }
+
+        try{
+            beschreibung = txtBelegBetrag.getText();
+        }catch(Exception ex){
+            System.out.println("Invalid beschreibung. Could not parse.");
+        }
+
+        try{
+            belegdatum = LocalDate.parse(txtBelegBetrag.getText());
+        }catch(Exception ex){
+            System.out.println("Invalid belegDatum. Could not parse.");
+        }
+
+        if(currentKategorie == null){
+            System.out.println("No Kategorie selected.");
+            return;
+        }
+
+        AbrechnungsItem item = new AbrechnungsItem();
+        item.setBelegDatum(belegdatum);
+        item.setParentKategorieFkey(currentKategorie.getKey());
+        item.setBeschreibung(beschreibung);
+        item.setRechnungsBetrag(betrag);
+        item.setDateCreated(LocalDate.now());
+        item.setDeletionFlag(false);
+        item.setFkeyUserCreated(Backend.Base.Application.getCurrentUser().getKey());
+        item.saveItem();
+        tblAbrechnungsItems.getItems().add(item);
+    }
+
+    @FXML
+    public void onTabChanged(Event event) {
+
+        /*tabStart.setStyle("-fx-background-color:whitesmoke");*/
     }
 }
 
