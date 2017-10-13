@@ -27,6 +27,12 @@ public class MainFormController extends Application {
     @FXML
     private TextField txtBackupPath;
     @FXML
+    private TextField txtBelegdatum;
+    @FXML
+    private TextField txtBelegBeschreibung;
+    @FXML
+    private TextField txtBelegBetrag;
+    @FXML
     private Text Status;
 
     @FXML
@@ -75,6 +81,8 @@ public class MainFormController extends Application {
             if (newTab == tabHaushaltsbuch){
                 refreshHaushaltsbuch();
                 return;
+            }else {
+                currentKategorie = null;
             }
 
             if (newTab == tabStart){
@@ -211,6 +219,53 @@ public class MainFormController extends Application {
 
         Stage kategorieEditor = new Stage();
         editor.start(kategorieEditor);
+    }
+
+    public void btnAbrechnungsItemSave(ActionEvent actionEvent) {
+        System.out.println("Call btnAbrechnungsItemSave");
+        if (txtBelegBeschreibung.getText() == "" || txtBelegBetrag.getText() == "" || txtBelegdatum.getText() == ""){
+            System.out.println("Could not save. Fields are empty.");
+            //Meldung Produzieren
+            return;
+        }
+
+        double betrag = 0.0;
+        String beschreibung = "";
+        LocalDate belegdatum = LocalDate.now();
+
+        try{
+            betrag = Double.parseDouble(txtBelegBetrag.getText());
+        }catch(Exception ex){
+            System.out.println("Invalid betrag. Could not parse.");
+        }
+
+        try{
+            beschreibung = txtBelegBetrag.getText();
+        }catch(Exception ex){
+            System.out.println("Invalid beschreibung. Could not parse.");
+        }
+
+        try{
+            belegdatum = LocalDate.parse(txtBelegBetrag.getText());
+        }catch(Exception ex){
+            System.out.println("Invalid belegDatum. Could not parse.");
+        }
+
+        if(currentKategorie == null){
+            System.out.println("No Kategorie selected.");
+            return;
+        }
+
+        AbrechnungsItem item = new AbrechnungsItem();
+        item.setBelegDatum(belegdatum);
+        item.setParentKategorieFkey(currentKategorie.getKey());
+        item.setBeschreibung(beschreibung);
+        item.setRechnungsBetrag(betrag);
+        item.setDateCreated(LocalDate.now());
+        item.setDeletionFlag(false);
+        item.setFkeyUserCreated(Backend.Base.Application.getCurrentUser().getKey());
+        item.saveItem();
+        tblAbrechnungsItems.getItems().add(item);
     }
 
     @FXML
