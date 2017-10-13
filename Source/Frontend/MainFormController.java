@@ -306,7 +306,16 @@ public class MainFormController extends Application {
         item.setDeletionFlag(false);
         item.setFkeyUserCreated(Backend.Base.Application.getCurrentUser().getKey());
         item.saveItem();
-        tblAbrechnungsItems.getItems().add(item);
+        if(!tblAbrechnungsItems.getItems().add(item)){
+            System.out.println("Could not create Item.");
+            return;
+        }
+
+        txtBelegBeschreibung.setText("");
+        txtBelegBetrag.setText("0,0");
+        dateBelegdatum.setValue(null);
+
+        refreshAbrechnungsItemView(currentKategorie);
     }
 
     @FXML
