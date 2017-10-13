@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -23,7 +22,6 @@ import javafx.scene.Scene;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Collections;
 
 public class MainFormController extends Application {
     @FXML
@@ -61,6 +59,7 @@ public class MainFormController extends Application {
     private Button btnAbrechnungsItemSave;
 
     private static Kategorie currentKategorie = null;
+    private static TreeItem<Kategorie> currentItemKategorieTree = null;
 
     @Override
     public void start(Stage primaryStage) {
@@ -100,6 +99,8 @@ public class MainFormController extends Application {
             System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
             refreshAbrechnungsItemView(item.getValue());
             MainFormController.currentKategorie = item.getValue();
+            MainFormController.currentItemKategorieTree = item;
+
         });
 
         //Init tblAbrechnungsItems
@@ -315,7 +316,15 @@ public class MainFormController extends Application {
         txtBelegBetrag.setText("0,0");
         dateBelegdatum.setValue(null);
 
-        refreshAbrechnungsItemView(currentKategorie);
+        Kategorie letzteKategorie = currentKategorie;
+        refreshKategorieView();
+        kategorieTreeSelectItem(letzteKategorie);
+    }
+
+    private void kategorieTreeSelectItem(Kategorie letzteKategorie) {
+        TreeItem<Kategorie> selectedItem = currentItemKategorieTree;
+        int row = kategorieTree.getRow( selectedItem);
+        kategorieTree.getSelectionModel().select( row );
     }
 
     @FXML
