@@ -49,12 +49,18 @@ public class User extends DatabaseItem{
     }
 
     @Override
-    public void saveItem() {
+    public boolean saveItem() {
         if (this.getKey() == null){
             this.setKey(createItem());
+
+            if (this.getKey() == null){
+                return false;
+            }else{
+                return true;
+            }
         }
         else{
-            updateItem();
+            return updateItem();
         }
     }
 
@@ -98,7 +104,7 @@ public class User extends DatabaseItem{
 
 
     @Override
-    protected void updateItem() {
+    protected boolean updateItem() {
         try {
             String query = "UPDATE [dbo].[User]" +
                     "   SET strName = ?" +
@@ -132,8 +138,10 @@ public class User extends DatabaseItem{
             DataBaseServer connection = new DataBaseServer();
 
             connection.update(query, values);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

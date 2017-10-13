@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbrechnungsItem extends DatabaseItem{
-    private SimpleDoubleProperty rechnungsBetrag;
-    private SimpleStringProperty beschreibung;
+    private SimpleDoubleProperty rechnungsBetrag = new SimpleDoubleProperty(0);
+    private SimpleStringProperty beschreibung = new SimpleStringProperty("");
     private Integer parentKategorieFkey;
     private LocalDate belegDatum;
 
@@ -49,12 +49,18 @@ public class AbrechnungsItem extends DatabaseItem{
     }
 
     @Override
-    public void saveItem() {
+    public boolean saveItem() {
         if (this.getKey() == null){
             this.setKey(createItem());
+
+            if (this.getKey() == null){
+                return false;
+            }else{
+                return true;
+            }
         }
         else{
-            updateItem();
+            return updateItem();
         }
     }
 
@@ -74,7 +80,7 @@ public class AbrechnungsItem extends DatabaseItem{
                     "           ,?" +
                     "           ,?" +
                     "           ,?" +
-                    "           ,?))";
+                    "           ,?)";
 
             List<String> values = new ArrayList<>();
             values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
@@ -90,15 +96,14 @@ public class AbrechnungsItem extends DatabaseItem{
             return connection.insert(query, values);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
 
 
     @Override
-    protected void updateItem() {
+    protected boolean updateItem() {
         try {
             String query = "UPDATE [dbo].[AbrechnungsItem]" +
                     "   SET [dateCreated] = ?" +
@@ -136,8 +141,10 @@ public class AbrechnungsItem extends DatabaseItem{
             DataBaseServer connection = new DataBaseServer();
 
             connection.update(query, values);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

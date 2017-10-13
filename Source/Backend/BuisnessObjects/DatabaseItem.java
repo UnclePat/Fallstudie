@@ -66,10 +66,10 @@ public abstract class DatabaseItem {
         this.key = key;
     }
 
-    public abstract void saveItem();
+    public abstract boolean saveItem();
 
     protected abstract Integer createItem();
-    protected abstract void updateItem();
+    protected abstract boolean updateItem();
 
     public abstract DatabaseItem loadItem(Integer key);
 

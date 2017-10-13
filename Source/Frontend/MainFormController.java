@@ -3,6 +3,8 @@ package Frontend;
 import Backend.BuisnessObjects.AbrechnungsItem;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -27,7 +29,7 @@ public class MainFormController extends Application {
     @FXML
     private TextField txtBackupPath;
     @FXML
-    private TextField txtBelegdatum;
+    private DatePicker dateBelegdatum;
     @FXML
     private TextField txtBelegBeschreibung;
     @FXML
@@ -117,6 +119,15 @@ public class MainFormController extends Application {
         //objectColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
 
         tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
+
+        txtBelegBetrag.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
+                    txtBelegBetrag.setText(oldValue);
+                }
+            }
+        });
     }
 
 
@@ -124,6 +135,7 @@ public class MainFormController extends Application {
         System.out.println("Call tab Haushaltsbuch");
         refreshKategorieView();
         clearTblAbrechnungsItems();
+        txtBelegBetrag.setText("0.0");
 }
 
     private void clearTblAbrechnungsItems() {
@@ -230,10 +242,24 @@ public class MainFormController extends Application {
 
     public void btnAbrechnungsItemSavePressed(ActionEvent actionEvent) {
         System.out.println("Call btnAbrechnungsItemSave");
-        if (txtBelegBeschreibung.getText() == "" || txtBelegBetrag.getText() == "" || txtBelegdatum.getText() == ""){
-            System.out.println("Could not save. Fields are empty.");
+        boolean valid = true;
+
+        if (txtBelegBeschreibung.getText() == null || txtBelegBeschreibung.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtBelegBeschreibung is empty.");
             //Meldung Produzieren
-            return;
+            valid = false;
+        }
+
+        if (txtBelegBetrag.getText() == null || txtBelegBetrag.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtBelegBetrag is empty.");
+            //Meldung Produzieren
+            valid = false;
+        }
+
+        if (dateBelegdatum.getValue() == null){
+            System.out.println("Could not save. Field dateBelegdatum is empty.");
+            //Meldung Produzieren
+            valid = false;
         }
 
         double betrag = 0.0;
@@ -241,25 +267,33 @@ public class MainFormController extends Application {
         LocalDate belegdatum = LocalDate.now();
 
         try{
-            betrag = Double.parseDouble(txtBelegBetrag.getText());
+            String strBetrag = txtBelegBetrag.getText().trim().replace(',', '.');
+            betrag = Double.parseDouble(strBetrag);
         }catch(Exception ex){
             System.out.println("Invalid betrag. Could not parse.");
+            valid = false;
         }
 
         try{
-            beschreibung = txtBelegBetrag.getText();
+            beschreibung = txtBelegBeschreibung.getText().trim();
         }catch(Exception ex){
             System.out.println("Invalid beschreibung. Could not parse.");
+            valid = false;
         }
 
         try{
-            belegdatum = LocalDate.parse(txtBelegBetrag.getText());
+            belegdatum = dateBelegdatum.getValue();
         }catch(Exception ex){
             System.out.println("Invalid belegDatum. Could not parse.");
+            valid = false;
         }
 
         if(currentKategorie == null){
             System.out.println("No Kategorie selected.");
+            valid = false;
+        }
+
+        if (!valid){
             return;
         }
 

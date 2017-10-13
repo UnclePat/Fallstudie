@@ -4,8 +4,19 @@ import Backend.BuisnessObjects.DatabaseItem;
 
 public class UserAccessRight extends DatabaseItem{
     @Override
-    public void saveItem() {
+    public boolean saveItem() {
+        if (this.getKey() == null){
+            this.setKey(createItem());
 
+            if (this.getKey() == null){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        else{
+            return updateItem();
+        }
     }
 
     @Override
@@ -14,8 +25,8 @@ public class UserAccessRight extends DatabaseItem{
     }
 
     @Override
-    protected void updateItem() {
-
+    protected boolean updateItem() {
+        return true;
     }
 
     @Override
