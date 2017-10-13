@@ -317,10 +317,10 @@ public class MainFormController extends Application {
         dateBelegdatum.setValue(null);
 
         refreshKategorieView();
-        kategorieTreeSelectItem();
+        kategorieTreeReselectLastItem();
     }
 
-    private void kategorieTreeSelectItem() {
+    private void kategorieTreeReselectLastItem() {
         TreeItem<Kategorie> selectedItem = currentItemKategorieTree;
         int row = kategorieTree.getRow( selectedItem);
         kategorieTree.getSelectionModel().select( row );
