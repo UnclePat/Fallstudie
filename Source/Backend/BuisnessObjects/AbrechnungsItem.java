@@ -1,32 +1,35 @@
 package Backend.BuisnessObjects;
 
 import Backend.Database.DataBaseServer;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbrechnungItem extends DatabaseItem{
-    private double rechnungsBetrag;
-    private String beschreibung;
+public class AbrechnungsItem extends DatabaseItem{
+    private SimpleDoubleProperty rechnungsBetrag;
+    private SimpleStringProperty beschreibung;
     private Integer parentKategorieFkey;
     private LocalDate belegDatum;
 
     public double getRechnungsBetrag() {
-        return rechnungsBetrag = 0;
+        return rechnungsBetrag.get();
     }
 
     public void setRechnungsBetrag(double rechnungsBetrag) {
-        this.rechnungsBetrag = rechnungsBetrag;
+        this.rechnungsBetrag.set(rechnungsBetrag);
     }
 
     public String getBeschreibung() {
-        return beschreibung;
+        return beschreibung.get();
     }
 
     public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
+        this.beschreibung.set(beschreibung);
     }
 
     public Integer getParentKategorieFkey() {
@@ -139,7 +142,7 @@ public class AbrechnungItem extends DatabaseItem{
     }
 
     @Override
-    public AbrechnungItem loadItem(Integer key) {
+    public AbrechnungsItem loadItem(Integer key) {
         try {
             String query = "SELECT [intKey]" +
                     "      ,[dateCreated]" +
@@ -162,18 +165,20 @@ public class AbrechnungItem extends DatabaseItem{
             values.add(key.toString());
 
             result = connection.select(query, values);
+            result.next();
 
-            AbrechnungItem item = new AbrechnungItem();
+            AbrechnungsItem item = new AbrechnungsItem();
 
             item.setKey(result.getInt("intKey"));
-            item.setBeschreibung(result.getString("strBechreibung"));
-            item.setRechnungsBetrag(result.getDouble("decValue"));
+            item.beschreibung = new SimpleStringProperty(result.getString("strBechreibung"));
+            item.rechnungsBetrag = new SimpleDoubleProperty(result.getDouble("decValue"));
             item.setBelegDatum(result.getDate("dateBelegDatum").toLocalDate());
             item.setDateCreated(result.getDate("dateCreated").toLocalDate());
+            item.setFkeyUserCreated(result.getInt("intFkeyUserCreatedBy"));
             item.setParentKategorieFkey(result.getInt("intFkeyKategorieParent"));
             item.setDeletionFlag(result.getBoolean("boolDeletionFlag"));
-            item.setDeletedByUser(result.getInt("intUserFkeyUserDeletedBy"));
-            item.setDateDeleted(result.getDate("dateDeleted").toLocalDate());
+            item.setDeletedByUser(result.getInt("intFkeyUserDeletedBy"));
+            item.setDateDeleted(result.getDate("dateDeleted") == null ? null : result.getDate("dateDeleted").toLocalDate());
 
             return item;
 
