@@ -111,7 +111,7 @@
                 <Button layoutX="977.0" layoutY="664.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
                 <Button fx:id="btnKategorieEdit" layoutX="408.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieEditPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
                 <Button fx:id="btnKategorieNew" layoutX="340.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieNewPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
-                <TableView fx:id="KategorieItemTabVie" layoutX="629.0" layoutY="95.0" prefHeight="431.0" prefWidth="581.5" />
+                <TableView fx:id="tblAbrechnungsItems" layoutX="629.0" layoutY="95.0" prefHeight="431.0" prefWidth="581.5" />
               </children>
             </AnchorPane>
           </content>
