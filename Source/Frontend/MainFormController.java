@@ -316,12 +316,11 @@ public class MainFormController extends Application {
         txtBelegBetrag.setText("0,0");
         dateBelegdatum.setValue(null);
 
-        Kategorie letzteKategorie = currentKategorie;
         refreshKategorieView();
-        kategorieTreeSelectItem(letzteKategorie);
+        kategorieTreeSelectItem();
     }
 
-    private void kategorieTreeSelectItem(Kategorie letzteKategorie) {
+    private void kategorieTreeSelectItem() {
         TreeItem<Kategorie> selectedItem = currentItemKategorieTree;
         int row = kategorieTree.getRow( selectedItem);
         kategorieTree.getSelectionModel().select( row );
