@@ -77,7 +77,7 @@ public class Kategorie extends DatabaseItem{
             values.add(this.getFkeyUserCreated().toString());
             values.add(this.getDeletionFlag() ? "1":"0");
             values.add(this.getName());
-            values.add(this.getFkeyKategorieParent() == null ? this.getFkeyKategorieParent().toString() : null);
+            values.add(this.getFkeyKategorieParent() == null ? null : this.getFkeyKategorieParent().toString());
             values.add(this.getFkeyUser().toString());
 
             DataBaseServer connection = new DataBaseServer();
