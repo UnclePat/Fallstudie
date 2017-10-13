@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class Kategorie extends DatabaseItem{
-    private List<AbrechnungItem> abrechnungsItems = new ArrayList<AbrechnungItem>();
+    private List<AbrechnungsItem> abrechnungsItems = new ArrayList<AbrechnungsItem>();
     private List<Kategorie> subKategorien = new ArrayList<Kategorie>();
 
     private String name;
@@ -30,7 +30,7 @@ public class Kategorie extends DatabaseItem{
     public void setFkeyUser(Integer fkeyUser) {
         FkeyUser = fkeyUser;
     }
-    public List<AbrechnungItem> getAbrechnungsItems() {
+    public List<AbrechnungsItem> getAbrechnungsItems() {
         return abrechnungsItems;
     }
     public List<Kategorie> getSubKategorien() {
@@ -201,7 +201,7 @@ public class Kategorie extends DatabaseItem{
             sum += subKategorie.getSum();
         }
 
-        for (AbrechnungItem item : abrechnungsItems) {
+        for (AbrechnungsItem item : abrechnungsItems) {
             sum += item.getRechnungsBetrag();
         }
 
@@ -248,7 +248,7 @@ public class Kategorie extends DatabaseItem{
             while (result.next()) {
 
                 int key = result.getInt("intKey");
-                AbrechnungItem abrechnungsItem = new AbrechnungItem().loadItem(key);
+                AbrechnungsItem abrechnungsItem = new AbrechnungsItem().loadItem(key);
                 abrechnungsItems.add(abrechnungsItem);
             }
         } catch (SQLException e) {

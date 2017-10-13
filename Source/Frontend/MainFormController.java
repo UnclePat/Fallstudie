@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backend.BuisnessObjects.AbrechnungsItem;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
 import javafx.event.ActionEvent;
@@ -13,8 +14,8 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class MainFormController extends Application {
@@ -22,11 +23,14 @@ public class MainFormController extends Application {
     private TextField txtBackupPath;
     @FXML
     private Text Status;
+
     @FXML
     private TreeView kategorieTree;
 
     @FXML
     private TableView RecentEntryTabView;
+    @FXML
+    private TableView tblAbrechnungsItems;
 
     @FXML
     private TabPane mainTabControl;
@@ -79,6 +83,15 @@ public class MainFormController extends Application {
             refreshAbrechnungsItemView(item.getValue());
             MainFormController.currentKategorie = item.getValue();
         });
+
+        //Init tblAbrechnungsItmes
+        TableColumn dateColumn = new TableColumn("Datum");
+        TableColumn beschreibungColumn = new TableColumn("Beschreibung");
+        TableColumn betragColumn = new TableColumn("Betrag");
+        TableColumn objectColumn = new TableColumn("Object");
+        objectColumn.setVisible(false);
+
+        tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn, objectColumn);
     }
 
 
@@ -96,7 +109,11 @@ public class MainFormController extends Application {
 
     void refreshAbrechnungsItemView(Kategorie kategorie){
         System.out.println("Call refreshAbrechnungsItemView");
-        kategorie.getAbrechnungsItems();
+        List<AbrechnungsItem> abrechnungsItems = kategorie.getAbrechnungsItems();
+
+        /*for (AbrechnungsItem item : abrechnungsItems) {
+            tblAbrechnungsItems.getItems().add()
+        }*/
     }
 
     @FXML void refreshKategorieView(){

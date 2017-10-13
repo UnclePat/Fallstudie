@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbrechnungItem extends DatabaseItem{
+public class AbrechnungsItem extends DatabaseItem{
     private double rechnungsBetrag;
     private String beschreibung;
     private Integer parentKategorieFkey;
@@ -139,7 +139,7 @@ public class AbrechnungItem extends DatabaseItem{
     }
 
     @Override
-    public AbrechnungItem loadItem(Integer key) {
+    public AbrechnungsItem loadItem(Integer key) {
         try {
             String query = "SELECT [intKey]" +
                     "      ,[dateCreated]" +
@@ -163,7 +163,7 @@ public class AbrechnungItem extends DatabaseItem{
 
             result = connection.select(query, values);
 
-            AbrechnungItem item = new AbrechnungItem();
+            AbrechnungsItem item = new AbrechnungsItem();
 
             item.setKey(result.getInt("intKey"));
             item.setBeschreibung(result.getString("strBechreibung"));

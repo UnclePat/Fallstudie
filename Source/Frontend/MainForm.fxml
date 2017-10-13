@@ -127,7 +127,7 @@
                 </ImageView>
                 <Button fx:id="btnKategorieEdit" layoutX="434.0" layoutY="798.0" mnemonicParsing="false" text="Bearbeiten" onAction="#btnKategorieEditPressed"/>
                 <Button fx:id="btnKategorieNew" layoutX="384.0" layoutY="798.0" mnemonicParsing="false" text="Neu" onAction="#btnKategorieNewPressed"/>
-                <TableView fx:id="KategorieItemTabView" layoutX="629.0" layoutY="136.0" prefHeight="431.0" prefWidth="581.5">
+                <TableView fx:id="tblAbrechnungsItems" layoutX="629.0" layoutY="136.0" prefHeight="431.0" prefWidth="581.5">
                 </TableView>
               </children>
             </AnchorPane>
