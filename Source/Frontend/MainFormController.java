@@ -121,12 +121,9 @@ public class MainFormController extends Application {
 
         tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
 
-        txtBelegBetrag.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
-                    txtBelegBetrag.setText(oldValue);
-                }
+        txtBelegBetrag.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
+                txtBelegBetrag.setText(oldValue);
             }
         });
     }
@@ -147,7 +144,7 @@ public class MainFormController extends Application {
 
     // Is here to build a tree item
     private TreeItem<Kategorie> makeTreeItem(Kategorie item) {
-        TreeItem<Kategorie> node = new TreeItem<Kategorie>(item);
+        TreeItem<Kategorie> node = new TreeItem<>(item);
         return node;
 
     }
@@ -231,6 +228,10 @@ public class MainFormController extends Application {
 
         Stage kategorieEditor = new Stage();
         editor.start(kategorieEditor);
+
+        KategorieEditorController.getKategorie().saveItem();
+        refreshKategorieView();
+        kategorieTreeReselectLastItem();
     }
 
     public void btnKategorieNewPressed(ActionEvent actionEvent){
@@ -239,6 +240,10 @@ public class MainFormController extends Application {
 
         Stage kategorieEditor = new Stage();
         editor.start(kategorieEditor);
+
+        KategorieEditorController.getKategorie().saveItem();
+        refreshKategorieView();
+        kategorieTreeReselectLastItem();
     }
 
     public void btnAbrechnungsItemSavePressed(ActionEvent actionEvent) {
@@ -324,12 +329,6 @@ public class MainFormController extends Application {
         TreeItem<Kategorie> selectedItem = currentItemKategorieTree;
         int row = kategorieTree.getRow( selectedItem);
         kategorieTree.getSelectionModel().select( row );
-    }
-
-    @FXML
-    public void onTabChanged(Event event) {
-
-        /*tabStart.setStyle("-fx-background-color:whitesmoke");*/
     }
 }
 

@@ -14,7 +14,7 @@
   <children>
     <TabPane fx:id="mainTabControl" layoutX="0.0" layoutY="105.0" prefHeight="759.0" prefWidth="1260.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab fx:id="tabStart" onSelectionChanged="#onTabChanged" style="-fx-background-radius: 0;&#10;-fx-background-insets: 0;&#10;-fx-focus-color: transparent;&#10;tab-border-color : dark-tab-color ;&#10; -fx-faint-focus-color: transparent;" text="Start">
+        <Tab fx:id="tabStart" style="-fx-background-radius: 0;&#10;-fx-background-insets: 0;&#10;-fx-focus-color: transparent;&#10;tab-border-color : dark-tab-color ;&#10; -fx-faint-focus-color: transparent;" text="Start">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;">
               <children>
