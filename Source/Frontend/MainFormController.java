@@ -40,6 +40,8 @@ public class MainFormController extends Application {
     @FXML
     private Tab tabEinstellungen;
 
+    private static Kategorie currentKategorie = null;
+
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -75,6 +77,7 @@ public class MainFormController extends Application {
             TreeItem<Kategorie> item = (TreeItem<Kategorie>) newTreeItem;
             System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
             refreshAbrechnungsItemView(item.getValue());
+            MainFormController.currentKategorie = item.getValue();
         });
     }
 
@@ -155,8 +158,24 @@ public class MainFormController extends Application {
 
     }
 
-    public void btnSelectUser(ActionEvent actionEvent){
+    public void btnSelectUserPressed(ActionEvent actionEvent){
 
+    }
+
+    public void btnKategorieEditPressed(ActionEvent actionEvent){
+        KategorieEditorController editor = new KategorieEditorController();
+        KategorieEditorController.setKategorie(currentKategorie);
+
+        Stage kategorieEditor = new Stage();
+        editor.start(kategorieEditor);
+    }
+
+    public void btnKategorieNewPressed(ActionEvent actionEvent){
+        KategorieEditorController editor = new KategorieEditorController();
+        KategorieEditorController.setKategorie(null);
+
+        Stage kategorieEditor = new Stage();
+        editor.start(kategorieEditor);
     }
 }
 
