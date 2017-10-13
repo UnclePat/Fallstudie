@@ -64,13 +64,12 @@ public class Kategorie extends DatabaseItem{
                     "           ,[intFkeyKategorieParent]" +
                     "           ,[intFkeyUser])" +
                     "     VALUES" +
+                    "          (?," +
                     "           ?," +
                     "           ?," +
                     "           ?," +
                     "           ?," +
-                    "           ?," +
-                    "           ?)" +
-                    "";
+                    "           ?)";
 
             List<String> values = new ArrayList<>();
             values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
