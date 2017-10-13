@@ -173,7 +173,6 @@
         <Font size="23.0" />
       </font>
     </Text>
-    <Button layoutX="1185.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="42.0" style="-fx-background-color: darkgray;" text="" />
     <ImageView id="sign-out-logout-icon-0.png" fitHeight="50.41796875" fitWidth="50.0" layoutX="1177.0" layoutY="38.0">
       <image>
         <Image url="@../../../../Documents/DHBW/2.Studienjahr/Fallstudie/sign-out-logout-icon-0.png" preserveRatio="true" smooth="true" />
