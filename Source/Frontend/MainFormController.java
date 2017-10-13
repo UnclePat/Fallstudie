@@ -262,6 +262,8 @@ public class MainFormController extends Application {
         item.setDateCreated(LocalDate.now());
         item.setDeletionFlag(false);
         item.setFkeyUserCreated(Backend.Base.Application.getCurrentUser().getKey());
+        item.saveItem();
+        tblAbrechnungsItems.getItems().add(item);
     }
 }
 
