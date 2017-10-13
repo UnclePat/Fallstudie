@@ -3,10 +3,12 @@ package Frontend;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -176,6 +178,12 @@ public class MainFormController extends Application {
 
         Stage kategorieEditor = new Stage();
         editor.start(kategorieEditor);
+    }
+
+    @FXML
+    public void onTabChanged(Event event) {
+
+        /*tabStart.setStyle("-fx-background-color:whitesmoke");*/
     }
 }
 
