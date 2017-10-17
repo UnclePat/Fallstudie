@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Frontend.MainFormController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainFormController">
   <children>
     <TabPane fx:id="mainTabControl" layoutX="0.0" layoutY="105.0" prefHeight="759.0" prefWidth="1260.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
@@ -136,8 +150,8 @@
                 <Line endX="1092.0" endY="0.0" layoutX="137.0" layoutY="406.0" startX="-100.0" />
                 <Text font="$x1" layoutX="35.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
                 <Text font="$x1" layoutX="35.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort:" />
-                <TextField layoutX="263.0" layoutY="428.0" prefWidth="200.0" promptText="Benutzername erstellen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <PasswordField layoutX="263.0" layoutY="469.0" prefWidth="200.0" promptText="Passwort eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <TextField fx:id="txtUserNameNew" layoutX="263.0" layoutY="428.0" prefWidth="200.0" promptText="Benutzername erstellen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <PasswordField fx:id="txtPasswordNew" layoutX="263.0" layoutY="469.0" prefWidth="200.0" promptText="Passwort eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text font="$x3" layoutX="35.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dateien sichern" />
                 <Line endX="1088.0" endY="0.0" layoutX="136.0" layoutY="607.0" startX="-100.0" />
                 <Button fx:id="btnBackup" layoutX="263.0" layoutY="660.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="94.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Sichern" />
@@ -146,17 +160,17 @@
                 <Text fx:id="Status" layoutX="509.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
                 <Text fill="GREY" layoutX="509.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: [installpath]\SSQL13.SQLEXPRESS\MSSQL\Backup" />
                 <Button fx:id="btnSelectUser" layoutX="481.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnSelectUserPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Benutzer Auswählen..." />
-                <TableView fx:id="tblUserAccessRights" layoutX="677.0" layoutY="132.0" prefHeight="204.0" prefWidth="514.0">
+                <TableView fx:id="tblUserAccessRights" layoutX="677.0" layoutY="132.0" prefHeight="204.0" prefWidth="514.0" visible="false">
                   <columns>
                     <TableColumn prefWidth="75.0" text="Column X" />
                     <TableColumn prefWidth="75.0" text="Column X" />
                   </columns>
                 </TableView>
-                <Button fx:id="btnNewAccessRight" layoutX="1017.0" layoutY="345.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
-                <Button fx:id="btnEditUserAcessRight" layoutX="1091.0" layoutY="345.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
-                <Button fx:id="btnNewUser" layoutX="482.0" layoutY="512.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
+                <Button fx:id="btnNewAccessRight" layoutX="1017.0" layoutY="345.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" visible="false" />
+                <Button fx:id="btnEditUserAcessRight" layoutX="1091.0" layoutY="345.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" visible="false" />
+                <Button fx:id="btnNewUser" onAction="#btnNewUserPressed" layoutX="482.0" layoutY="512.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
                 <Text font="$x1" layoutX="36.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort bestätigen:" />
-                <PasswordField layoutX="263.0" layoutY="513.0" prefHeight="26.0" prefWidth="200.0" promptText="neues Passwort bestätigen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <PasswordField fx:id="txtPasswordRetypeNew" layoutX="263.0" layoutY="513.0" prefHeight="26.0" prefWidth="200.0" promptText="neues Passwort bestätigen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
               </children>
             </AnchorPane>
           </content>
@@ -165,7 +179,7 @@
     </TabPane>
     <ImageView id="Logo.png" fitHeight="72.0" fitWidth="91.0001220703125" layoutX="33.0" layoutY="14.0">
       <image>
-        <Image url="@Logo.png" preserveRatio="true" smooth="true" />
+        <Image preserveRatio="true" smooth="true" url="@Logo.png" />
       </image>
     </ImageView>
     <Text fill="WHITE" layoutX="230.0" layoutY="62.0" scaleX="2.063105775241048" scaleY="2.195314492575571" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: whitesmoke;" text="HouseLook 2018">
@@ -175,7 +189,7 @@
     </Text>
     <ImageView id="sign-out-logout-icon-0.png" fitHeight="50.41796875" fitWidth="50.0" layoutX="1177.0" layoutY="38.0">
       <image>
-        <Image url="@sign-out-logout-icon-0.png" preserveRatio="true" smooth="true" />
+        <Image preserveRatio="true" smooth="true" url="@sign-out-logout-icon-0.png" />
       </image>
     </ImageView>
   </children>

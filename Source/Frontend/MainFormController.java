@@ -3,6 +3,7 @@ package Frontend;
 import Backend.BuisnessObjects.AbrechnungsItem;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
+import Backend.User.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,6 +32,12 @@ public class MainFormController extends Application {
     private TextField txtBelegBetrag;
     @FXML
     private Text Status;
+    @FXML
+    private TextField txtUserNameNew;
+    @FXML
+    private TextField txtPasswordNew;
+    @FXML
+    private TextField txtPasswordRetypeNew;
 
     @FXML
     private TreeView kategorieTree;
@@ -54,6 +61,8 @@ public class MainFormController extends Application {
 
     @FXML
     private Button btnAbrechnungsItemSave;
+    @FXML
+    private Button btnNewUser;
 
     private static Kategorie currentKategorie = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
@@ -321,6 +330,63 @@ public class MainFormController extends Application {
 
         refreshKategorieView();
         kategorieTreeReselectLastItem();
+    }
+
+    public void btnNewUserPressed(ActionEvent actionEvent) {
+        System.out.println("Call btnNewUserPressed");
+        boolean valid = true;
+
+        if (txtUserNameNew.getText() == null || txtUserNameNew.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtUserNameNew is empty.");
+            //Meldung Produzieren
+            valid = false;
+        }
+
+        if (txtPasswordNew.getText() == null || txtPasswordNew.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtPasswordNew is empty.");
+            //Meldung Produzieren
+            valid = false;
+        }
+
+        if (txtPasswordRetypeNew.getText() == null || txtPasswordRetypeNew.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtPasswordRetypeNew is empty.");
+            //Meldung Produzieren
+            valid = false;
+        }
+
+        String userName = "";
+        String password = "";
+
+        userName = txtUserNameNew.getText();
+
+        if(!User.checkUsernameUnique(userName)){
+            System.out.println("Username non unique.");
+            valid = false;
+        }
+
+        if (txtPasswordNew.getText().equals(txtPasswordRetypeNew.getText())){
+            password = txtPasswordNew.getText();
+        }else{
+            System.out.println("Passwords do not match.");
+            valid = false;
+        }
+
+        if (!valid){
+            return;
+        }
+
+        User user = new User();
+        user.setDeletionFlag(false);
+        user.setFkeyUserCreated(Backend.Base.Application.getCurrentUser().getKey());
+        user.setDateCreated(LocalDate.now());
+        user.setAdmin(false);
+        user.setPassword(password);
+        user.setName(userName);
+        user.saveItem();
+
+        txtUserNameNew.setText("");
+        txtPasswordNew.setText("");
+        txtPasswordRetypeNew.setText("");
     }
 
     private void kategorieTreeReselectLastItem() {

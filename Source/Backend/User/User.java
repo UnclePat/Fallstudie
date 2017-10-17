@@ -192,16 +192,16 @@ public class User extends DatabaseItem{
     public static User loadItemLogin(String userName, String password) {
         try {
             String query = "SELECT [intKey]" +
-                "      ,[strName]" +
-                "      ,[boolAdmin]" +
-                "      ,[strPassword]" +
-                "      ,[dateCreated]" +
-                "      ,[intFkeyUserCreatedBy]" +
-                "      ,[boolDeletionFlag]" +
-                "      ,[intFkeyUserDeletedBy]" +
-                "      ,[dateDeleted]" +
-                "  FROM [dbo].[User]" +
-                "  WHERE [strName] = ? AND [strPassword] = ?";
+                    "      ,[strName]" +
+                    "      ,[boolAdmin]" +
+                    "      ,[strPassword]" +
+                    "      ,[dateCreated]" +
+                    "      ,[intFkeyUserCreatedBy]" +
+                    "      ,[boolDeletionFlag]" +
+                    "      ,[intFkeyUserDeletedBy]" +
+                    "      ,[dateDeleted]" +
+                    "  FROM [dbo].[User]" +
+                    "  WHERE [strName] = ? AND [strPassword] = ?";
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -231,5 +231,29 @@ public class User extends DatabaseItem{
             e.printStackTrace();
             return null;
         }
+    }
+    public static boolean checkUsernameUnique(String username){
+        boolean result = true;
+
+        try {
+            DataBaseServer connection = new DataBaseServer();
+            String query = "SELECT COUNT(strName) as ocurrences" +
+                    "  FROM [Haushaltsbuch].[dbo].[User]" +
+                    "  WHERE strName = ?";
+
+            List<String> values = new ArrayList<>();
+            values.add(username);
+
+            ResultSet resultSet = connection.select(query, values);
+            resultSet.next();
+            if(resultSet.getInt("ocurrences") > 0){
+                result = false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            result = false;
+        }
+
+        return result;
     }
 }
