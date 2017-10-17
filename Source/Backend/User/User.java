@@ -168,6 +168,7 @@ public class User extends DatabaseItem{
             values.add(key.toString());
 
             result = connection.select(query, values);
+            result.next();
 
             User user = new User();
 
@@ -178,10 +179,35 @@ public class User extends DatabaseItem{
             user.setDateCreated(result.getDate("dateCreated").toLocalDate());
             user.setFkeyUserCreated(result.getInt("intFkeyUserCreatedBy"));
             user.setDeletionFlag(result.getBoolean("boolDeletionFlag"));
-            user.setDeletedByUser(result.getInt("intUserFkeyUserDeletedBy"));
-            user.setDateDeleted(result.getDate("dateDeleted").toLocalDate());
+            user.setDeletedByUser(result.getInt("intFkeyUserDeletedBy"));
+            user.setDateDeleted(result.getDate("dateDeleted") == null ? null : result.getDate("dateDeleted").toLocalDate());
 
             return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<Integer> getAllKeys(){
+        try {
+            List<Integer> returnList = new ArrayList<Integer>();
+
+            String query = "SELECT [intKey]" +
+                    "  FROM [dbo].[User]";
+            DataBaseServer connection = new DataBaseServer();
+
+            List<String> values = new ArrayList<>();
+
+            ResultSet result = connection.select(query, values);
+
+            while (result.next()) {
+                int key = result.getInt("intKey");
+                returnList.add(key);
+            }
+
+            return returnList;
 
         } catch (SQLException e) {
             e.printStackTrace();

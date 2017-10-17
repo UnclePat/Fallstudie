@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -38,6 +39,14 @@ public class MainFormController extends Application {
     private TextField txtPasswordNew;
     @FXML
     private TextField txtPasswordRetypeNew;
+    @FXML
+    private TextField txtEditedUserName;
+    @FXML
+    private TextField txtEditedUserPasswordOld;
+    @FXML
+    private TextField txtEditedUserPasswordNew;
+    @FXML
+    private TextField txtEditedUserPasswordNewRetype;
 
     @FXML
     private TreeView kategorieTree;
@@ -66,6 +75,14 @@ public class MainFormController extends Application {
 
     private static Kategorie currentKategorie = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
+    private static User editedUser = null;
+
+    public static User getEditedUser() {
+        return editedUser;
+    }
+    public static void setEditedUser(User editedUser) {
+        MainFormController.editedUser = editedUser;
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -90,9 +107,11 @@ public class MainFormController extends Application {
         mainTabControl.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
             if (newTab == tabHaushaltsbuch){
                 refreshHaushaltsbuch();
+                editedUser = null;
                 return;
             }else {
                 currentKategorie = null;
+                editedUser = null;
             }
 
             if (newTab == tabStart){
@@ -132,6 +151,9 @@ public class MainFormController extends Application {
                 txtBelegBetrag.setText(oldValue);
             }
         });
+
+        //Set EditUserFields
+        txtEditedUserName.setEditable(false);
     }
 
 
@@ -225,7 +247,16 @@ public class MainFormController extends Application {
     }
 
     public void btnSelectUserPressed(ActionEvent actionEvent){
+        UserSelectorController selector = new UserSelectorController();
 
+        try {
+            editedUser = selector.showWindow();
+
+            txtEditedUserName.setText(editedUser.getName());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void btnKategorieEditPressed(ActionEvent actionEvent){
@@ -387,6 +418,51 @@ public class MainFormController extends Application {
         txtUserNameNew.setText("");
         txtPasswordNew.setText("");
         txtPasswordRetypeNew.setText("");
+    }
+
+    public void btnEditedUserSavePressed(ActionEvent actionEvent) {
+        System.out.println("Call btnNewUserPressed");
+        boolean valid = true;
+
+        if (txtEditedUserPasswordOld.getText() == null || txtEditedUserPasswordOld.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtEditedUserPasswordOld is empty.");
+            //Meldung Produzieren
+            valid = false;
+        }
+
+        if (txtEditedUserPasswordNew.getText() == null || txtEditedUserPasswordNew.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtEditedUserPasswordNew is empty.");
+            //Meldung Produzieren
+            valid = false;
+        }
+
+        if (txtEditedUserPasswordNewRetype.getText() == null || txtEditedUserPasswordNewRetype.getText().trim().isEmpty()){
+            System.out.println("Could not save. Field txtEditedUserPasswordNewRetype is empty.");
+            //Meldung Produzieren
+            valid = false;
+        }
+
+        if (txtEditedUserPasswordOld.getText().equals(editedUser.getPassword())){
+            if (txtEditedUserPasswordNew.getText().equals(txtEditedUserPasswordNewRetype.getText())){
+                editedUser.setPassword(txtEditedUserPasswordNew.getText());
+            }else{
+                System.out.println("New passwords do not match.");
+                valid = false;
+            }
+        }else{
+            System.out.println("Old password does not match.");
+            valid = false;
+        }
+
+        if (!valid){
+            return;
+        }
+
+        editedUser.saveItem();
+
+        txtEditedUserPasswordOld.setText("");
+        txtEditedUserPasswordNew.setText("");
+        txtEditedUserPasswordNewRetype.setText("");
     }
 
     private void kategorieTreeReselectLastItem() {

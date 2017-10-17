@@ -6,11 +6,7 @@
   <children>
     <Label layoutX="14.0" layoutY="14.0" text="Benutzer-Auswahl" />
     <TableView fx:id="tableUserSelector" layoutX="14.0" layoutY="30.0" prefHeight="324.0" prefWidth="572.0">
-      <columns>
-        <TableColumn prefWidth="75.0" text="Column X" />
-        <TableColumn prefWidth="75.0" text="Column X" />
-      </columns>
     </TableView>
-    <Button fx:id="btnSelectUser" layoutX="508.0" layoutY="366.0" mnemonicParsing="false" text="Auswählen" onAction="#btnSelectUserPressed"/>
+    <Button fx:id="btnSelectUser" layoutX="508.0" layoutY="366.0" mnemonicParsing="false" text="Auswählen" onAction="#btnSelectUserPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;"/>
   </children>
 </AnchorPane>
