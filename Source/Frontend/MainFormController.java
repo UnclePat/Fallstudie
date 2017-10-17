@@ -42,7 +42,7 @@ public class MainFormController extends Application {
     @FXML
     private TextField txtEditedUserName;
     @FXML
-    private TextField txtEditedUserPasswordOld;
+    private TextField txtEditedPasswordOld;
     @FXML
     private TextField txtEditedUserPasswordNew;
     @FXML
@@ -424,7 +424,7 @@ public class MainFormController extends Application {
         System.out.println("Call btnNewUserPressed");
         boolean valid = true;
 
-        if (txtEditedUserPasswordOld.getText() == null || txtEditedUserPasswordOld.getText().trim().isEmpty()){
+        if (txtEditedPasswordOld.getText() == null || txtEditedPasswordOld.getText().trim().isEmpty()){
             System.out.println("Could not save. Field txtEditedUserPasswordOld is empty.");
             //Meldung Produzieren
             valid = false;
@@ -442,7 +442,7 @@ public class MainFormController extends Application {
             valid = false;
         }
 
-        if (txtEditedUserPasswordOld.getText().equals(editedUser.getPassword())){
+        if (txtEditedPasswordOld.getText().equals(editedUser.getPassword())){
             if (txtEditedUserPasswordNew.getText().equals(txtEditedUserPasswordNewRetype.getText())){
                 editedUser.setPassword(txtEditedUserPasswordNew.getText());
             }else{
@@ -460,7 +460,7 @@ public class MainFormController extends Application {
 
         editedUser.saveItem();
 
-        txtEditedUserPasswordOld.setText("");
+        txtEditedPasswordOld.setText("");
         txtEditedUserPasswordNew.setText("");
         txtEditedUserPasswordNewRetype.setText("");
     }
