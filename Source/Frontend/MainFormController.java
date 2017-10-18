@@ -168,7 +168,7 @@ public class MainFormController extends Application {
         RecentBeschreibungColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.65)); // w * 1/3
         RecentBetragColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.2)); // w * 1/3
 
-        tblRecentEntryTabView.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
+        tblRecentEntryTabView.getColumns().addAll(RecentDateColumn, RecentBeschreibungColumn, RecentBetragColumn);
         refreshStart();
     }
 
@@ -260,14 +260,6 @@ public class MainFormController extends Application {
         System.out.println("RefreshRecentItems");
         List<AbrechnungsItem> AbrechnungsItems = AbrechnungsItem.getRecentItems();
         tblRecentEntryTabView.setItems(FXCollections.observableArrayList(AbrechnungsItems));
-
-
-    }
-
-
-    public void refreshAbrechnungsItemView(){
-        // if tab clicked do something
-        System.out.println("Call tab Haushaltsbuch");
     }
 
     public void btnBackupPressed(ActionEvent actionEvent){
