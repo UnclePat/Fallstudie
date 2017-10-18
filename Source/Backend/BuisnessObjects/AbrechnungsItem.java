@@ -198,7 +198,7 @@ public class AbrechnungsItem extends DatabaseItem{
 
         List<AbrechnungsItem> resultList = new ArrayList<>();
         try {
-            String query = "SELECT [dateBelegDatum]" +
+            String query = "SELECT TOP 10 [dateBelegDatum]" +
                     "      ,[strBechreibung]" +
                     "      ,[decValue]" +
                     "  FROM [dbo].[AbrechnungsItem]" +
