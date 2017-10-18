@@ -1,0 +1,6 @@
+SELECT
+	DateName( month , DateAdd( month , MONTH(dateBelegDatum) , -1 ) ) AS Monat,
+	SUM(decValue) AS Summe
+  FROM [Haushaltsbuch].[dbo].[AbrechnungsItem]
+  WHERE intFkeyUserCreatedBy = 1 AND YEAR(dateBelegDatum) = YEAR(getdate())
+  GROUP BY MONTH(dateBelegDatum)
