@@ -93,8 +93,6 @@ public class MainFormController extends Application {
             DataBaseServer.dbConnect();
             primaryStage.show();
             primaryStage.setResizable(false);
-            refreshStart();
-
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -153,18 +151,20 @@ public class MainFormController extends Application {
         //Set EditUserFields
         txtEditedUserName.setEditable(false);
 
+        //TabStart Table Init
         TableColumn RecentBetragColumn = new TableColumn("Betrag");
         TableColumn RecentBeschreibungColumn = new TableColumn("Beschreibung");
         TableColumn RecentDateColumn = new TableColumn ("Datum");
 
         RecentDateColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,LocalDate>("belegDatum"));
         RecentBeschreibungColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
-        RecentBetragColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem, String>("betrag"));
+        RecentBetragColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem, String>("rechnungsBetrag"));
         RecentDateColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.15)); // w * 1/3
         RecentBeschreibungColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.65)); // w * 1/3
         RecentBetragColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.2)); // w * 1/3
 
         tblRecentEntryTabView.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
+        refreshStart();
     }
 
 
