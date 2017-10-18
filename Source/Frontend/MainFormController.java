@@ -5,10 +5,12 @@ import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
 import Backend.User.User;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
@@ -72,6 +74,9 @@ public class MainFormController extends Application {
     private Button btnAbrechnungsItemSave;
     @FXML
     private Button btnNewUser;
+
+    @FXML
+    private PieChart pieStartLastExpenses;
 
     private static Kategorie currentKategorie = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
@@ -228,6 +233,27 @@ public class MainFormController extends Application {
     public void refreshStart() {
         System.out.println("Call tab Start");
         refreshRecentItemView();
+        refreshPieChart();
+    }
+
+    private void refreshPieChart() {
+        System.out.println("Call refreshPieChart.");
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        try {
+            List<Integer> katKeys = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
+            for (Integer key : katKeys) {
+                Kategorie kat = new Kategorie().loadItem(key);
+
+                pieChartData.add(new PieChart.Data(kat.getName(), kat.getSum()));
+            }
+
+            pieStartLastExpenses.setData(pieChartData);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void refreshRecentItemView() {
