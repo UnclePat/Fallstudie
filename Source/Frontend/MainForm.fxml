@@ -37,7 +37,7 @@
                     <Font size="20.0" fx:id="x3" />
                   </font>
                 </Text>
-                <StackedBarChart layoutX="39.0" layoutY="431.0" prefHeight="258.0" prefWidth="564.0">
+                <StackedBarChart layoutX="23.0" layoutY="433.0" prefHeight="258.0" prefWidth="657.0">
                   <xAxis>
                     <CategoryAxis side="BOTTOM" />
                   </xAxis>

@@ -245,8 +245,8 @@ public class MainFormController extends Application {
             List<Integer> katKeys = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
             for (Integer key : katKeys) {
                 Kategorie kat = new Kategorie().loadItem(key);
-
-                pieChartData.add(new PieChart.Data(kat.getName(), kat.getSum()));
+                if (kat.getSum() != 0)
+                    pieChartData.add(new PieChart.Data(kat.getName(), kat.getSum()));
             }
 
             pieStartLastExpenses.setData(pieChartData);
