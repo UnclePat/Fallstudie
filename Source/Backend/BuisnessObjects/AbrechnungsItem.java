@@ -194,4 +194,38 @@ public class AbrechnungsItem extends DatabaseItem{
             return null;
         }
     }
+    public static  List<AbrechnungsItem> getRecentItems() {
+
+        List<AbrechnungsItem> resultList = new ArrayList<>();
+        try {
+            String query = "SELECT [dateBelegDatum]" +
+                    "      ,[strBechreibung]" +
+                    "      ,[decValue]" +
+                    "  FROM [dbo].[AbrechnungsItem]" +
+                    "  WHERE [boolDeletionFlag] = 0 "+
+                    "order by [dateBelegDatum] desc";
+
+            DataBaseServer connection = new DataBaseServer();
+
+            ResultSet result = null;
+
+            List<String> values = new ArrayList<>();
+
+            result = connection.select(query, values);
+
+
+            while (result.next()) {
+                AbrechnungsItem item = new AbrechnungsItem();
+                item.beschreibung = new SimpleStringProperty(result.getString("strBechreibung"));
+                item.rechnungsBetrag = new SimpleDoubleProperty(result.getDouble("decValue"));
+                item.setBelegDatum(result.getDate("dateBelegDatum").toLocalDate());
+                resultList.add(item);
+            }
+            return resultList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

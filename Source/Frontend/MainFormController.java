@@ -52,7 +52,7 @@ public class MainFormController extends Application {
     private TreeView kategorieTree;
 
     @FXML
-    private TableView RecentEntryTabView;
+    private TableView tblRecentEntryTabView;
     @FXML
     private TableView tblAbrechnungsItems;
 
@@ -93,6 +93,7 @@ public class MainFormController extends Application {
             DataBaseServer.dbConnect();
             primaryStage.show();
             primaryStage.setResizable(false);
+            refreshStart();
 
 
         } catch (Exception e) {
@@ -132,8 +133,7 @@ public class MainFormController extends Application {
         TableColumn dateColumn = new TableColumn("Datum");
         TableColumn beschreibungColumn = new TableColumn("Beschreibung");
         TableColumn betragColumn = new TableColumn("Betrag");
-        //TableColumn objectColumn = new TableColumn("Object");
-        //objectColumn.setVisible(false);
+
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,LocalDate>("belegDatum"));
         beschreibungColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
@@ -141,8 +141,6 @@ public class MainFormController extends Application {
         dateColumn.prefWidthProperty().bind(tblAbrechnungsItems.widthProperty().multiply(0.15)); // w * 1/3
         beschreibungColumn.prefWidthProperty().bind(tblAbrechnungsItems.widthProperty().multiply(0.65)); // w * 1/3
         betragColumn.prefWidthProperty().bind(tblAbrechnungsItems.widthProperty().multiply(0.2)); // w * 1/3
-
-        //objectColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
 
         tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
 
@@ -154,6 +152,19 @@ public class MainFormController extends Application {
 
         //Set EditUserFields
         txtEditedUserName.setEditable(false);
+
+        TableColumn RecentBetragColumn = new TableColumn("Betrag");
+        TableColumn RecentBeschreibungColumn = new TableColumn("Beschreibung");
+        TableColumn RecentDateColumn = new TableColumn ("Datum");
+
+        RecentDateColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,LocalDate>("belegDatum"));
+        RecentBeschreibungColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
+        RecentBetragColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem, String>("betrag"));
+        RecentDateColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.15)); // w * 1/3
+        RecentBeschreibungColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.65)); // w * 1/3
+        RecentBetragColumn.prefWidthProperty().bind(tblRecentEntryTabView.widthProperty().multiply(0.2)); // w * 1/3
+
+        tblRecentEntryTabView.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
     }
 
 
@@ -216,7 +227,17 @@ public class MainFormController extends Application {
 
     public void refreshStart() {
         System.out.println("Call tab Start");
+        refreshRecentItemView();
     }
+
+    public void refreshRecentItemView() {
+        System.out.println("RefreshRecentItems");
+        List<AbrechnungsItem> AbrechnungsItems = AbrechnungsItem.getRecentItems();
+        tblRecentEntryTabView.setItems(FXCollections.observableArrayList(AbrechnungsItems));
+
+
+    }
+
 
     public void refreshAbrechnungsItemView(){
         // if tab clicked do something

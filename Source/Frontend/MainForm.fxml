@@ -46,13 +46,7 @@
                   </yAxis>
                 </StackedBarChart>
                 <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="76.0" startX="565.0" startY="-1.0" />
-                <TableView fx:id="RecentEntryTabView" layoutX="702.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5">
-                  <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="165.0" text="Datum" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="175.0" text="Description" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="175.0" text="Amount" />
-                  </columns>
-                </TableView>
+                <TableView fx:id="tblRecentEntryTabView" layoutX="702.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5"/>
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="290.0" layoutX="39.0" layoutY="77.0" stroke="BLACK" strokeType="INSIDE" style="" visible="true" width="361.0" />
                 <PieChart id="PieChart" layoutX="97.0" layoutY="106.0" prefHeight="237.0" prefWidth="262.0" visible="true" />
                 <Text font="$x3" layoutX="39.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten Ausgaben" />
