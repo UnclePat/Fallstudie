@@ -11,6 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
@@ -77,6 +81,8 @@ public class MainFormController extends Application {
 
     @FXML
     private PieChart pieStartLastExpenses;
+    @FXML
+    private StackedBarChart BarChartStart;
 
     private static Kategorie currentKategorie = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
@@ -234,6 +240,35 @@ public class MainFormController extends Application {
         System.out.println("Call tab Start");
         refreshRecentItemView();
         refreshPieChart();
+        refreshBarChartStart();
+    }
+
+    private void refreshBarChartStart() {
+        System.out.println("Call refreshBarChartStart.");
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+
+        BarChartStart.setTitle("Monatsauswertung");
+
+
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("2003");
+        series1.getData().add(new XYChart.Data("Test", 25601.34));
+        series1.getData().add(new XYChart.Data("Test1", 20148.82));
+        series1.getData().add(new XYChart.Data("Test2", 10000));
+        series1.getData().add(new XYChart.Data("Test3", 35407.15));
+        series1.getData().add(new XYChart.Data("Test4", 12000));
+
+        XYChart.Series series2 = new XYChart.Series();
+        series2.setName("2004");
+        series2.getData().add(new XYChart.Data("Test", 57401.85));
+        series2.getData().add(new XYChart.Data("Test1", 41941.19));
+        series2.getData().add(new XYChart.Data("Test2", 45263.37));
+        series2.getData().add(new XYChart.Data("Test3", 117320.16));
+        series2.getData().add(new XYChart.Data("Test4", 14845.27));
+
+        BarChartStart.getData().addAll(series1, series2);
+
     }
 
     private void refreshPieChart() {

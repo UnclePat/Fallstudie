@@ -2,6 +2,7 @@ package Backend.BuisnessObjects;
 
 import Backend.Database.DataBaseServer;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.ResultSet;
@@ -10,11 +11,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbrechnungsItem extends DatabaseItem{
+public class AbrechnungsItem extends DatabaseItem {
     private SimpleDoubleProperty rechnungsBetrag = new SimpleDoubleProperty(0);
     private SimpleStringProperty beschreibung = new SimpleStringProperty("");
     private Integer parentKategorieFkey;
     private LocalDate belegDatum;
+    private SimpleDoubleProperty Summe;
+    private SimpleStringProperty Monat;
 
     public double getRechnungsBetrag() {
         return rechnungsBetrag.get();
@@ -50,16 +53,15 @@ public class AbrechnungsItem extends DatabaseItem{
 
     @Override
     public boolean saveItem() {
-        if (this.getKey() == null){
+        if (this.getKey() == null) {
             this.setKey(createItem());
 
-            if (this.getKey() == null){
+            if (this.getKey() == null) {
                 return false;
-            }else{
+            } else {
                 return true;
             }
-        }
-        else{
+        } else {
             return updateItem();
         }
     }
@@ -101,7 +103,6 @@ public class AbrechnungsItem extends DatabaseItem{
     }
 
 
-
     @Override
     protected boolean updateItem() {
         try {
@@ -120,13 +121,12 @@ public class AbrechnungsItem extends DatabaseItem{
             List<String> values = new ArrayList<>();
             values.add(java.sql.Date.valueOf(this.getDateCreated()).toString());
             values.add(this.getFkeyUserCreated().toString());
-            values.add(this.getDeletionFlag() ? "1":"0");
+            values.add(this.getDeletionFlag() ? "1" : "0");
 
-            if (!this.getDeletionFlag()){
+            if (!this.getDeletionFlag()) {
                 values.add(null);
                 values.add(null);
-            }
-            else{
+            } else {
                 values.add(this.getDeletedByUser().toString());
                 values.add(this.getDateDeleted().toString());
             }
@@ -194,16 +194,15 @@ public class AbrechnungsItem extends DatabaseItem{
             return null;
         }
     }
-    public static  List<AbrechnungsItem> getRecentItems() {
 
-        List<AbrechnungsItem> resultList = new ArrayList<>();
+    public static List<AbrechnungsItem> getMontlyItems() {
+        List<AbrechnungsItem> resultListMonthly = new ArrayList<>();
         try {
-            String query = "SELECT TOP 10 [dateBelegDatum]" +
-                    "      ,[strBechreibung]" +
-                    "      ,[decValue]" +
-                    "  FROM [dbo].[AbrechnungsItem]" +
-                    "  WHERE [boolDeletionFlag] = 0 "+
-                    "order by [dateBelegDatum] desc";
+            String query = "SELECT DateName( month, DateAdd(month,Month(dateBelegDatum) , -1)) AS Monat," +
+                    "SUM (decValue) AS Summe" +
+                    "  FROM [Haushaltsbuch].[dbo].[AbrechnungsItem]" +
+                    "  WHERE [intFkeyUserCreatedBy] = 1  AND YEAR(dateBelegDatum) = YEAR(getdate()) " +
+                    " GROUP BY MONTH(dateBelegDatum)";
 
             DataBaseServer connection = new DataBaseServer();
 
@@ -216,16 +215,51 @@ public class AbrechnungsItem extends DatabaseItem{
 
             while (result.next()) {
                 AbrechnungsItem item = new AbrechnungsItem();
-                item.beschreibung = new SimpleStringProperty(result.getString("strBechreibung"));
-                item.rechnungsBetrag = new SimpleDoubleProperty(result.getDouble("decValue"));
-                item.setBelegDatum(result.getDate("dateBelegDatum").toLocalDate());
-                resultList.add(item);
+                item.Monat = new SimpleStringProperty(result.getString("DateName"));
+                item.Summe = new SimpleDoubleProperty(result.getDouble("Summe"));
+                resultListMonthly.add(item);
             }
-            return resultList;
+            return resultListMonthly;
 
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-}
+
+        public static List<AbrechnungsItem> getRecentItems() {
+
+            List<AbrechnungsItem> resultList = new ArrayList<>();
+            try {
+                String query = "SELECT TOP 10 [dateBelegDatum]" +
+                        "      ,[strBechreibung]" +
+                        "      ,[decValue]" +
+                        "  FROM [dbo].[AbrechnungsItem]" +
+                        "  WHERE [boolDeletionFlag] = 0 " +
+                        "order by [dateBelegDatum] desc";
+
+                DataBaseServer connection = new DataBaseServer();
+
+                ResultSet result = null;
+
+                List<String> values = new ArrayList<>();
+
+                result = connection.select(query, values);
+
+
+                while (result.next()) {
+                    AbrechnungsItem item = new AbrechnungsItem();
+                    item.beschreibung = new SimpleStringProperty(result.getString("strBechreibung"));
+                    item.rechnungsBetrag = new SimpleDoubleProperty(result.getDouble("decValue"));
+                    item.setBelegDatum(result.getDate("dateBelegDatum").toLocalDate());
+                    resultList.add(item);
+                }
+                return resultList;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
