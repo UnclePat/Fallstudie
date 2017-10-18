@@ -50,6 +50,29 @@ public class AbrechnungsItem extends DatabaseItem {
     public void setBelegDatum(LocalDate belegDatum) {
         this.belegDatum = belegDatum;
     }
+    public double getSumme() {
+        return Summe.get();
+    }
+
+    public SimpleDoubleProperty summeProperty() {
+        return Summe;
+    }
+
+    public void setSumme(double summe) {
+        this.Summe.set(summe);
+    }
+
+    public String getMonat() {
+        return Monat.get();
+    }
+
+    public SimpleStringProperty monatProperty() {
+        return Monat;
+    }
+
+    public void setMonat(String monat) {
+        this.Monat.set(monat);
+    }
 
     @Override
     public boolean saveItem() {
@@ -215,8 +238,9 @@ public class AbrechnungsItem extends DatabaseItem {
 
             while (result.next()) {
                 AbrechnungsItem item = new AbrechnungsItem();
-                item.Monat = new SimpleStringProperty(result.getString("DateName"));
+                item.Monat = new SimpleStringProperty(result.getString("Monat"));
                 item.Summe = new SimpleDoubleProperty(result.getDouble("Summe"));
+
                 resultListMonthly.add(item);
             }
             return resultListMonthly;
@@ -261,5 +285,7 @@ public class AbrechnungsItem extends DatabaseItem {
                 return null;
             }
         }
-    }
+
+
+}
 

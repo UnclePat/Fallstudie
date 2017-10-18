@@ -249,7 +249,8 @@ public class MainFormController extends Application {
         final NumberAxis yAxis = new NumberAxis();
 
         BarChartStart.setTitle("Monatsauswertung");
-
+        List<AbrechnungsItem> AI = AbrechnungsItem.getMontlyItems();
+        System.out.println(AI);
 
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2003");
