@@ -53,7 +53,6 @@
                 </StackedBarChart>
                 <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="76.0" startX="565.0" startY="-1.0" />
                 <TableView fx:id="tblRecentEntryTabView" layoutX="702.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="319.0" layoutX="39.0" layoutY="77.0" stroke="BLACK" strokeType="INSIDE" style="" visible="true" width="637.0" />
                 <PieChart id="PieChart" fx:id="pieStartLastExpenses" layoutX="40.0" layoutY="79.0" prefHeight="316.0" prefWidth="636.0" visible="true" />
                 <Text font="$x3" layoutX="39.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten Ausgaben" />
                 <Text font="$x3" layoutX="39.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jahresüberblick" />
