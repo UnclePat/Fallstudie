@@ -246,10 +246,10 @@ public class MainFormController extends Application {
 
     private void refreshBarChartStart() {
         System.out.println("Call refreshBarChartStart.");
+        BarChartStart.getData().clear();
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
 
-        BarChartStart.setTitle("Monatsauswertung");
         List<BarChartInputAbrechnungsItemsProMonat> AI = AbrechnungsItem.getItemsPerMonthAndKategorie();
         List<String> kategorieNamen = Kategorie.getAllKategorieNames();
         System.out.println(AI);
