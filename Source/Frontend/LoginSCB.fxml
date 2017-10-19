@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0000999999975" prefWidth="807.0" snapToPixel="true" style="" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0000999999975" prefWidth="807.0" snapToPixel="true" style="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Frontend.LoginController">
   <children>
     <Pane id="" layoutX="0.0" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="497.0001220703125" prefWidth="262.0" style="-fx-background-color:darkgray">
       <children>
         <ImageView id="Logo.png" fitHeight="77.0" fitWidth="109.00634765625" layoutX="76.0" layoutY="202.0" style="-fx-background-color:darkgrey;">
           <image>
-            <Image preserveRatio="true" smooth="true" url="@Logo.png" />
+            <Image url="@Logo.png" preserveRatio="true" smooth="true" />
           </image>
         </ImageView>
       </children>
     </Pane>
-    <Pane layoutX="261.0" layoutY="-12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="510.0001220703125" prefWidth="547.0" fx:id="pane">
+    <Pane fx:id="pane" layoutX="261.0" layoutY="-12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="510.0001220703125" prefWidth="547.0">
       <children>
-        <TextField fx:id="textField" onAction="#buttonPressed" layoutX="143.0" layoutY="233.0" prefWidth="270.998046875" promptText="Benutzername" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 15;" text="" />
-        <Text layoutX="143.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 15;&#10;-fx-text-box-border: transparent;" text="Benutzername:" />
-        <Text layoutX="140.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 35;&#10;-fx-text-box-border: transparent;" text="HouseLook 2018" />
-        <Text layoutX="143.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 15;&#10;-fx-text-box-border: transparent;" text="Passwort:" />
-        <Text layoutX="391.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;" text="powered by DHBW" />
-        <PasswordField fx:id="passwordField" onAction="#buttonPressed" layoutX="143.0" layoutY="312.0" prefHeight="28.951171875" prefWidth="270.998046875" promptText="********" />
+        <TextField fx:id="textField" layoutX="143.0" layoutY="233.0" onAction="#buttonPressed" prefWidth="270.998046875" promptText="Benutzername" style="&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 15;" text="" />
+        <Text layoutX="143.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" style="&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 15;&#10;-fx-text-box-border: transparent;" text="Benutzername:" />
+        <Text layoutX="140.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" style="&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 35;&#10;-fx-text-box-border: transparent;" text="HouseLook 2018" />
+        <Text layoutX="143.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" style="&#10;-fx-text-inner-color: black;&#10;-fx-font-size: 15;&#10;-fx-text-box-border: transparent;" text="Passwort:" />
+        <Text layoutX="391.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" style="" text="powered by DHBW" />
+        <PasswordField fx:id="passwordField" layoutX="143.0" layoutY="312.0" onAction="#buttonPressed" prefHeight="28.951171875" prefWidth="270.998046875" promptText="********" />
         <Button fx:id="actionTarget" layoutX="143.0" layoutY="384.0" mnemonicParsing="false" onAction="#buttonPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Einloggen" />
-        <Text fx:id="Fehler" visible="false" fill="RED" layoutX="143.0" layoutY="366.0" scaleX="1.0" scaleY="1.0000052960491472" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif;&#10;-fx-font-size: 12;&#10;-fx-text-box-border: transparent;" text="Benutzername oder Passwort falsch!" />
+        <Text fx:id="Fehler" fill="RED" layoutX="143.0" layoutY="366.0" scaleX="1.0" scaleY="1.0000052960491472" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family:;&#10;-fx-text-box-border: transparent;" text="Benutzername oder Passwort falsch!" visible="false" />
       </children>
     </Pane>
   </children>
