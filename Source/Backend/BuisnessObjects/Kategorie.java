@@ -265,6 +265,30 @@ public class Kategorie extends DatabaseItem{
         }
     }
 
+    public static List<String> getAllKategorieNames(){
+        try {
+            List<String> kategorieNamen = new ArrayList<>();
+
+            String query = "SELECT [strName]" +
+                    "  FROM [Haushaltsbuch].[dbo].[Kategorie]";
+
+            List<String> values = new ArrayList<String>();
+
+            DataBaseServer connection = new DataBaseServer();
+
+            ResultSet result = connection.select(query, values);
+
+            while (result.next()) {
+                kategorieNamen.add(result.getString("strName"));
+            }
+
+            return kategorieNamen;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public String toString(){
         return this.getName();

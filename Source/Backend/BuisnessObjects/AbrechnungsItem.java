@@ -1,5 +1,6 @@
 package Backend.BuisnessObjects;
 
+import Backend.Base.Application;
 import Backend.Database.DataBaseServer;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -16,8 +17,6 @@ public class AbrechnungsItem extends DatabaseItem {
     private SimpleStringProperty beschreibung = new SimpleStringProperty("");
     private Integer parentKategorieFkey;
     private LocalDate belegDatum;
-    private SimpleDoubleProperty Summe;
-    private SimpleStringProperty Monat;
 
     public double getRechnungsBetrag() {
         return rechnungsBetrag.get();
@@ -49,29 +48,6 @@ public class AbrechnungsItem extends DatabaseItem {
 
     public void setBelegDatum(LocalDate belegDatum) {
         this.belegDatum = belegDatum;
-    }
-    public double getSumme() {
-        return Summe.get();
-    }
-
-    public SimpleDoubleProperty summeProperty() {
-        return Summe;
-    }
-
-    public void setSumme(double summe) {
-        this.Summe.set(summe);
-    }
-
-    public String getMonat() {
-        return Monat.get();
-    }
-
-    public SimpleStringProperty monatProperty() {
-        return Monat;
-    }
-
-    public void setMonat(String monat) {
-        this.Monat.set(monat);
     }
 
     @Override
@@ -218,28 +194,32 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
-    public static List<AbrechnungsItem> getMontlyItems() {
-        List<AbrechnungsItem> resultListMonthly = new ArrayList<>();
+    public static List<BarChartInputAbrechnungsItemsProMonat> getItemsPerMonthAndKategorie() {
+        List<BarChartInputAbrechnungsItemsProMonat> resultListMonthly = new ArrayList<>();
         try {
-            String query = "SELECT DateName( month, DateAdd(month,Month(dateBelegDatum) , -1)) AS Monat," +
-                    "SUM (decValue) AS Summe" +
-                    "  FROM [Haushaltsbuch].[dbo].[AbrechnungsItem]" +
-                    "  WHERE [intFkeyUserCreatedBy] = 1  AND YEAR(dateBelegDatum) = YEAR(getdate()) " +
-                    " GROUP BY MONTH(dateBelegDatum)";
+            String query = "SELECT " +
+                    " k.strName as Kategorie," +
+                    " DateName( month, DateAdd(month,Month(dateBelegDatum) , -1)) AS Monat," +
+                    "     SUM (decValue) AS Summe" +
+                    " FROM [Haushaltsbuch].[dbo].[AbrechnungsItem] a INNER JOIN [dbo].[Kategorie] k ON a.intFkeyKategorieParent = k.intKey" +
+                    " WHERE a.[intFkeyUserCreatedBy] = ?  AND YEAR(dateBelegDatum) = YEAR(getdate()) " +
+                    " GROUP BY k.strName, MONTH(dateBelegDatum)";
 
             DataBaseServer connection = new DataBaseServer();
 
             ResultSet result = null;
 
             List<String> values = new ArrayList<>();
+            values.add(Application.getCurrentUser().getKey().toString());
 
             result = connection.select(query, values);
 
 
             while (result.next()) {
-                AbrechnungsItem item = new AbrechnungsItem();
-                item.Monat = new SimpleStringProperty(result.getString("Monat"));
-                item.Summe = new SimpleDoubleProperty(result.getDouble("Summe"));
+                BarChartInputAbrechnungsItemsProMonat item = new BarChartInputAbrechnungsItemsProMonat();
+                item.setMonatName(result.getString("Monat"));
+                item.setKategorieName(result.getString("Kategorie"));
+                item.setBetrag(result.getDouble("Summe"));
 
                 resultListMonthly.add(item);
             }

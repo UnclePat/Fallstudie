@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.BuisnessObjects.AbrechnungsItem;
+import Backend.BuisnessObjects.BarChartInputAbrechnungsItemsProMonat;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
 import Backend.User.User;
@@ -249,27 +250,24 @@ public class MainFormController extends Application {
         final NumberAxis yAxis = new NumberAxis();
 
         BarChartStart.setTitle("Monatsauswertung");
-        List<AbrechnungsItem> AI = AbrechnungsItem.getMontlyItems();
+        List<BarChartInputAbrechnungsItemsProMonat> AI = AbrechnungsItem.getItemsPerMonthAndKategorie();
+        List<String> kategorieNamen = Kategorie.getAllKategorieNames();
         System.out.println(AI);
+        System.out.println(kategorieNamen);
 
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("2003");
-        series1.getData().add(new XYChart.Data("Test", 25601.34));
-        series1.getData().add(new XYChart.Data("Test1", 20148.82));
-        series1.getData().add(new XYChart.Data("Test2", 10000));
-        series1.getData().add(new XYChart.Data("Test3", 35407.15));
-        series1.getData().add(new XYChart.Data("Test4", 12000));
+        for (String kategorieName : kategorieNamen) {
+            System.out.println("Current Kategorie " + kategorieName);
 
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("2004");
-        series2.getData().add(new XYChart.Data("Test", 57401.85));
-        series2.getData().add(new XYChart.Data("Test1", 41941.19));
-        series2.getData().add(new XYChart.Data("Test2", 45263.37));
-        series2.getData().add(new XYChart.Data("Test3", 117320.16));
-        series2.getData().add(new XYChart.Data("Test4", 14845.27));
+            XYChart.Series series = new XYChart.Series();
+            series.setName(kategorieName);
 
-        BarChartStart.getData().addAll(series1, series2);
+            for (BarChartInputAbrechnungsItemsProMonat item : AI) {
+                if (item.getBetrag() != 0)
+                    series.getData().add(new XYChart.Data(item.getMonatName(), item.getBetrag()));
+            }
 
+            BarChartStart.getData().add(series);
+        }
     }
 
     private void refreshPieChart() {
