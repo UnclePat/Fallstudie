@@ -85,6 +85,25 @@ public class MainFormController extends Application {
     @FXML
     private StackedBarChart BarChartStart;
 
+    @FXML
+    private Text txtEditUserNoUserSelected;
+    @FXML
+    private Text txtEditUserPasswordsNotEqual;
+    @FXML
+    private Text txtEditUserNewPasswordEmpty;
+    @FXML
+    private Text txtEditUserPasswordChangeSuccessful;
+    @FXML
+    private Text txtEditUserPasswordEmpty;
+    @FXML
+    private Text txtNewUserInvalidUsername;
+    @FXML
+    private Text txtNewUserPasswordEmpty;
+    @FXML
+    private Text txtNewUserPasswordsNotEqual;
+    @FXML
+    private Text txtNewUserSuccessful;
+
     private static Kategorie currentKategorie = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
     private static User editedUser = null;
@@ -127,6 +146,11 @@ public class MainFormController extends Application {
 
             if (newTab == tabStart){
                 refreshStart();
+                return;
+            }
+
+            if (newTab == tabEinstellungen){
+                resetTabEinstellungenLabels();
                 return;
             }
         });
@@ -177,6 +201,19 @@ public class MainFormController extends Application {
 
         tblRecentEntryTabView.getColumns().addAll(RecentDateColumn, RecentBeschreibungColumn, RecentBetragColumn);
         refreshStart();
+    }
+
+    private void resetTabEinstellungenLabels(){
+        txtEditUserNoUserSelected.setVisible(false);
+        txtEditUserPasswordsNotEqual.setVisible(false);
+        txtEditUserNewPasswordEmpty.setVisible(false);
+        txtEditUserPasswordChangeSuccessful.setVisible(false);
+        txtEditUserPasswordEmpty.setVisible(false);
+
+        txtNewUserInvalidUsername.setVisible(false);
+        txtNewUserPasswordEmpty.setVisible(false);
+        txtNewUserPasswordsNotEqual.setVisible(false);
+        txtNewUserSuccessful.setVisible(false);
     }
 
 
@@ -439,21 +476,28 @@ public class MainFormController extends Application {
     public void btnNewUserPressed(ActionEvent actionEvent) {
         System.out.println("Call btnNewUserPressed");
         boolean valid = true;
+        resetTabEinstellungenLabels();
 
         if (txtUserNameNew.getText() == null || txtUserNameNew.getText().trim().isEmpty()){
             System.out.println("Could not save. Field txtUserNameNew is empty.");
+            txtNewUserInvalidUsername.setText("Benutzernamefeld darf nicht leer sein!");
+            txtNewUserInvalidUsername.setVisible(true);
+
             //Meldung Produzieren
             valid = false;
         }
 
         if (txtPasswordNew.getText() == null || txtPasswordNew.getText().trim().isEmpty()){
             System.out.println("Could not save. Field txtPasswordNew is empty.");
+            txtNewUserPasswordEmpty.setVisible(true);
+
             //Meldung Produzieren
             valid = false;
         }
 
         if (txtPasswordRetypeNew.getText() == null || txtPasswordRetypeNew.getText().trim().isEmpty()){
             System.out.println("Could not save. Field txtPasswordRetypeNew is empty.");
+            txtNewUserPasswordsNotEqual.setVisible(true);
             //Meldung Produzieren
             valid = false;
         }
@@ -465,6 +509,8 @@ public class MainFormController extends Application {
 
         if(!User.checkUsernameUnique(userName)){
             System.out.println("Username non unique.");
+            txtNewUserInvalidUsername.setText("Der angegebene Benutzername existiert bereits!");
+            txtNewUserInvalidUsername.setVisible(true);
             valid = false;
         }
 
@@ -472,6 +518,7 @@ public class MainFormController extends Application {
             password = txtPasswordNew.getText();
         }else{
             System.out.println("Passwords do not match.");
+            txtNewUserPasswordsNotEqual.setVisible(true);
             valid = false;
         }
 
@@ -491,26 +538,43 @@ public class MainFormController extends Application {
         txtUserNameNew.setText("");
         txtPasswordNew.setText("");
         txtPasswordRetypeNew.setText("");
+        txtNewUserSuccessful.setVisible(true);
     }
 
     public void btnEditedUserSavePressed(ActionEvent actionEvent) {
-        System.out.println("Call btnNewUserPressed");
+        System.out.println("Call btnEditedUserSavePressed");
         boolean valid = true;
+        resetTabEinstellungenLabels();
+
+        if (txtEditedUserName.getText() == null || txtEditedUserName.getText().trim().isEmpty()){
+            System.out.println("Could not save. No user selected.");
+            txtEditUserNoUserSelected.setVisible(true);
+
+            //Direkt raus, ohne User macht es keinen Sinn weiter zu prüfen
+            return;
+        }
 
         if (txtEditedPasswordOld.getText() == null || txtEditedPasswordOld.getText().trim().isEmpty()){
             System.out.println("Could not save. Field txtEditedUserPasswordOld is empty.");
+            txtEditUserPasswordEmpty.setText("Passwortfeld darf nicht leer sein!");
+            txtEditUserPasswordEmpty.setVisible(true);
+
             //Meldung Produzieren
             valid = false;
         }
 
         if (txtEditedUserPasswordNew.getText() == null || txtEditedUserPasswordNew.getText().trim().isEmpty()){
             System.out.println("Could not save. Field txtEditedUserPasswordNew is empty.");
+            txtEditUserNewPasswordEmpty.setVisible(true);
+
             //Meldung Produzieren
             valid = false;
         }
 
         if (txtEditedUserPasswordNewRetype.getText() == null || txtEditedUserPasswordNewRetype.getText().trim().isEmpty()){
             System.out.println("Could not save. Field txtEditedUserPasswordNewRetype is empty.");
+            txtEditUserPasswordsNotEqual.setVisible(true);
+
             //Meldung Produzieren
             valid = false;
         }
@@ -520,10 +584,14 @@ public class MainFormController extends Application {
                 editedUser.setPassword(txtEditedUserPasswordNew.getText());
             }else{
                 System.out.println("New passwords do not match.");
+                txtEditUserPasswordsNotEqual.setVisible(true);
+
                 valid = false;
             }
         }else{
             System.out.println("Old password does not match.");
+            txtEditUserPasswordEmpty.setText("Das angegebene Passwort ist falsch!");
+            txtEditUserPasswordEmpty.setVisible(true);
             valid = false;
         }
 
@@ -536,6 +604,8 @@ public class MainFormController extends Application {
         txtEditedPasswordOld.setText("");
         txtEditedUserPasswordNew.setText("");
         txtEditedUserPasswordNewRetype.setText("");
+
+        txtEditUserPasswordChangeSuccessful.setVisible(true);
     }
 
     private void kategorieTreeReselectLastItem() {

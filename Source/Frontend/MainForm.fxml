@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.chart.*?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.chart.StackedBarChart?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker.*?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollBar?>
@@ -19,19 +17,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Frontend.MainFormController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainFormController">
   <children>
     <TabPane fx:id="mainTabControl" layoutX="0.0" layoutY="105.0" prefHeight="759.0" prefWidth="1260.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
@@ -174,14 +168,15 @@
                 <Button fx:id="btnNewUser" layoutX="263.0" layoutY="546.0" mnemonicParsing="false" onAction="#btnNewUserPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
                 <Text font="$x1" layoutX="36.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort bestätigen:" />
                 <PasswordField fx:id="txtPasswordRetypeNew" layoutX="263.0" layoutY="505.0" prefHeight="26.0" prefWidth="200.0" promptText="neues Passwort bestätigen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Text fill="RED" layoutX="482.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen neuen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
-                <Text fill="RED" layoutX="482.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
-                <Text fill="RED" layoutX="481.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzernamefeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
-                <Text fill="RED" layoutX="481.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
-                <Text fill="RED" layoutX="482.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
-                <Text fill="GREEN" layoutX="393.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neuer Benutzer wurde angelegt!" wrappingWidth="473.6708984375" />
-                <Text fill="GREEN" layoutX="393.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortändern erfolgreich!" wrappingWidth="473.6708984375" />
-                <Text fill="RED" layoutX="482.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtEditUserPasswordsNotEqual" fill="RED" layoutX="482.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen neuen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
+                <Text fx:id="txtEditUserNewPasswordEmpty" fill="RED" layoutX="482.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtNewUserInvalidUsername" fill="RED" layoutX="481.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzernamefeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtNewUserPasswordEmpty" fill="RED" layoutX="481.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtNewUserPasswordsNotEqual" fill="RED" layoutX="482.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
+                <Text fx:id="txtNewUserSuccessful" fill="GREEN" layoutX="393.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neuer Benutzer wurde angelegt!" wrappingWidth="473.6708984375" />
+                <Text fx:id="txtEditUserPasswordChangeSuccessful" fill="GREEN" layoutX="393.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortändern erfolgreich!" wrappingWidth="473.6708984375" />
+                <Text fx:id="txtEditUserPasswordEmpty" fill="RED" layoutX="482.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtEditUserNoUserSelected" fill="RED" layoutX="630.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Es muss ein Benutzer ausgewählt werden!" wrappingWidth="399.6708984375"/>
               </children>
             </AnchorPane>
           </content>
@@ -190,7 +185,7 @@
     </TabPane>
     <ImageView id="Logo.png" fitHeight="72.0" fitWidth="91.0001220703125" layoutX="33.0" layoutY="14.0">
       <image>
-        <Image url="@Logo.png" preserveRatio="true" smooth="true" />
+        <Image preserveRatio="true" smooth="true" url="@Logo.png" />
       </image>
     </ImageView>
     <Text fill="WHITE" layoutX="230.0" layoutY="62.0" scaleX="2.063105775241048" scaleY="2.195314492575571" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: whitesmoke;" text="HouseLook 2018">
@@ -200,7 +195,7 @@
     </Text>
     <ImageView id="sign-out-logout-icon-0.png" fitHeight="50.41796875" fitWidth="50.0" layoutX="1177.0" layoutY="38.0">
       <image>
-        <Image url="@sign-out-logout-icon-0.png" preserveRatio="true" smooth="true" />
+        <Image preserveRatio="true" smooth="true" url="@sign-out-logout-icon-0.png" />
       </image>
     </ImageView>
   </children>
