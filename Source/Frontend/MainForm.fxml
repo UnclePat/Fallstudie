@@ -174,7 +174,7 @@
                 <Text fx:id="txtNewUserPasswordEmpty" fill="RED" layoutX="481.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
                 <Text fx:id="txtNewUserPasswordsNotEqual" fill="RED" layoutX="482.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
                 <Text fx:id="txtNewUserSuccessful" fill="GREEN" layoutX="393.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neuer Benutzer wurde angelegt!" wrappingWidth="473.6708984375" />
-                <Text fx:id="txtEditUserPasswordChangeSuccessful" fill="GREEN" layoutX="393.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortändern erfolgreich!" wrappingWidth="473.6708984375" />
+                <Text fx:id="txtEditUserPasswordChangeSuccessful" fill="GREEN" layoutX="393.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortänderung erfolgreich!" wrappingWidth="473.6708984375" />
                 <Text fx:id="txtEditUserPasswordEmpty" fill="RED" layoutX="482.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
                 <Text fx:id="txtEditUserNoUserSelected" fill="RED" layoutX="630.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Es muss ein Benutzer ausgewählt werden!" wrappingWidth="399.6708984375"/>
               </children>
