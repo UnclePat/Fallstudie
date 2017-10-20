@@ -357,6 +357,7 @@ public class MainFormController extends Application {
     }
 
     public void btnSelectUserPressed(ActionEvent actionEvent){
+        resetTabEinstellungenLabels();
         UserSelectorController selector = new UserSelectorController();
 
         try {
