@@ -51,6 +51,11 @@ public class AbrechnungsItem extends DatabaseItem {
     }
 
     @Override
+    public String getTableName() {
+        return "AbrechnungsItem";
+    }
+
+    @Override
     public boolean saveItem() {
         if (this.getKey() == null) {
             this.setKey(createItem());

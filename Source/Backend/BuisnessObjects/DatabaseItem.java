@@ -9,7 +9,8 @@ import java.util.List;
 
 public abstract class DatabaseItem {
     Integer key = null;
-    String tableName;
+
+    public abstract String getTableName();
 
     private LocalDate dateDeleted;
     private Integer fkeyUserDeleted = null;
@@ -75,11 +76,11 @@ public abstract class DatabaseItem {
 
     public void markAsDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();
-        db.markAsDeleted(this.tableName, this.key.intValue());
+        db.markAsDeleted(this.getTableName(), this.key.intValue());
     }
 
     public void markAsNotDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();
-        db.markAsNotDeleted(this.tableName, this.key.intValue());
+        db.markAsNotDeleted(this.getTableName(), this.key.intValue());
     }
 }

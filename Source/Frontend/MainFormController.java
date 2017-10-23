@@ -105,6 +105,7 @@ public class MainFormController extends Application {
     private Text txtNewUserSuccessful;
 
     private static Kategorie currentKategorie = null;
+    private static AbrechnungsItem currentAbrechnungsItem = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
     private static User editedUser = null;
 
@@ -177,6 +178,12 @@ public class MainFormController extends Application {
         betragColumn.prefWidthProperty().bind(tblAbrechnungsItems.widthProperty().multiply(0.2)); // w * 1/3
 
         tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
+
+        tblAbrechnungsItems.getSelectionModel().selectedItemProperty().addListener((observable, oldTableItem, newTableItem) -> {
+            AbrechnungsItem item = (AbrechnungsItem) newTableItem;
+            System.out.println("Selected Key : " + item.getKey() + " Selected Item: " + item.getBeschreibung());
+            MainFormController.currentAbrechnungsItem = item;
+        });
 
         txtBelegBetrag.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
@@ -540,6 +547,29 @@ public class MainFormController extends Application {
         txtPasswordNew.setText("");
         txtPasswordRetypeNew.setText("");
         txtNewUserSuccessful.setVisible(true);
+    }
+
+    public void btnKategorieDeletePressed(ActionEvent actionEvent) {
+        try {
+            System.out.println("Call btnKategorieDeletePressed.");
+            currentKategorie.markAsDeleted();
+            refreshKategorieView();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error deleting Kategorie.");
+        }
+    }
+
+    public void btnAbrechnungsItemDeletePressed(ActionEvent actionEvent) {
+        try {
+            System.out.println("Call btnAbrechnungsItemDeletePressed.");
+            currentAbrechnungsItem.markAsDeleted();
+            refreshKategorieView();
+            kategorieTreeReselectLastItem();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error deleting AbrechnungsItem.");
+        }
     }
 
     public void btnEditedUserSavePressed(ActionEvent actionEvent) {

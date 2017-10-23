@@ -4,6 +4,11 @@ import Backend.BuisnessObjects.DatabaseItem;
 
 public class UserAccessRight extends DatabaseItem{
     @Override
+    public String getTableName() {
+        return null;
+    }
+
+    @Override
     public boolean saveItem() {
         if (this.getKey() == null){
             this.setKey(createItem());

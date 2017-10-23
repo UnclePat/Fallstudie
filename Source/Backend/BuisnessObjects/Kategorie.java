@@ -38,6 +38,11 @@ public class Kategorie extends DatabaseItem{
     }
 
     @Override
+    public String getTableName() {
+        return "Kategorie";
+    }
+
+    @Override
     public boolean saveItem() {
         if (this.getKey() == null){
             this.setKey(createItem());

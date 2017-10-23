@@ -49,6 +49,11 @@ public class User extends DatabaseItem{
     }
 
     @Override
+    public String getTableName() {
+        return "User";
+    }
+
+    @Override
     public boolean saveItem() {
         if (this.getKey() == null){
             this.setKey(createItem());
