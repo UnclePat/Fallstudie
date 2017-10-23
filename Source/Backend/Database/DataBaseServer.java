@@ -1,6 +1,9 @@
 package Backend.Database;
 
+import Backend.Base.Application;
+
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 
 public class DataBaseServer
@@ -82,19 +85,31 @@ public class DataBaseServer
 
     public int markAsDeleted(String table, int key) throws SQLException {
         String sql = " UPDATE " + table +
-                " SET boolDeletionFlag = true" +
-                " WHERE intKey = " + key;
+                " SET [boolDeletionFlag] = 1," +
+                "     [intFkeyUserDeletedBy] = ?," +
+                "     [dateDeleted] = ?" +
+                " WHERE intKey = ?";
 
-        Statement statement = DataBaseServer.databaseConnection.createStatement();
+        PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(sql);
+        statement.setString(0, Application.getCurrentUser().getKey().toString());
+        statement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+        statement.setInt(2, key);
+
         return statement.executeUpdate(sql);
     }
 
     public int markAsNotDeleted(String table, int key) throws SQLException{
         String sql = " UPDATE " + table +
-                " SET boolDeletionFlag = false" +
-                " WHERE intKey = " + key;
+                " SET [boolDeletionFlag] = 0," +
+                "     [intFkeyUserDeletedBy] = ?," +
+                "     [dateDeleted] = ?" +
+                " WHERE intKey = ?";
 
-        Statement statement = DataBaseServer.databaseConnection.createStatement();
+        PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(sql);
+        statement.setString(0, Application.getCurrentUser().getKey().toString());
+        statement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+        statement.setInt(2, key);
+
         return statement.executeUpdate(sql);
     }
 
