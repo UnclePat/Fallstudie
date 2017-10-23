@@ -91,11 +91,11 @@ public class DataBaseServer
                 " WHERE intKey = ?";
 
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(sql);
-        statement.setString(0, Application.getCurrentUser().getKey().toString());
-        statement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
-        statement.setInt(2, key);
+        statement.setString(1, Application.getCurrentUser().getKey().toString());
+        statement.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+        statement.setInt(3, key);
 
-        return statement.executeUpdate(sql);
+        return statement.executeUpdate();
     }
 
     public int markAsNotDeleted(String table, int key) throws SQLException{
@@ -106,11 +106,11 @@ public class DataBaseServer
                 " WHERE intKey = ?";
 
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(sql);
-        statement.setString(0, Application.getCurrentUser().getKey().toString());
-        statement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
-        statement.setInt(2, key);
+        statement.setNull(1, 1);
+        statement.setNull(2, 1);
+        statement.setInt(3, key);
 
-        return statement.executeUpdate(sql);
+        return statement.executeUpdate();
     }
 
     public void executeBackup(String path) throws SQLException {
