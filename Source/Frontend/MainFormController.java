@@ -639,6 +639,7 @@ public class MainFormController extends Application {
             }else {
                 currentKategorie.markAsDeleted();
             }
+            clearTblAbrechnungsItems();
             refreshKategorieView();
         } catch (SQLException e) {
             e.printStackTrace();
