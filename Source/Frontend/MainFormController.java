@@ -187,6 +187,7 @@ public class MainFormController extends Application {
                 super.updateItem(item, empty);
                 getStyleClass().removeAll();
                 if (empty) {
+                    setText("");
                     setStyle("");
                 } else {
                     setText(item.toString());
