@@ -639,7 +639,10 @@ public class MainFormController extends Application {
             }else {
                 currentKategorie.markAsDeleted();
             }
-            clearTblAbrechnungsItems();
+
+            if (!checkShowDeletedItems.isSelected()){
+                clearTblAbrechnungsItems();
+            }
             refreshKategorieView();
         } catch (SQLException e) {
             e.printStackTrace();
