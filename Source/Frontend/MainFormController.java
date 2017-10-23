@@ -552,7 +552,11 @@ public class MainFormController extends Application {
     public void btnKategorieDeletePressed(ActionEvent actionEvent) {
         try {
             System.out.println("Call btnKategorieDeletePressed.");
-            currentKategorie.markAsDeleted();
+            if(currentKategorie.getDeletionFlag()){
+                currentKategorie.markAsNotDeleted();
+            }else {
+                currentKategorie.markAsDeleted();
+            }
             refreshKategorieView();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -563,7 +567,11 @@ public class MainFormController extends Application {
     public void btnAbrechnungsItemDeletePressed(ActionEvent actionEvent) {
         try {
             System.out.println("Call btnAbrechnungsItemDeletePressed.");
-            currentAbrechnungsItem.markAsDeleted();
+            if(currentAbrechnungsItem.getDeletionFlag()){
+                currentAbrechnungsItem.markAsNotDeleted();
+            }else {
+                currentAbrechnungsItem.markAsDeleted();
+            }
             refreshKategorieView();
             kategorieTreeReselectLastItem();
         } catch (SQLException e) {
