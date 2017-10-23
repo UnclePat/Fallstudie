@@ -120,9 +120,9 @@
                 <Button fx:id="btnKategorieEdit" layoutX="307.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnKategorieEditPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
                 <Button fx:id="btnKategorieNew" layoutX="231.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnKategorieNewPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
                 <TableView fx:id="tblAbrechnungsItems" layoutX="629.0" layoutY="95.0" prefHeight="431.0" prefWidth="581.5" />
-                <Button id="btnKategorieEdit" layoutX="426.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
-                <Button id="btnKategorieEdit" layoutX="1129.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
-                <CheckBox layoutX="1002.0" layoutY="37.0" mnemonicParsing="false" style="&#10;-fx-cursor: hand;&#10;&#10;&#10;&#10;" text="Gelöschte Elemente anzeigen" />
+                <Button fx:id="btnDeleteKategorie" layoutX="426.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
+                <Button fx:id="btnDeleteAbrechnungsItem" layoutX="1129.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
+                <CheckBox fx:id="checkShowDeletedItems" layoutX="1002.0" layoutY="37.0" mnemonicParsing="false" style="&#10;-fx-cursor: hand;&#10;&#10;&#10;&#10;" text="Gelöschte Elemente anzeigen" />
               </children>
             </AnchorPane>
           </content>

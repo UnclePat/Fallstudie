@@ -5,6 +5,8 @@ import Backend.BuisnessObjects.BarChartInputAbrechnungsItemsProMonat;
 import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
 import Backend.User.User;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -104,6 +107,14 @@ public class MainFormController extends Application {
     @FXML
     private Text txtNewUserSuccessful;
 
+    @FXML
+    private CheckBox checkShowDeletedItems;
+
+    @FXML
+    private Button btnDeleteKategorie;
+    @FXML
+    private Button btnDeleteAbrechnungsItem;
+
     private static Kategorie currentKategorie = null;
     private static AbrechnungsItem currentAbrechnungsItem = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
@@ -155,6 +166,7 @@ public class MainFormController extends Application {
                 return;
             }
         });
+
         kategorieTree.getSelectionModel().selectedItemProperty().addListener((observable, oldTreeItem, newTreeItem) -> {
             TreeItem<Kategorie> item = (TreeItem<Kategorie>) newTreeItem;
             System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
@@ -162,6 +174,31 @@ public class MainFormController extends Application {
             MainFormController.currentKategorie = item.getValue();
             MainFormController.currentItemKategorieTree = item;
 
+            if (currentKategorie.getDeletionFlag()){
+                btnDeleteKategorie.setText("Wiederherstellen");
+            }else{
+                btnDeleteKategorie.setText("Löschen");
+            }
+        });
+
+        kategorieTree.setCellFactory(tv ->  new TreeCell<Kategorie>() {
+            @Override
+            public void updateItem(Kategorie item, boolean empty) {
+                super.updateItem(item, empty);
+                getStyleClass().removeAll();
+                if (empty) {
+                    setStyle("");
+                } else {
+                    setText(item.toString());
+                    if (item.getDeletionFlag()){
+                        super.updateSelected(empty);
+                        setTextFill(Color.RED);
+                    }
+                    else{
+                        setTextFill(Color.BLACK);
+                    }
+                }
+            }
         });
 
         //Init tblAbrechnungsItems
@@ -183,6 +220,33 @@ public class MainFormController extends Application {
             AbrechnungsItem item = (AbrechnungsItem) newTableItem;
             System.out.println("Selected Key : " + item.getKey() + " Selected Item: " + item.getBeschreibung());
             MainFormController.currentAbrechnungsItem = item;
+
+            if (currentAbrechnungsItem.getDeletionFlag()){
+                btnDeleteAbrechnungsItem.setText("Wiederherstellen");
+            }else{
+                btnDeleteAbrechnungsItem.setText("Löschen");
+            }
+        });
+
+        tblAbrechnungsItems.setRowFactory(row -> new TableRow<AbrechnungsItem>(){
+            @Override
+            public void updateItem(AbrechnungsItem item, boolean empty){
+                super.updateItem(item, empty);
+
+                if (item == null || empty) {
+                    setStyle("");
+                } else {
+                    if (item.getDeletionFlag()) {
+                        for(int i=0; i<getChildren().size();i++){
+                            ((Labeled) getChildren().get(i)).setTextFill(Color.RED);
+                        }
+                    } else {
+                        for(int i=0; i<getChildren().size();i++){
+                            ((Labeled) getChildren().get(i)).setTextFill(Color.BLACK);;
+                        }
+                    }
+                }
+            }
         });
 
         txtBelegBetrag.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -208,6 +272,14 @@ public class MainFormController extends Application {
 
         tblRecentEntryTabView.getColumns().addAll(RecentDateColumn, RecentBeschreibungColumn, RecentBetragColumn);
         refreshStart();
+
+        checkShowDeletedItems.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                refreshKategorieView();
+                kategorieTreeReselectLastItem();
+            }
+        });
     }
 
     private void resetTabEinstellungenLabels(){
@@ -248,14 +320,16 @@ public class MainFormController extends Application {
         System.out.println("Call refreshAbrechnungsItemView");
         clearTblAbrechnungsItems();
 
-        List<AbrechnungsItem> abrechnungsItems = kategorie.getAbrechnungsItems();
+        List<AbrechnungsItem> abrechnungsItems = kategorie.getAbrechnungsItems(checkShowDeletedItems.isSelected());
 
         tblAbrechnungsItems.setItems(FXCollections.observableArrayList(abrechnungsItems));
-
+        btnDeleteAbrechnungsItem.setText("Löschen");
     }
 
     @FXML void refreshKategorieView(){
         List<Integer> kategorieKeys;
+
+        btnDeleteAbrechnungsItem.setText("Löschen");
 
         try {
             kategorieKeys = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
@@ -269,9 +343,16 @@ public class MainFormController extends Application {
                 // Debug
                 System.out.println(key);
                 System.out.println("Kategoriename: " + kat.getName());
+                System.out.println("Kategorie has deletionFlag: " + kat.getDeletionFlag());
 
-                dummyRoot.getChildren().add(makeTreeItem(kat));
+                TreeItem<Kategorie> item = makeTreeItem(kat);
 
+                if (kat.getDeletionFlag()){
+                    if (checkShowDeletedItems.isSelected())
+                        dummyRoot.getChildren().add(item);
+                }else{
+                    dummyRoot.getChildren().add(item);
+                }
             }
 
             kategorieTree.setShowRoot(false);

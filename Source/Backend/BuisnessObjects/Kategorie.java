@@ -2,6 +2,8 @@ package Backend.BuisnessObjects;
 
 import Backend.User.User;
 import Backend.Database.DataBaseServer;
+
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,8 +32,20 @@ public class Kategorie extends DatabaseItem{
     public void setFkeyUser(Integer fkeyUser) {
         FkeyUser = fkeyUser;
     }
-    public List<AbrechnungsItem> getAbrechnungsItems() {
-        return abrechnungsItems;
+
+    public List<AbrechnungsItem> getAbrechnungsItems(boolean showDeleted) {
+        if(showDeleted) {
+            return abrechnungsItems;
+        }else{
+            List<AbrechnungsItem> clearedList = new ArrayList<>();
+
+            for (AbrechnungsItem item : abrechnungsItems) {
+                if (!item.getDeletionFlag()){
+                    clearedList.add(item);
+                }
+            }
+            return clearedList;
+        }
     }
     public List<Kategorie> getSubKategorien() {
         return subKategorien;
