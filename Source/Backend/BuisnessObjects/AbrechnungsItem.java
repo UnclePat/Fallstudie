@@ -244,7 +244,7 @@ public class AbrechnungsItem extends DatabaseItem {
                         "      ,[strBechreibung]" +
                         "      ,[decValue]" +
                         "  FROM [dbo].[AbrechnungsItem]" +
-                        "  WHERE [boolDeletionFlag] = 0 " +
+                        "  WHERE [boolDeletionFlag] = 0 AND [intFkeyUserCreatedBy] = ? " +
                         "order by [dateBelegDatum] desc";
 
                 DataBaseServer connection = new DataBaseServer();
@@ -252,6 +252,7 @@ public class AbrechnungsItem extends DatabaseItem {
                 ResultSet result = null;
 
                 List<String> values = new ArrayList<>();
+                values.add(Application.getCurrentUser().getKey().toString());
 
                 result = connection.select(query, values);
 

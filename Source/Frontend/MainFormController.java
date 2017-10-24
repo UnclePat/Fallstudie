@@ -130,6 +130,21 @@ public class MainFormController extends Application {
     @FXML
     private Line lineNewUser;
 
+    @FXML
+    private DatePicker dateAuswertungBis;
+    @FXML
+    private DatePicker dateAuswertungVon;
+    @FXML
+    private TextField txtAuswertungBetragVon;
+    @FXML
+    private TextField txtAuswertungBetragBis;
+    @FXML
+    private TextField txtAuswertungSearch;
+    @FXML
+    private Button btnAuswertungResetFilter;
+    @FXML
+    private Button btnAuswertungCommit;
+
     private static Kategorie currentKategorie = null;
     private static AbrechnungsItem currentAbrechnungsItem = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
