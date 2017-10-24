@@ -187,6 +187,10 @@ public class MainFormController extends Application {
 
         kategorieTree.getSelectionModel().selectedItemProperty().addListener((observable, oldTreeItem, newTreeItem) -> {
             TreeItem<Kategorie> item = (TreeItem<Kategorie>) newTreeItem;
+            if (item == null){
+                return;
+            }
+
             System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
             refreshAbrechnungsItemView(item.getValue());
             MainFormController.currentKategorie = item.getValue();
@@ -237,6 +241,10 @@ public class MainFormController extends Application {
 
         tblAbrechnungsItems.getSelectionModel().selectedItemProperty().addListener((observable, oldTableItem, newTableItem) -> {
             AbrechnungsItem item = (AbrechnungsItem) newTableItem;
+            if (item == null){
+                return;
+            }
+
             System.out.println("Selected Key : " + item.getKey() + " Selected Item: " + item.getBeschreibung());
             MainFormController.currentAbrechnungsItem = item;
 
