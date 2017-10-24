@@ -207,7 +207,7 @@ public class AbrechnungsItem extends DatabaseItem {
                     " DateName( month, DateAdd(month,Month(dateBelegDatum) , -1)) AS Monat," +
                     "     SUM (decValue) AS Summe" +
                     " FROM [Haushaltsbuch].[dbo].[AbrechnungsItem] a INNER JOIN [dbo].[Kategorie] k ON a.intFkeyKategorieParent = k.intKey" +
-                    " WHERE a.[intFkeyUserCreatedBy] = ?  AND YEAR(dateBelegDatum) = YEAR(getdate()) " +
+                    " WHERE a.[intFkeyUserCreatedBy] = ?  AND YEAR(dateBelegDatum) = YEAR(getdate()) AND (k.[boolDeletionFlag] = 0 AND a.[boolDeletionFlag] = 0)" +
                     " GROUP BY k.strName, MONTH(dateBelegDatum)";
 
             DataBaseServer connection = new DataBaseServer();
