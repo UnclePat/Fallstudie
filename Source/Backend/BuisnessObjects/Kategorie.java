@@ -226,11 +226,13 @@ public class Kategorie extends DatabaseItem{
         double sum = 0;
 
         for (Kategorie subKategorie : subKategorien) {
-            sum += subKategorie.getSum();
+            if (!subKategorie.getDeletionFlag())
+                sum += subKategorie.getSum();
         }
 
         for (AbrechnungsItem item : abrechnungsItems) {
-            sum += item.getRechnungsBetrag();
+            if (!item.getDeletionFlag())
+                sum += item.getRechnungsBetrag();
         }
 
         return sum;
