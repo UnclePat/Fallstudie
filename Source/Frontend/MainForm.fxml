@@ -77,15 +77,15 @@
                 <TextField fx:id="txtAuswertungBetragBis" layoutX="488.0" layoutY="219.0" prefWidth="186.0" promptText="00,00 €" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text font="$x1" layoutX="29.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suche:" />
                 <TextField fx:id="txtAuswertungSearch" layoutX="181.0" layoutY="272.0" prefWidth="186.0078125" promptText="Suchbegriff eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Button fx:id="btnAuswertungResetFilter" layoutX="181.0" layoutY="321.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
-                <Button fx:id="btnAuswertungCommit" layoutX="368.0" layoutY="321.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="speichern" />
+                <Button fx:id="btnAuswertungResetFilter" onAction="#btnAuswertungResetFilterPressed" layoutX="181.0" layoutY="321.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
+                <Button fx:id="btnAuswertungCommit" layoutX="368.0" onAction="#btnAuswertungCommitPressed" layoutY="321.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="speichern" />
                 <Line endX="1093.0" endY="0.0" layoutX="129.0" layoutY="91.0" startX="-100.0" />
                 <Text layoutX="35.0" layoutY="41.0" scaleX="1.1212764138874183" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auswertung">
                   <font>
                     <Font name="System Bold" size="25.0" fx:id="x2" />
                   </font>
                 </Text>
-                <ChoiceBox blendMode="SRC_ATOP" layoutX="181.0" layoutY="165.0" mouseTransparent="false" pickOnBounds="false" style="" />
+                <ChoiceBox fx:id="choiceAuswertungKategorie" blendMode="SRC_ATOP" layoutX="181.0" layoutY="165.0" mouseTransparent="false" pickOnBounds="false" style="" />
                 <Text font="$x3" layoutX="29.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
                 <Line endX="1090.0" endY="0.0" layoutX="132.0" layoutY="410.0" startX="-100.0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="265.0001220703125" layoutX="31.0" layoutY="424.0" stroke="BLACK" strokeType="INSIDE" width="423.0" />

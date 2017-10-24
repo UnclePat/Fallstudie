@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backend.Auswertung;
 import Backend.BuisnessObjects.AbrechnungsItem;
 import Backend.BuisnessObjects.BarChartInputAbrechnungsItemsProMonat;
 import Backend.BuisnessObjects.Kategorie;
@@ -144,6 +145,8 @@ public class MainFormController extends Application {
     private Button btnAuswertungResetFilter;
     @FXML
     private Button btnAuswertungCommit;
+    @FXML
+    private ChoiceBox choiceAuswertungKategorie;
 
     private static Kategorie currentKategorie = null;
     private static AbrechnungsItem currentAbrechnungsItem = null;
@@ -156,6 +159,7 @@ public class MainFormController extends Application {
     public static void setEditedUser(User editedUser) {
         MainFormController.editedUser = editedUser;
     }
+    public static Auswertung currentAuswertung = null;
 
     @Override
     public void start(Stage primaryStage) {
@@ -294,6 +298,18 @@ public class MainFormController extends Application {
         txtBelegBetrag.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
                 txtBelegBetrag.setText(oldValue);
+            }
+        });
+
+        txtAuswertungBetragVon.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
+                txtAuswertungBetragVon.setText(oldValue);
+            }
+        });
+
+        txtAuswertungBetragBis.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
+                txtAuswertungBetragBis.setText(oldValue);
             }
         });
 
@@ -833,6 +849,22 @@ public class MainFormController extends Application {
 
         //no hit:
         return null;
+    }
+
+    @FXML
+    public void btnAuswertungCommitPressed(ActionEvent actionEvent){
+
+    }
+
+    @FXML
+    public void btnAuswertungResetFilterPressed(ActionEvent actionEvent){
+        currentAuswertung = null;
+        txtAuswertungBetragBis.setText("");
+        txtAuswertungBetragVon.setText("");
+        txtAuswertungSearch.setText("");
+        choiceAuswertungKategorie.setValue(null);
+        dateAuswertungVon.setValue(null);
+        dateAuswertungBis.setValue(null);
     }
 }
 
