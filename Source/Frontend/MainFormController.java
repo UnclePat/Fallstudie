@@ -853,7 +853,18 @@ public class MainFormController extends Application {
 
     @FXML
     public void btnAuswertungCommitPressed(ActionEvent actionEvent){
+        String strBetragVon = txtAuswertungBetragVon.getText().trim().replace(',', '.');
+        double betragVon = Double.parseDouble(strBetragVon);
 
+        String strBetragBis = txtAuswertungBetragBis.getText().trim().replace(',', '.');
+        double betragBis = Double.parseDouble(strBetragBis);
+
+        LocalDate datumVon = dateAuswertungVon.getValue();
+        LocalDate datumBis = dateAuswertungBis.getValue();
+
+        String beschreibung = txtBelegBeschreibung.getText();
+
+        Auswertung auswertung = new Auswertung(datumVon, datumBis, betragVon, betragBis, beschreibung);
     }
 
     @FXML
