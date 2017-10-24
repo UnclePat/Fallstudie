@@ -147,6 +147,10 @@ public class MainFormController extends Application {
     private Button btnAuswertungCommit;
     @FXML
     private ChoiceBox choiceAuswertungKategorie;
+    @FXML
+    private TableView tblAuswertung;
+    @FXML
+    private PieChart chartAuswertung;
 
     private static Kategorie currentKategorie = null;
     private static AbrechnungsItem currentAbrechnungsItem = null;
@@ -201,6 +205,10 @@ public class MainFormController extends Application {
                 initChangePassword();
                 initNewUser();
                 return;
+            }
+
+            if (newTab == tabAuswertungen){
+                initTabAuswertung();
             }
         });
 
@@ -338,6 +346,20 @@ public class MainFormController extends Application {
                 kategorieTreeReselectLastItem();
             }
         });
+
+        //Init Table Auswertungen
+        TableColumn AuswertungBetragColumn = new TableColumn("Betrag");
+        TableColumn AuswertungBeschreibungColumn = new TableColumn("Beschreibung");
+        TableColumn AuswertungDateColumn = new TableColumn ("Datum");
+
+        AuswertungDateColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,LocalDate>("belegDatum"));
+        AuswertungBeschreibungColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem,String>("beschreibung"));
+        AuswertungBetragColumn.setCellValueFactory(new PropertyValueFactory<AbrechnungsItem, String>("rechnungsBetrag"));
+        AuswertungDateColumn.prefWidthProperty().bind(tblAuswertung.widthProperty().multiply(0.15)); // w * 1/3
+        AuswertungBeschreibungColumn.prefWidthProperty().bind(tblAuswertung.widthProperty().multiply(0.65)); // w * 1/3
+        AuswertungBetragColumn.prefWidthProperty().bind(tblAuswertung.widthProperty().multiply(0.2)); // w * 1/3
+
+        tblAuswertung.getColumns().addAll(AuswertungDateColumn, AuswertungBeschreibungColumn, AuswertungBetragColumn);
     }
 
     private void initChangePassword() {
@@ -398,6 +420,10 @@ public class MainFormController extends Application {
         for ( int i = 0; i < tblAbrechnungsItems.getItems().size(); i++) {
             tblAbrechnungsItems.getItems().clear();
         }
+    }
+
+    private void clearTblAuswertung() {
+        tblAuswertung.getItems().clear();
     }
 
     // Is here to build a tree item
@@ -853,6 +879,8 @@ public class MainFormController extends Application {
 
     @FXML
     public void btnAuswertungCommitPressed(ActionEvent actionEvent){
+        clearTblAuswertung();
+
         String strBetragVon = txtAuswertungBetragVon.getText().trim().replace(',', '.');
         double betragVon = Double.parseDouble(strBetragVon);
 
@@ -865,10 +893,19 @@ public class MainFormController extends Application {
         String beschreibung = txtBelegBeschreibung.getText();
 
         Auswertung auswertung = new Auswertung(datumVon, datumBis, betragVon, betragBis, beschreibung);
+        List<AbrechnungsItem> resultAuswertung = auswertung.getResult();
+
+        tblAuswertung.setItems(FXCollections.observableArrayList(resultAuswertung));
+
+
     }
 
     @FXML
     public void btnAuswertungResetFilterPressed(ActionEvent actionEvent){
+        initTabAuswertung();
+    }
+
+    private void initTabAuswertung() {
         currentAuswertung = null;
         txtAuswertungBetragBis.setText("");
         txtAuswertungBetragVon.setText("");
@@ -876,6 +913,10 @@ public class MainFormController extends Application {
         choiceAuswertungKategorie.setValue(null);
         dateAuswertungVon.setValue(null);
         dateAuswertungBis.setValue(null);
+
+        chartAuswertung.getData().clear();
+
+        clearTblAuswertung();
     }
 }
 

@@ -6,10 +6,9 @@
 <?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -24,7 +23,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.ChoiceBox?>
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainFormController">
   <children>
     <TabPane fx:id="mainTabControl" layoutX="0.0" layoutY="105.0" prefHeight="759.0" prefWidth="1260.0" tabClosingPolicy="UNAVAILABLE">
@@ -77,8 +75,8 @@
                 <TextField fx:id="txtAuswertungBetragBis" layoutX="488.0" layoutY="219.0" prefWidth="186.0" promptText="00,00 €" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text font="$x1" layoutX="29.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suche:" />
                 <TextField fx:id="txtAuswertungSearch" layoutX="181.0" layoutY="272.0" prefWidth="186.0078125" promptText="Suchbegriff eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Button fx:id="btnAuswertungResetFilter" onAction="#btnAuswertungResetFilterPressed" layoutX="181.0" layoutY="321.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
-                <Button fx:id="btnAuswertungCommit" layoutX="368.0" onAction="#btnAuswertungCommitPressed" layoutY="321.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="speichern" />
+                <Button fx:id="btnAuswertungResetFilter" layoutX="181.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnAuswertungResetFilterPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
+                <Button fx:id="btnAuswertungCommit" layoutX="368.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnAuswertungCommitPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="speichern" />
                 <Line endX="1093.0" endY="0.0" layoutX="129.0" layoutY="91.0" startX="-100.0" />
                 <Text layoutX="35.0" layoutY="41.0" scaleX="1.1212764138874183" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auswertung">
                   <font>
@@ -89,7 +87,8 @@
                 <Text font="$x3" layoutX="29.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
                 <Line endX="1090.0" endY="0.0" layoutX="132.0" layoutY="410.0" startX="-100.0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="265.0001220703125" layoutX="31.0" layoutY="424.0" stroke="BLACK" strokeType="INSIDE" width="423.0" />
-                <PieChart id="PieChart" layoutX="53.0" layoutY="438.0" prefHeight="237.0001220703125" prefWidth="378.0" />
+                <PieChart id="PieChart" fx:id="chartAuswertung" layoutX="53.0" layoutY="438.0" prefHeight="237.0001220703125" prefWidth="378.0" />
+                <TableView fx:id="tblAuswertung" layoutX="702.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
               </children>
             </AnchorPane>
           </content>

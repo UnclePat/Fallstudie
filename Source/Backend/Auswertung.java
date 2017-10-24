@@ -1,6 +1,10 @@
 package Backend;
 
+import Backend.BuisnessObjects.AbrechnungsItem;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Auswertung {
     LocalDate filterDatumVon;
@@ -17,5 +21,11 @@ public class Auswertung {
         this.filterBetragVon = filterBetragVon;
         this.filterBetragBis = filterBetragBis;
         this.filterBeschreibung = filterBeschreibung;
+    }
+
+    public List<AbrechnungsItem> getResult(){
+        List<AbrechnungsItem> resultList = new ArrayList<>();
+
+        return resultList;
     }
 }
