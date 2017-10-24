@@ -22,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -82,6 +83,8 @@ public class MainFormController extends Application {
     private Button btnAbrechnungsItemSave;
     @FXML
     private Button btnNewUser;
+    @FXML
+    private Button btnSelectUser;
 
     @FXML
     private PieChart pieStartLastExpenses;
@@ -115,10 +118,22 @@ public class MainFormController extends Application {
     @FXML
     private Button btnDeleteAbrechnungsItem;
 
+    @FXML
+    private Text labelUserName;
+    @FXML
+    private Text labelUserPassword;
+    @FXML
+    private Text labelUserPasswordRetype;
+    @FXML
+    private Text labelNewUser;
+
+    @FXML
+    private Line lineNewUser;
+
     private static Kategorie currentKategorie = null;
     private static AbrechnungsItem currentAbrechnungsItem = null;
     private static TreeItem<Kategorie> currentItemKategorieTree = null;
-    private static User editedUser = null;
+    private static User editedUser = Backend.Base.Application.getCurrentUser();
 
     public static User getEditedUser() {
         return editedUser;
@@ -162,7 +177,10 @@ public class MainFormController extends Application {
             }
 
             if (newTab == tabEinstellungen){
+                editedUser = Backend.Base.Application.getCurrentUser();
                 resetTabEinstellungenLabels();
+                initChangePassword();
+                initNewUser();
                 return;
             }
         });
@@ -281,6 +299,39 @@ public class MainFormController extends Application {
                 kategorieTreeReselectLastItem();
             }
         });
+    }
+
+    private void initChangePassword() {
+        txtEditedUserName.setText(editedUser.getName());
+        if (Backend.Base.Application.getCurrentUser().getAdmin()){
+            btnSelectUser.setVisible(true);
+        }else{
+            btnSelectUser.setVisible(false);
+        }
+    }
+
+    private void initNewUser(){
+        if (Backend.Base.Application.getCurrentUser().getAdmin()){
+            labelNewUser.setVisible(true);
+            labelUserName.setVisible(true);
+            labelUserPassword.setVisible(true);
+            labelUserPasswordRetype.setVisible(true);
+            lineNewUser.setVisible(true);
+            txtUserNameNew.setVisible(true);
+            txtPasswordNew.setVisible(true);
+            txtPasswordRetypeNew.setVisible(true);
+            btnNewUser.setVisible(true);
+        }else{
+            labelNewUser.setVisible(false);
+            labelUserName.setVisible(false);
+            labelUserPassword.setVisible(false);
+            labelUserPasswordRetype.setVisible(false);
+            lineNewUser.setVisible(false);
+            txtUserNameNew.setVisible(false);
+            txtPasswordNew.setVisible(false);
+            txtPasswordRetypeNew.setVisible(false);
+            btnNewUser.setVisible(false);
+        }
     }
 
     private void resetTabEinstellungenLabels(){
