@@ -882,22 +882,28 @@ public class MainFormController extends Application {
         clearTblAuswertung();
 
         String strBetragVon = txtAuswertungBetragVon.getText().trim().replace(',', '.');
-        double betragVon = Double.parseDouble(strBetragVon);
+        Double betragVon = null;
+        if (!strBetragVon.equals("")){
+            betragVon = Double.parseDouble(strBetragVon);
+        }
 
         String strBetragBis = txtAuswertungBetragBis.getText().trim().replace(',', '.');
-        double betragBis = Double.parseDouble(strBetragBis);
+        Double betragBis = null;
+        if (!strBetragBis.equals("")){
+            betragBis = Double.parseDouble(strBetragBis);
+        }
 
         LocalDate datumVon = dateAuswertungVon.getValue();
         LocalDate datumBis = dateAuswertungBis.getValue();
 
-        String beschreibung = txtBelegBeschreibung.getText();
+        String beschreibung = txtAuswertungSearch.getText();
 
         Auswertung auswertung = new Auswertung(datumVon, datumBis, betragVon, betragBis, beschreibung);
         List<AbrechnungsItem> resultAuswertung = auswertung.getResult();
 
         tblAuswertung.setItems(FXCollections.observableArrayList(resultAuswertung));
 
-
+        //Wenn Kategorien da sind, PieChart in Kats aufteilen. Wenn nur eine Kategorie, alle AI teilen.
     }
 
     @FXML
