@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.util.Duration;
 
 import javax.swing.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 
 public class LoginController extends Application {
@@ -82,7 +84,9 @@ public class LoginController extends Application {
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
                 s.printStackTrace();
 
-                JOptionPane.showMessageDialog(null, s.getMessage() + s.getCause() + s.getStackTrace(), "InfoBox: Error", JOptionPane.INFORMATION_MESSAGE);
+                StringWriter errors = new StringWriter();
+                s.printStackTrace(new PrintWriter(errors));
+                JOptionPane.showMessageDialog(null,errors.toString() , "InfoBox: Error", JOptionPane.INFORMATION_MESSAGE);
 
                 actionTarget.setStyle("-fx-border-color: red;");
                 textField.setStyle("-fx-border-color: red;");
