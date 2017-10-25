@@ -82,7 +82,7 @@ public class LoginController extends Application {
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
                 s.printStackTrace();
 
-                JOptionPane.showMessageDialog(null, s.getStackTrace(), "InfoBox: Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, s.getMessage() + s.getCause() + s.getStackTrace(), "InfoBox: Error", JOptionPane.INFORMATION_MESSAGE);
 
                 actionTarget.setStyle("-fx-border-color: red;");
                 textField.setStyle("-fx-border-color: red;");
