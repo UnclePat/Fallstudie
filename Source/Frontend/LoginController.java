@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.util.Duration;
 
+import javax.swing.*;
+
 
 public class LoginController extends Application {
 
@@ -79,6 +81,8 @@ public class LoginController extends Application {
                 actionTarget.setStyle("-fx-border-color: red;");
                 System.out.println(s.toString() + "Exception: Login war nicht erfolgreich");
                 s.printStackTrace();
+
+                JOptionPane.showMessageDialog(null, s.getStackTrace(), "InfoBox: Error", JOptionPane.INFORMATION_MESSAGE);
 
                 actionTarget.setStyle("-fx-border-color: red;");
                 textField.setStyle("-fx-border-color: red;");
