@@ -27,6 +27,8 @@ public class LoginController extends Application {
 
         private User currentUser = null;
 
+        /*  Ruft die LoginSCB.fxml Datei auf, um das Login Fenster für den Benutzer anzeigen zu können. */
+
         @Override
         public void start(Stage loginStage) {
             try {
@@ -49,7 +51,9 @@ public class LoginController extends Application {
         @FXML private Pane pane;
 
 
-
+    /*  Mit der Klasse buttonPressed wird der Benutzername und Passwort auf Zugangsrecht überprüft.
+        Das heisst, dass überprüft wird ob der Benutzer mit diesem Passwort zur ANmeldung zugelassen ist oder nicht.
+        Sollte dies nicht der Fall sein, wird das Fenster geschlossen. */
 
     public void buttonPressed(ActionEvent actionEvent){
 

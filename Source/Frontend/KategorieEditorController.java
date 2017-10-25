@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
+//Die Klasse KategorieEditorController ist die "Logik" hinter der gleichnamigen FXML Datei. Sie gibt an, was welcher Button, Textfeld, etc. macht
+
 public class KategorieEditorController extends Application {
     @FXML
     private Button btnKategorieSave;
@@ -43,6 +45,8 @@ public class KategorieEditorController extends Application {
         return canceled;
     }
 
+    /* start Klasse ruft die KategorieEditor.fxml Datei auf um die Kategorien anzeigen zu lassen. */
+
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -60,6 +64,8 @@ public class KategorieEditorController extends Application {
         }
     }
 
+    /* Die Klasse initialize legt eine neue Kategorie an. */
+
     @FXML
     protected void initialize() {
         if (KategorieEditorController.getKategorie() != null){
@@ -70,6 +76,9 @@ public class KategorieEditorController extends Application {
             txtKategorieName.setText("");
         }
     }
+
+    /*  Die Klasse btnKategorieSavePressed checkt, ob der Button zum speichern gedrückt wurde und gibt den Variablen der Klasse kategorie Schlüssel,
+        damit diese als gespeichert dargestellt werden. */
 
     public void btnKategorieSavePressed(ActionEvent actionEvent){
         if (txtKategorieName.getText().trim().isEmpty()){
@@ -92,6 +101,8 @@ public class KategorieEditorController extends Application {
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
+
+    /* btnCancelPressed bricht alles ab, sofern der Button Abbrechen gedrückt wurde. */
 
     public void btnCancelPressed(ActionEvent actionEvent){
         canceled = true;
