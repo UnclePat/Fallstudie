@@ -1,5 +1,6 @@
 package Backend.BuisnessObjects;
 
+import Backend.Base.Application;
 import Backend.User.User;
 import Backend.Database.DataBaseServer;
 
@@ -291,9 +292,10 @@ public class Kategorie extends DatabaseItem{
             List<String> kategorieNamen = new ArrayList<>();
 
             String query = "SELECT [strName]" +
-                    "  FROM [Haushaltsbuch].[dbo].[Kategorie]";
+                    "  FROM [Haushaltsbuch].[dbo].[Kategorie] WHERE [intFkeyUserCreatedBy] = ?";
 
             List<String> values = new ArrayList<String>();
+            values.add(Application.getCurrentUser().getKey().toString());
 
             DataBaseServer connection = new DataBaseServer();
 

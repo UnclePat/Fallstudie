@@ -32,7 +32,9 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainFormController extends Application {
     @FXML
@@ -880,6 +882,7 @@ public class MainFormController extends Application {
     @FXML
     public void btnAuswertungCommitPressed(ActionEvent actionEvent){
         clearTblAuswertung();
+        chartAuswertung.getData().clear();
 
         String strBetragVon = txtAuswertungBetragVon.getText().trim().replace(',', '.');
         Double betragVon = null;
@@ -898,12 +901,37 @@ public class MainFormController extends Application {
 
         String beschreibung = txtAuswertungSearch.getText();
 
-        Auswertung auswertung = new Auswertung(datumVon, datumBis, betragVon, betragBis, beschreibung);
+        Kategorie selectedKategorie = (Kategorie) choiceAuswertungKategorie.getSelectionModel().getSelectedItem();
+
+        Auswertung auswertung = new Auswertung(datumVon, datumBis, betragVon, betragBis, beschreibung, selectedKategorie);
         List<AbrechnungsItem> resultAuswertung = auswertung.getResult();
+        Map<Integer, String> kategorieKeyNameMapping = auswertung.getKategorieKeyNameMapping();
 
         tblAuswertung.setItems(FXCollections.observableArrayList(resultAuswertung));
 
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
         //Wenn Kategorien da sind, PieChart in Kats aufteilen. Wenn nur eine Kategorie, alle AI teilen.
+        if (selectedKategorie == null){
+            for (Map.Entry<Integer, String> mapping : kategorieKeyNameMapping.entrySet()) {
+                double sum = 0;
+
+                for (AbrechnungsItem item : resultAuswertung) {
+                    if (item.getParentKategorieFkey() == mapping.getKey())
+                        sum += item.getRechnungsBetrag();
+                }
+
+                if (sum != 0)
+                    pieChartData.add(new PieChart.Data(mapping.getValue(), sum));
+            }
+
+        }else{
+            for (AbrechnungsItem item : resultAuswertung) {
+                pieChartData.add(new PieChart.Data(item.getBeschreibung(), item.getRechnungsBetrag()));
+            }
+        }
+
+        chartAuswertung.setData(pieChartData);
     }
 
     @FXML
@@ -912,17 +940,34 @@ public class MainFormController extends Application {
     }
 
     private void initTabAuswertung() {
-        currentAuswertung = null;
-        txtAuswertungBetragBis.setText("");
-        txtAuswertungBetragVon.setText("");
-        txtAuswertungSearch.setText("");
-        choiceAuswertungKategorie.setValue(null);
-        dateAuswertungVon.setValue(null);
-        dateAuswertungBis.setValue(null);
+        try {
+            currentAuswertung = null;
+            txtAuswertungBetragBis.setText("");
+            txtAuswertungBetragVon.setText("");
+            txtAuswertungSearch.setText("");
+            choiceAuswertungKategorie.setValue(null);
+            dateAuswertungVon.setValue(null);
+            dateAuswertungBis.setValue(null);
 
-        chartAuswertung.getData().clear();
 
-        clearTblAuswertung();
+            List<Kategorie> kategorien = new ArrayList<>();
+
+            for (Integer key : Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser())) {
+                Kategorie kat = new Kategorie().loadItem(key);
+                kategorien.add(kat);
+            }
+
+            kategorien.add(null);
+
+            choiceAuswertungKategorie.getItems().addAll(kategorien);
+            choiceAuswertungKategorie.setValue(null);
+
+            chartAuswertung.getData().clear();
+
+            clearTblAuswertung();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

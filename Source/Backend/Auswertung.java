@@ -1,6 +1,7 @@
 package Backend;
 
 import Backend.BuisnessObjects.AbrechnungsItem;
+import Backend.BuisnessObjects.Kategorie;
 import Backend.Database.DataBaseServer;
 
 import java.sql.ResultSet;
@@ -20,12 +21,15 @@ public class Auswertung {
 
     private String filterBeschreibung;
 
-    public Auswertung(LocalDate filterDatumVon, LocalDate filterDatumBis, Double filterBetragVon, Double filterBetragBis, String filterBeschreibung){
+    private Kategorie filterKategorie;
+
+    public Auswertung(LocalDate filterDatumVon, LocalDate filterDatumBis, Double filterBetragVon, Double filterBetragBis, String filterBeschreibung, Kategorie kategorie){
         this.filterDatumVon = filterDatumVon;
         this.filterDatumBis = filterDatumBis;
         this.filterBetragVon = filterBetragVon;
         this.filterBetragBis = filterBetragBis;
         this.filterBeschreibung = filterBeschreibung;
+        this.filterKategorie = kategorie;
     }
 
     public List<AbrechnungsItem> getResult(){
@@ -58,6 +62,11 @@ public class Auswertung {
             if (this.filterDatumVon != null){
                 query = query.concat(" AND [dateBelegDatum] >= ?");
                 values.add(filterDatumVon.toString());
+            }
+
+            if (this.filterKategorie != null){
+                query = query.concat(" AND [intFkeyKategorieParent] = ?");
+                values.add(filterKategorie.getKey().toString());
             }
 
             if (this.filterBeschreibung != null){

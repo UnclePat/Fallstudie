@@ -19,7 +19,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -53,7 +52,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab fx:id="tabAuswertung" style=" -fx-background-radius: 0;&#10;-fx-background-insets: 0;&#10;-fx-focus-color: transparent;&#10;tab-border-color : dark-tab-color ;&#10; -fx-faint-focus-color: transparent;" text="Auswertung">
+        <Tab fx:id="tabAuswertungen" style=" -fx-background-radius: 0;&#10;-fx-background-insets: 0;&#10;-fx-focus-color: transparent;&#10;tab-border-color : dark-tab-color ;&#10; -fx-faint-focus-color: transparent;" text="Auswertung">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;">
               <children>
@@ -86,7 +85,6 @@
                 <ChoiceBox fx:id="choiceAuswertungKategorie" blendMode="SRC_ATOP" layoutX="181.0" layoutY="165.0" mouseTransparent="false" pickOnBounds="false" style="" />
                 <Text font="$x3" layoutX="29.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
                 <Line endX="1090.0" endY="0.0" layoutX="132.0" layoutY="410.0" startX="-100.0" />
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="265.0001220703125" layoutX="31.0" layoutY="424.0" stroke="BLACK" strokeType="INSIDE" width="423.0" />
                 <PieChart id="PieChart" fx:id="chartAuswertung" layoutX="53.0" layoutY="438.0" prefHeight="237.0001220703125" prefWidth="378.0" />
                 <TableView fx:id="tblAuswertung" layoutX="702.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
               </children>
