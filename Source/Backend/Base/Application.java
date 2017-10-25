@@ -16,6 +16,7 @@ public class Application extends javafx.application.Application {
         return Application.currentUser;
     }
 
+    //Startet unsere Applikation und ruft dazu als erstes, den Login Controller mit dem aktuellen Benutzer auf
     public static void main(String[] args) {
         launch(args);
     }

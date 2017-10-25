@@ -19,6 +19,8 @@ public abstract class DatabaseItem {
     private LocalDate dateCreated;
     private boolean deletionFlag;
 
+    //Getter und Setter Methoden für die bereits angegebenen Variablen, mit dem Wert der Variablen als Rückgabewert
+
     public LocalDate getDateCreated() {
         return dateCreated;
     }
@@ -74,10 +76,14 @@ public abstract class DatabaseItem {
 
     public abstract DatabaseItem loadItem(Integer key);
 
+    //Die Klasse checkt ob das Item in der Datenbank gelöscht wurde und versetzt es entsprechend mit einem Schlüssel.
+
     public void markAsDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();
         db.markAsDeleted(this.getTableName(), this.key.intValue());
     }
+
+    //markAsNotDeleted gibt dem Item einen Schlüssel, wenn es als nicht gelöscht gekennzeichnet ist.
 
     public void markAsNotDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();

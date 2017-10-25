@@ -55,6 +55,7 @@ public class AbrechnungsItem extends DatabaseItem {
         return "AbrechnungsItem";
     }
 
+    /* Checkt ob das Item bereits gespeichert ist, indem ein Schlüssel überprüft wird. Ist dieser vorhanden, wird der Wert true zurück gegeben*/
     @Override
     public boolean saveItem() {
         if (this.getKey() == null) {
@@ -70,6 +71,8 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
+    /*  Mit createItem wird ein SQL Befehl abgesetzt, der die SQL Tabelle mit entsprechenden Werten, die übergeben wurden, ausfüllt.
+        Die einzelnen Werte werden über die vorgegebenen Variablen abgebildet und so umgewandelt, damit sie in die SQL Tabelle eingetragen werden können.*/
     @Override
     protected Integer createItem() {
         try {
@@ -106,7 +109,8 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
-
+    /*  Wie bei createItem wird in der Klasse updateItem einen SQL Befehl abgesetzt, der die vorhandenen Werte in der SQL Tabelle, mit den neuen Werten überschreibt.
+        Dazu werden die vorherigen Werte gelöscht und dann werden erst die neuen Werte eingetragen.  */
     @Override
     protected boolean updateItem() {
         try {
@@ -151,6 +155,9 @@ public class AbrechnungsItem extends DatabaseItem {
             return false;
         }
     }
+
+    /*  Die Klasse loadItem gibt die vorhandenen Werte aus der SQL Tabelle aus, indem sie in Variablen gespeichert werden
+        und somit von unserer Applikation dargestellt werden können. */
 
     @Override
     public AbrechnungsItem loadItem(Integer key) {
@@ -199,6 +206,9 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
+    /*  getItemsperMonthandKategorie stellt eine Verbindung zur Datenbank her und setzt einen SQL Befehl ab um die Summe der Werte,
+        aus den einzelnen Kategorien und Monaten darzustellen */
+
     public static List<BarChartInputAbrechnungsItemsProMonat> getItemsPerMonthAndKategorie() {
         List<BarChartInputAbrechnungsItemsProMonat> resultListMonthly = new ArrayList<>();
         try {
@@ -235,6 +245,8 @@ public class AbrechnungsItem extends DatabaseItem {
             return null;
         }
     }
+
+    /* Die Klasse getRecentItems nimmt aus der SQL Tabelle die obersten zehn Werte und gibt diese, geordnet nach dem Datum mit dem Betrag und der Beschreibung.*/
 
         public static List<AbrechnungsItem> getRecentItems() {
 

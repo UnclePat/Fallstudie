@@ -9,10 +9,15 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 
+//Hauptmethode für die Verbindung zur Datenbank.
+
 public class DataBaseServer
 {
     private static Connection databaseConnection = null;
     private static final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa;databaseName=Haushaltsbuch;";
+
+    /*  Verbindung zur Datenbank. Sollte die Verbindung zu Stande gekommen sein, wird "Connected" angezeigt,
+        sollte dies nicht der Fall sein, zeigt sie "Connection attempt failed" an und bricht ab. */
 
     public static void dbConnect(){
         try {
@@ -43,6 +48,8 @@ public class DataBaseServer
         DataBaseServer.dbConnect();
     }
 
+    /* Mit der Klasse ResultSet wird ein Statement abgesetzt, ob die Verbindung zu der Datenbank vollständig aufgebaut wurde oder nicht. */
+
     public ResultSet select(String query, List<String> values) throws SQLException {
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query);
 
@@ -57,6 +64,8 @@ public class DataBaseServer
         return statement.executeQuery();
     }
 
+    /* */
+
     public int update(String query, List<String> values) throws SQLException {
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query);
 
@@ -70,6 +79,8 @@ public class DataBaseServer
 
         return statement.executeUpdate();
     }
+
+    /* */
 
     public int insert(String query, List<String> values) throws SQLException {
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -89,6 +100,8 @@ public class DataBaseServer
 
         return rs.getInt(1);
     }
+
+    /* Mit den Klassen markAsDeleted und markAsNotDeleted wird jeweils ein SQL Befehl abgesetzt um zu überpürfen, welche Werte asl gelöscht markiert wurden und welche nicht. */
 
     public int markAsDeleted(String table, int key) throws SQLException {
         String sql = " UPDATE " + table +
@@ -119,6 +132,8 @@ public class DataBaseServer
 
         return statement.executeUpdate();
     }
+
+    /* Backup Funktion unserer Datenbank. Das Backup wird auf der Festplatte abgespeichert. */
 
     public void executeBackup(String path) throws SQLException {
         String backupStatement = "BACKUP DATABASE [Haushaltsbuch] TO DISK = '" + path + "' with INIT, NAME = N'SQL Voll'";

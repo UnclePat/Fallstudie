@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+    //Die Klasse Kategorie ruft alle weitere Klassen auf und definiert die Variablen inklusive getter und setter Methoden.
 
 public class Kategorie extends DatabaseItem{
     private List<AbrechnungsItem> abrechnungsItems = new ArrayList<AbrechnungsItem>();
@@ -34,6 +35,8 @@ public class Kategorie extends DatabaseItem{
         FkeyUser = fkeyUser;
     }
 
+    /*  Die Klasse getAbrechnungsitem zeigt die AbrechnungsItems in einer Liste an, sofern sie nicht gelöscht wurden*/
+
     public List<AbrechnungsItem> getAbrechnungsItems(boolean showDeleted) {
         if(showDeleted) {
             return abrechnungsItems;
@@ -48,6 +51,8 @@ public class Kategorie extends DatabaseItem{
             return clearedList;
         }
     }
+
+
     public List<Kategorie> getSubKategorien() {
         return subKategorien;
     }
@@ -56,6 +61,8 @@ public class Kategorie extends DatabaseItem{
     public String getTableName() {
         return "Kategorie";
     }
+
+    /*  In der Klasse saveItem wird dem Item ein Flag verpasst, sollte es noch keine besitzen um anzugeben, ob es gespeichert wurde oder nicht. */
 
     @Override
     public boolean saveItem() {
@@ -72,6 +79,9 @@ public class Kategorie extends DatabaseItem{
             return updateItem();
         }
     }
+
+    /*  Die Klasse createItem setzt einen Insert Into (SQL) Befehl ab um die Datenbank mit den Werten zu befüllen,
+        die bereits vom Anwender angegeben wurden und in den Übergabe Variablen gespeichert sind. */
 
     @Override
     protected Integer createItem() {
@@ -107,6 +117,9 @@ public class Kategorie extends DatabaseItem{
         }
         return null;
     }
+
+    /*  Bei updateItem wird ein update (SQL) Befehl abgesetzt um bereits vorhandene Werte in der Datenbank zu ändern.
+        Dabei wird es zuerst gelöscht und mit einer DeletionFlag versehen, damit das Programm sicher sein kann, dass der Wert wirklich gelöscht wurde. */
 
     @Override
     protected boolean updateItem() {
@@ -152,6 +165,8 @@ public class Kategorie extends DatabaseItem{
         }
     }
 
+    /* Mit der Klasse getKeyforKategorieUser werden dem user aus der Datenbank ForeignKeys versehen. */
+
     public static List<Integer> getKategorieKeysForUser(User user) throws SQLException {
         List<Integer> returnList = new ArrayList<Integer>();
 
@@ -174,6 +189,8 @@ public class Kategorie extends DatabaseItem{
 
         return returnList;
     }
+
+    /*  Die Klasse loadItem überträgt die Werte aus der Datenbank in die bereits angegebenen und vorhandenen Variablen, um sie anzeigen zu können. */
 
     @Override
     public Kategorie loadItem(Integer key) {
@@ -223,6 +240,8 @@ public class Kategorie extends DatabaseItem{
         }
     }
 
+    /* Die getSum Klasse summiert die Werte aus einer Kategorie auf. */
+
     public double getSum(){
         double sum = 0;
 
@@ -238,6 +257,8 @@ public class Kategorie extends DatabaseItem{
 
         return sum;
     }
+
+    /* Die Klasse loadSubKategorien zeigt die einzelnen Unterkategorien von einer Kategorie an. */
 
     private void loadSubKategorien(Kategorie kategorie){
         try {
@@ -263,6 +284,8 @@ public class Kategorie extends DatabaseItem{
         }
     }
 
+    /* Mit der Klasse loadAbrechnungsItems werden die AbrechnungsItems (Werte) von einer bestimmten Kategorie geladen und angezeigt. */
+
     private void loadAbrechnungsItems(Kategorie kategorie){
         try {
             String query = "SELECT [intKey]" +
@@ -286,6 +309,8 @@ public class Kategorie extends DatabaseItem{
             e.printStackTrace();
         }
     }
+
+    /* Die Klasse getAllkategorieName zeigt alle gedankliche kategorien der Datenbank an. */
 
     public static List<String> getAllKategorieNames(){
         try {

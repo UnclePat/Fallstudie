@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class User extends DatabaseItem{
+//Hauptmethode der User Funktionen-Klassen
+
+    public class User extends DatabaseItem{
     private List<UserAccessRight> userGroups;
 
     public List<UserAccessRight> getUserGroups() {
@@ -53,6 +55,8 @@ public class User extends DatabaseItem{
         return "User";
     }
 
+    /* In der saveItem Klasse wird überprüft, ob der Wert schon gespeichert wurde und sofern benötigt, mit einem Key versehen. */
+
     @Override
     public boolean saveItem() {
         if (this.getKey() == null){
@@ -68,6 +72,8 @@ public class User extends DatabaseItem{
             return updateItem();
         }
     }
+
+    /* Mit createItem wird ein SQL befehl abgesetzt, der neue Werte in die Datenbank Tabelle einfügt. */
 
     @Override
     protected Integer createItem() {
@@ -106,7 +112,7 @@ public class User extends DatabaseItem{
         return null;
     }
 
-
+    /* Mit der Klasse updateItem werden die gewünschten Werte aus der SQL Tabelle, mit Hilfe eines SQL Befehls, mit den neuen Werten überschrieben. */
 
     @Override
     protected boolean updateItem() {
@@ -149,6 +155,8 @@ public class User extends DatabaseItem{
             return false;
         }
     }
+
+    /* Die Klasse loadItem setzt einen SQL Befehl ab um die benötigten Werte aus der Datenbank anzeigen zu können. */
 
     @Override
     public User loadItem(Integer key) {
@@ -195,6 +203,8 @@ public class User extends DatabaseItem{
         }
     }
 
+    /*  Mit der Klasse getAllKeys werden die Keys der Kategorien gesammelt. Dieses Bündel wird so in eine Liste eingetragen und übergeben. */
+
     public static List<Integer> getAllKeys(){
         try {
             List<Integer> returnList = new ArrayList<Integer>();
@@ -219,6 +229,8 @@ public class User extends DatabaseItem{
             return null;
         }
     }
+
+    /*  Mit loadItemLogin werden die Werte aus der Datenbank angezeigt, die der bei Login angegebene User angelegt hat. */
 
     public static User loadItemLogin(String userName, String password) {
         try {
@@ -263,6 +275,9 @@ public class User extends DatabaseItem{
             return null;
         }
     }
+
+    /*  Mit checkUsernameUnique wird sichergestellt, dass es jeden User nur einmal so gibt um Komplikationen in der Datenbank zu verhindern. */
+
     public static boolean checkUsernameUnique(String username){
         boolean result = true;
 

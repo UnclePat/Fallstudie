@@ -5,6 +5,8 @@ public class BarChartInputAbrechnungsItemsProMonat {
     private double betrag;
     private String kategorieName;
 
+    //Getter und Setter Methoden für die angegebenen Variablen, mit dem Wert der Variablen als Rückgabewert.
+
     public String getMonatName() {
         return monatName;
     }

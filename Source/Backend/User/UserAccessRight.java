@@ -2,6 +2,8 @@ package Backend.User;
 
 import Backend.BuisnessObjects.DatabaseItem;
 
+/* Die Klasse USerAccessRight checkt, welche einzelnen Werte in der Datenbank von welchem User erstellt, gespeichert, geupdatet oder geladen wurden. */
+
 public class UserAccessRight extends DatabaseItem{
     @Override
     public String getTableName() {
