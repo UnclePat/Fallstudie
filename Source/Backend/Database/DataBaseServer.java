@@ -2,6 +2,9 @@ package Backend.Database;
 
 import Backend.Base.Application;
 
+import javax.swing.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +31,10 @@ public class DataBaseServer
                 System.out.println("Connection attempt failed");
             }
         } catch (Exception e) {
+            StringWriter errors = new StringWriter();
+            e.printStackTrace(new PrintWriter(errors));
+            JOptionPane.showMessageDialog(null,errors.toString() , "InfoBox: Error", JOptionPane.INFORMATION_MESSAGE);
+
             e.printStackTrace();
         }
     }
