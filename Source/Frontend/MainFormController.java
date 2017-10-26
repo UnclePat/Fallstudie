@@ -970,6 +970,7 @@ public class MainFormController extends Application {
 
             kategorien.add(null);
 
+            choiceAuswertungKategorie.getItems().clear();
             choiceAuswertungKategorie.getItems().addAll(kategorien);
             choiceAuswertungKategorie.setValue(null);
 
