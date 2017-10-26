@@ -12,6 +12,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Bildet ein AbrechnungsItem ab. Enthält die nötigen Methoden zur Kommunikation mit der Datenbank und sonstige Methoden
+ * mit Bezug zu AbrechnungsItems.
+ */
 public class AbrechnungsItem extends DatabaseItem {
     private SimpleDoubleProperty rechnungsBetrag = new SimpleDoubleProperty(0);
     private SimpleStringProperty beschreibung = new SimpleStringProperty("");
@@ -55,7 +59,14 @@ public class AbrechnungsItem extends DatabaseItem {
         return "AbrechnungsItem";
     }
 
-    /* Checkt ob das Item bereits gespeichert ist, indem ein Schlüssel überprüft wird. Ist dieser vorhanden, wird der Wert true zurück gegeben*/
+    /**
+     * Speichert das Objekt. Ist bereits ein Schlüßel vorhanden, so wird davon ausgegangen, dass das Objekt noch nie
+     * gespeichert wurde, es wird CreateItem aufgerufen. Ist ein Schlüßel vorhanden, wird UpdateItem aufgerufen.
+     * War der Vorgang erfolgreich, wird true zurück gegeben
+     * andernfalls false.
+     * @return
+     * True falls erfolgreich, andernfalls false.
+     */
     @Override
     public boolean saveItem() {
         if (this.getKey() == null) {
@@ -71,8 +82,11 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
-    /*  Mit createItem wird ein SQL Befehl abgesetzt, der die SQL Tabelle mit entsprechenden Werten, die übergeben wurden, ausfüllt.
-        Die einzelnen Werte werden über die vorgegebenen Variablen abgebildet und so umgewandelt, damit sie in die SQL Tabelle eingetragen werden können.*/
+    /**
+     * Erstellt das Objekt mittels insert-Statement auf der Datenbank und gibt den generierten Key zurück.
+     * @return
+     * Der generierte Key.
+     */
     @Override
     protected Integer createItem() {
         try {
@@ -109,8 +123,11 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
-    /*  Wie bei createItem wird in der Klasse updateItem einen SQL Befehl abgesetzt, der die vorhandenen Werte in der SQL Tabelle, mit den neuen Werten überschreibt.
-        Dazu werden die vorherigen Werte gelöscht und dann werden erst die neuen Werte eingetragen.  */
+    /**
+     * Aktualisiert mittels Update-Statement das Objekt auf der Datenbank.
+     * @return
+     * True falls erfolgreich, andernfalls false.
+     */
     @Override
     protected boolean updateItem() {
         try {
@@ -156,9 +173,13 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
-    /*  Die Klasse loadItem gibt die vorhandenen Werte aus der SQL Tabelle aus, indem sie in Variablen gespeichert werden
-        und somit von unserer Applikation dargestellt werden können. */
-
+    /**
+     * Lädt das Objekt, das durch den übergebenen Key identifiziert werden kann von der Datenbank.
+     * @param key
+     * Der Key des zu ladenenden Objekts.
+     * @return
+     * Das geladene Objekt.
+     */
     @Override
     public AbrechnungsItem loadItem(Integer key) {
         try {
@@ -209,6 +230,12 @@ public class AbrechnungsItem extends DatabaseItem {
     /*  getItemsperMonthandKategorie stellt eine Verbindung zur Datenbank her und setzt einen SQL Befehl ab um die Summe der Werte,
         aus den einzelnen Kategorien und Monaten darzustellen */
 
+    /**
+     * Ermittelt eine Liste von AbrechnungsItems aufgeteilt nach Kategorie und Monat, innerhalb des aktuellen Jahres.
+     * Das Ergebnis der Abfrage wird in eine Liste von BarChartInputAbrechnungsItemsProMonat übersetzt.
+     * @return
+     * Die Liste der ermittelten Items.
+     */
     public static List<BarChartInputAbrechnungsItemsProMonat> getItemsPerMonthAndKategorie() {
         List<BarChartInputAbrechnungsItemsProMonat> resultListMonthly = new ArrayList<>();
         try {
@@ -246,44 +273,45 @@ public class AbrechnungsItem extends DatabaseItem {
         }
     }
 
-    /* Die Klasse getRecentItems nimmt aus der SQL Tabelle die obersten zehn Werte und gibt diese, geordnet nach dem Datum mit dem Betrag und der Beschreibung.*/
+    /**
+     * Ermittelt die letzten 10 AbrechnungsItems des derzeit angemeldeten Benutzers.
+     * @return
+     * Liste mit den ermittelten Items, absteigend nach Datum des Beleges sortiert.
+     */
+    public static List<AbrechnungsItem> getRecentItems() {
 
-        public static List<AbrechnungsItem> getRecentItems() {
+        List<AbrechnungsItem> resultList = new ArrayList<>();
+        try {
+            String query = "SELECT TOP 10 [dateBelegDatum]" +
+                    "      ,[strBechreibung]" +
+                    "      ,[decValue]" +
+                    "  FROM [dbo].[AbrechnungsItem]" +
+                    "  WHERE [boolDeletionFlag] = 0 AND [intFkeyUserCreatedBy] = ? " +
+                    "order by [dateBelegDatum] desc";
 
-            List<AbrechnungsItem> resultList = new ArrayList<>();
-            try {
-                String query = "SELECT TOP 10 [dateBelegDatum]" +
-                        "      ,[strBechreibung]" +
-                        "      ,[decValue]" +
-                        "  FROM [dbo].[AbrechnungsItem]" +
-                        "  WHERE [boolDeletionFlag] = 0 AND [intFkeyUserCreatedBy] = ? " +
-                        "order by [dateBelegDatum] desc";
+            DataBaseServer connection = new DataBaseServer();
 
-                DataBaseServer connection = new DataBaseServer();
+            ResultSet result = null;
 
-                ResultSet result = null;
+            List<String> values = new ArrayList<>();
+            values.add(Application.getCurrentUser().getKey().toString());
 
-                List<String> values = new ArrayList<>();
-                values.add(Application.getCurrentUser().getKey().toString());
-
-                result = connection.select(query, values);
+            result = connection.select(query, values);
 
 
-                while (result.next()) {
-                    AbrechnungsItem item = new AbrechnungsItem();
-                    item.beschreibung = new SimpleStringProperty(result.getString("strBechreibung"));
-                    item.rechnungsBetrag = new SimpleDoubleProperty(result.getDouble("decValue"));
-                    item.setBelegDatum(result.getDate("dateBelegDatum").toLocalDate());
-                    resultList.add(item);
-                }
-                return resultList;
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return null;
+            while (result.next()) {
+                AbrechnungsItem item = new AbrechnungsItem();
+                item.beschreibung = new SimpleStringProperty(result.getString("strBechreibung"));
+                item.rechnungsBetrag = new SimpleDoubleProperty(result.getDouble("decValue"));
+                item.setBelegDatum(result.getDate("dateBelegDatum").toLocalDate());
+                resultList.add(item);
             }
+            return resultList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-
-
+    }
 }
 
