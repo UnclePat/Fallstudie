@@ -31,8 +31,10 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -545,7 +547,7 @@ public class MainFormController extends Application {
         Status.setVisible(false);
         String path = txtBackupPath.getText();
         DataBaseServer connection = new DataBaseServer();
-        String backupPath = path +"\\Backup.bak";
+        String backupPath = path +"\\Backup" + new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format( new Date()) + ".bak";
 
         try {
             connection.executeBackup(backupPath);
