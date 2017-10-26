@@ -86,7 +86,10 @@
                 <Text font="$x3" layoutX="29.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
                 <Line endX="1090.0" endY="0.0" layoutX="132.0" layoutY="410.0" startX="-100.0" />
                 <PieChart id="PieChart" fx:id="chartAuswertung" layoutX="53.0" layoutY="438.0" prefHeight="237.0001220703125" prefWidth="378.0" />
-                <TableView fx:id="tblAuswertung" layoutX="702.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
+                <TableView fx:id="tblAuswertung" layoutX="702.0" layoutY="93.0" prefHeight="519.0" prefWidth="514.0" />
+                        <Text layoutX="702.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summe:" />
+                        <TextField fx:id="summeAuswertung" disable="true" layoutX="772.0" layoutY="631.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                        <Text layoutX="968.0" layoutY="653.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€" />
               </children>
             </AnchorPane>
           </content>
