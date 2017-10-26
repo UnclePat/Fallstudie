@@ -31,6 +31,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -155,6 +156,9 @@ public class MainFormController extends Application {
     private TableView tblAuswertung;
     @FXML
     private PieChart chartAuswertung;
+
+    @FXML
+    private TextField summeAuswertung;
 
     private static Kategorie currentKategorie = null;
     private static AbrechnungsItem currentAbrechnungsItem = null;
@@ -912,6 +916,7 @@ public class MainFormController extends Application {
         tblAuswertung.setItems(FXCollections.observableArrayList(resultAuswertung));
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        Double summe = 0.0;
 
         //Wenn Kategorien da sind, PieChart in Kats aufteilen. Wenn nur eine Kategorie, alle AI teilen.
         if (selectedKategorie == null){
@@ -923,17 +928,21 @@ public class MainFormController extends Application {
                         sum += item.getRechnungsBetrag();
                 }
 
-                if (sum != 0)
+                if (sum != 0) {
                     pieChartData.add(new PieChart.Data(mapping.getValue(), sum));
+                    summe += sum;
+                }
             }
 
         }else{
             for (AbrechnungsItem item : resultAuswertung) {
                 pieChartData.add(new PieChart.Data(item.getBeschreibung(), item.getRechnungsBetrag()));
+                summe += item.getRechnungsBetrag();
             }
         }
 
         chartAuswertung.setData(pieChartData);
+        summeAuswertung.setText(new DecimalFormat("#.00").format(summe) + " €");
     }
 
     @FXML
