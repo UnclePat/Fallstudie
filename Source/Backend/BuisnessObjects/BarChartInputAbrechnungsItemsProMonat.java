@@ -1,11 +1,15 @@
 package Backend.BuisnessObjects;
 
+/**
+ * Ergebnis Klasse für die Kommunikation zwischen MainFormController und AbrechnungsItem.
+ * Objekte dieser Klasse enthalten nur die Informationen, die für die Befüllung der BarCharts verwendet werden.
+ */
 public class BarChartInputAbrechnungsItemsProMonat {
     private String monatName;
     private double betrag;
     private String kategorieName;
 
-    //Getter und Setter Methoden für die angegebenen Variablen, mit dem Wert der Variablen als Rückgabewert.
+
 
     public String getMonatName() {
         return monatName;
