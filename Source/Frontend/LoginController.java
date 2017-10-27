@@ -2,7 +2,6 @@ package Frontend;
 
 import Backend.User.User;
 import Backend.User.UserUtils;
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.*;
+
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.util.Duration;
 
 import javax.swing.*;
 import java.io.PrintWriter;
@@ -24,10 +22,6 @@ import java.io.StringWriter;
 
 
 public class LoginController extends Application {
-
-        private User currentUser = null;
-
-        /*  Ruft die LoginSCB.fxml Datei auf, um das Login Fenster für den Benutzer anzeigen zu können. */
 
         @Override
         public void start(Stage loginStage) {
@@ -48,22 +42,19 @@ public class LoginController extends Application {
         @FXML private TextField passwordField;
         @FXML private TextField textField;
         @FXML private Text Fehler;
-        @FXML private Pane pane;
 
-
-    /*  Mit der Klasse buttonPressed wird der Benutzername und Passwort auf Zugangsrecht überprüft.
-        Das heisst, dass überprüft wird ob der Benutzer mit diesem Passwort zur ANmeldung zugelassen ist oder nicht.
-        Sollte dies nicht der Fall sein, wird das Fenster geschlossen. */
-
+    /**
+     * Überprüft die Angaben des Benutzers, und versucht den angegebenen Benutzer von der Datenbank zu laden.
+     * Ist der Benutzer gültig, wird das Objekt in die Application Klasse übertragen und das Formular geschlossen.
+     * Andernfalls werden dem Benutzer die entsprechenden Fehler angezeigt.
+     * @param actionEvent
+     */
     public void buttonPressed(ActionEvent actionEvent){
 
-            //Login
             try {
-                //Username aus TextField wird ausgelesen
                 String username = textField.getText();
-                //Passwort aus PasswortField wird ausgelesen
                 String password = passwordField.getText();
-                //Parameter werden Übergeben
+
                 User user = UserUtils.authenticateUser(username, password);
 
                 if(user == null){
@@ -103,12 +94,4 @@ public class LoginController extends Application {
 
 
         }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    private void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
 }

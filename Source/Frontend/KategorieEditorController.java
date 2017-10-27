@@ -10,20 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
-//Die Klasse KategorieEditorController ist die "Logik" hinter der gleichnamigen FXML Datei. Sie gibt an, was welcher Button, Textfeld, etc. macht
-
 public class KategorieEditorController extends Application {
-    @FXML
-    private Button btnKategorieSave;
-    @FXML
-    private Button btnCancel;
 
     @FXML
     private TextField txtKategorieName;
@@ -40,12 +33,6 @@ public class KategorieEditorController extends Application {
     public static void setKategorie(Kategorie kategorie) {
         KategorieEditorController.kategorie = kategorie;
     }
-
-    public static boolean isCanceled() {
-        return canceled;
-    }
-
-    /* start Klasse ruft die KategorieEditor.fxml Datei auf um die Kategorien anzeigen zu lassen. */
 
     @Override
     public void start(Stage primaryStage) {
@@ -64,8 +51,11 @@ public class KategorieEditorController extends Application {
         }
     }
 
-    /* Die Klasse initialize legt eine neue Kategorie an. */
-
+    /**
+     * Initialisiert das KategorieEditor Fenster. Wurde das Fenster mit einer Kategorie aufgerufen, so wird diese
+     * im Fenster dargestellt und bearbeitet. Wurde keine angegeben wird eine neue Kategorie erzeugt und bearbeitet.
+     * Die Labels in der Kopfzeile werden entsprechend gesetzt.
+     */
     @FXML
     protected void initialize() {
         if (KategorieEditorController.getKategorie() != null){
@@ -77,9 +67,11 @@ public class KategorieEditorController extends Application {
         }
     }
 
-    /*  Die Klasse btnKategorieSavePressed checkt, ob der Button zum speichern gedrückt wurde und gibt den Variablen der Klasse kategorie Schlüssel,
-        damit diese als gespeichert dargestellt werden. */
-
+    /**
+     * Setzt die Werte der editierten Kategorie und beendet den Dialog. Sollte der angegebene Name der Kategorie leer
+     * sein, so wird die Methode abgebrochen, das Fenster nicht geschlossen.
+     * @param actionEvent
+     */
     public void btnKategorieSavePressed(ActionEvent actionEvent){
         if (txtKategorieName.getText().trim().isEmpty()){
             return;
@@ -102,8 +94,11 @@ public class KategorieEditorController extends Application {
         stage.close();
     }
 
-    /* btnCancelPressed bricht alles ab, sofern der Button Abbrechen gedrückt wurde. */
-
+    /**
+     * Der Abbrechen-Button schließt das Fenster ohne Änderungen an der Kategorie vorzunehmen. Es wird ein Flag gesetzt,
+     * welches diesen Zustand anzeigt.
+     * @param actionEvent
+     */
     public void btnCancelPressed(ActionEvent actionEvent){
         canceled = true;
         Node source = (Node) actionEvent.getSource();

@@ -661,6 +661,11 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Erzeugt einen neuen KategorieEditor, um den Namen der bestehenden Kategorie zu ändern. Nach Schließen des Editors
+     * wird die Kategorie gespeichert und der KategorieTree aktualisiert.
+     * @param actionEvent
+     */
     public void btnKategorieEditPressed(ActionEvent actionEvent){
         KategorieEditorController editor = new KategorieEditorController();
         KategorieEditorController.setKategorie(currentKategorie);
@@ -674,6 +679,11 @@ public class MainFormController extends Application {
         selectKategorie(kat);
     }
 
+    /**
+     * Erzeugt einen neuen KategorieEditor, um den Namen der neuen Kategorie zu vergeben. Nach Schließen des Editors
+     * wird die Kategorie gespeichert und der KategorieTree aktualisiert.
+     * @param actionEvent
+     */
     public void btnKategorieNewPressed(ActionEvent actionEvent){
         KategorieEditorController editor = new KategorieEditorController();
         KategorieEditorController.setKategorie(null);
@@ -686,6 +696,11 @@ public class MainFormController extends Application {
         kategorieTreeReselectLastItem();
     }
 
+    /**
+     * Validiert die Angaben die der Benutzer gemacht hat. Sind diese ungültig, so werden entsprechende Meldungen
+     * angezeigt. Andernfalls wird das neue AbrechnungsItem an der Datenbank erzeugt.
+     * @param actionEvent
+     */
     public void btnAbrechnungsItemSavePressed(ActionEvent actionEvent) {
         System.out.println("Call btnAbrechnungsItemSave");
         boolean valid = true;
@@ -765,6 +780,11 @@ public class MainFormController extends Application {
         kategorieTreeReselectLastItem();
     }
 
+    /**
+     * Validiert die Angaben die der Benutzer gemacht hat. Sind diese ungültig, so werden entsprechende Meldungen
+     * angezeigt. Andernfalls wird der neue Benutzer an der Datenbank erzeugt.
+     * @param actionEvent
+     */
     public void btnNewUserPressed(ActionEvent actionEvent) {
         System.out.println("Call btnNewUserPressed");
         boolean valid = true;
@@ -833,6 +853,10 @@ public class MainFormController extends Application {
         txtNewUserSuccessful.setVisible(true);
     }
 
+    /**
+     * Markiert das im KategorieTree markierte Element als gelöscht und aktualisiert den Tree.
+     * @param actionEvent
+     */
     public void btnKategorieDeletePressed(ActionEvent actionEvent) {
         try {
             System.out.println("Call btnKategorieDeletePressed.");
@@ -852,6 +876,10 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Markiert das in der AbrechnungsItem Tabelle markierte Element als gelöscht und aktualisiert die Tabelle.
+     * @param actionEvent
+     */
     public void btnAbrechnungsItemDeletePressed(ActionEvent actionEvent) {
         try {
             System.out.println("Call btnAbrechnungsItemDeletePressed.");
@@ -868,6 +896,11 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Speichert den Benutzer der aktuell in der Bearbeitung ist. Validiert die Angaben des Benutzers, falls dies
+     * erfolgreich ist, wird der Benutzer gespeichert. Andernfalls werden an entsprechender Stelle Meldungen angezeigt.
+     * @param actionEvent
+     */
     public void btnEditedUserSavePressed(ActionEvent actionEvent) {
         System.out.println("Call btnEditedUserSavePressed");
         boolean valid = true;
@@ -941,6 +974,11 @@ public class MainFormController extends Application {
         kategorieTree.getSelectionModel().select( row );
     }
 
+    /**
+     * Selektiert die angegebene Kategorie im Baum, falls diese gefunden werden kann.
+     * @param kategorie
+     * Kategorie, die selektiert werden soll.
+     */
     private void selectKategorie(Kategorie kategorie){
         TreeItem<Kategorie> nodeToSelect = searchKategorieInTree(kategorieTree.getRoot(), kategorie);
 
@@ -948,6 +986,15 @@ public class MainFormController extends Application {
         kategorieTree.getSelectionModel().select( row );
     }
 
+    /**
+     * Durchsucht rekursiv den Kategorie Baum nach einer definierten Kategorie.
+     * @param item
+     * Item in welchem gesucht werden soll.
+     * @param searchedKategorie
+     * Kategorie, die gefunden werden soll.
+     * @return
+     * Das TreeItem, falls es gefunden wurde, andernfalls null.
+     */
     TreeItem<Kategorie> searchKategorieInTree(TreeItem<Kategorie> item, Kategorie searchedKategorie) {
 
         if(item.getValue().equals(searchedKategorie)) return item; // hit!
@@ -963,6 +1010,12 @@ public class MainFormController extends Application {
         return null;
     }
 
+    /**
+     * Setzt alle Ausgabefelder zurück.
+     * Überträgt die angegebenen Filtereinstellungen an ein neues Objekt der Klasse Auwertung. Dieses wertet aus, das
+     * Ergebnis dieser Auswertung wird anschließend im Tab dargsetellt.
+     * @param actionEvent
+     */
     @FXML
     public void btnAuswertungCommitPressed(ActionEvent actionEvent){
         clearTblAuswertung();
@@ -1028,6 +1081,10 @@ public class MainFormController extends Application {
         initTabAuswertung();
     }
 
+    /**
+     * Initialisiert das Tab Auswertungen. Alle Textfelder werden geleert und die Kategorien des angemeldeten Benutzers
+     * in die Auswahlliste geladen.
+     */
     private void initTabAuswertung() {
         try {
             currentAuswertung = null;
