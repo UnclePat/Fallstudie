@@ -3,8 +3,6 @@ package Backend.BuisnessObjects;
 import Backend.Base.Application;
 import Backend.User.User;
 import Backend.Database.DataBaseServer;
-
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

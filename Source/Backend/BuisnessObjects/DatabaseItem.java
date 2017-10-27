@@ -1,11 +1,8 @@
 package Backend.BuisnessObjects;
 
 import Backend.Database.DataBaseServer;
-import Backend.User.User;
-
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Basis Klasse für alle weiteren Klassen, die eine Anbindung an die Datenbank benötigen. Diese Klasse definiert alle

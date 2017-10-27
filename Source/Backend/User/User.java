@@ -6,12 +6,11 @@ import Backend.Database.DataBaseServer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 //Hauptmethode der User Funktionen-Klassen
 
-    public class User extends DatabaseItem{
+public class User extends DatabaseItem{
     private List<UserAccessRight> userGroups;
 
     public List<UserAccessRight> getUserGroups() {
