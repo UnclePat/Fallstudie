@@ -58,10 +58,10 @@ public class LoginController extends Application {
                 User user = UserUtils.authenticateUser(username, password);
 
                 if(user == null){
-                    actionTarget.setStyle("-fx-border-color: red;");
+                    actionTarget.setStyle("-fx-border-radius: 0 0 0 0;-fx-background-radius: 00 00 0 0;-fx-background-color:white;-fx-border-color:darkgrey; -fx-cursor: hand; ");
                     textField.setStyle("-fx-border-color: red;");
                     passwordField.setStyle("-fx-border-color: red;");
-                    Fehler.setText("Benutzername und Passwort sind ungültig.");
+                    Fehler.setText("Benutzername oder Passwort sind ungültig");
                     System.out.println("Login war nicht erfolgreich");
                     Fehler.setVisible(true);
                 }
