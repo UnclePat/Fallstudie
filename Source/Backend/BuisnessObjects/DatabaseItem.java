@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Basis Klasse für alle weiteren Klassen, die eine Anbindung an die Datenbank benötigen. Diese Klasse definiert alle
+ * nötigen Methoden (CRUD) und Felder, die eine Klasse benötigt um ihre Objekte an der Datenbank zu manipulieren.
+ */
 public abstract class DatabaseItem {
     Integer key = null;
 
@@ -76,15 +80,19 @@ public abstract class DatabaseItem {
 
     public abstract DatabaseItem loadItem(Integer key);
 
-    //Die Klasse checkt ob das Item in der Datenbank gelöscht wurde und versetzt es entsprechend mit einem Schlüssel.
-
+    /**
+     * Markiert das Objekt in der Datenbank als gelöscht.
+     * @throws SQLException
+     */
     public void markAsDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();
         db.markAsDeleted(this.getTableName(), this.key.intValue());
     }
 
-    //markAsNotDeleted gibt dem Item einen Schlüssel, wenn es als nicht gelöscht gekennzeichnet ist.
-
+    /**
+     * Entfernt die Markierung als gelöscht eines Objektes von der Datenbank.
+     * @throws SQLException
+     */
     public void markAsNotDeleted() throws SQLException {
         DataBaseServer db = new DataBaseServer();
         db.markAsNotDeleted(this.getTableName(), this.key.intValue());
