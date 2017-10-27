@@ -24,7 +24,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainFormController">
   <children>
-    <TabPane fx:id="mainTabControl" layoutX="0.0" layoutY="105.0" prefHeight="759.0" prefWidth="1260.0" tabClosingPolicy="UNAVAILABLE">
+    <TabPane fx:id="mainTabControl" layoutX="0.0" layoutY="105.0" prefHeight="771.0" prefWidth="1311.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
         <Tab fx:id="tabStart" style="-fx-background-radius: 0;&#10;-fx-background-insets: 0;&#10;-fx-focus-color: transparent;&#10;tab-border-color : dark-tab-color ;&#10; -fx-faint-focus-color: transparent;" text="Start">
           <content>
@@ -54,7 +54,7 @@
         </Tab>
         <Tab fx:id="tabAuswertungen" style=" -fx-background-radius: 0;&#10;-fx-background-insets: 0;&#10;-fx-focus-color: transparent;&#10;tab-border-color : dark-tab-color ;&#10; -fx-faint-focus-color: transparent;" text="Auswertung">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1456.0" style="-fx-background-color: whitesmoke;">
               <children>
                 <DatePicker fx:id="dateAuswertungVon" layoutX="181.0" layoutY="112.0" prefWidth="187.00009999999747" promptText="TT.MM.JJJJ" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text layoutX="28.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zeitraum:">
@@ -74,8 +74,8 @@
                 <TextField fx:id="txtAuswertungBetragBis" layoutX="488.0" layoutY="219.0" prefWidth="186.0" promptText="00,00 €" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text font="$x1" layoutX="28.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suche:" />
                 <TextField fx:id="txtAuswertungSearch" layoutX="181.0" layoutY="272.0" prefWidth="186.0078125" promptText="Suchbegriff eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Button fx:id="btnAuswertungResetFilter" layoutX="530.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnAuswertungResetFilterPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
-                <Button fx:id="btnAuswertungCommit" layoutX="181.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnAuswertungCommitPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filtern" />
+                <Button fx:id="btnAuswertungResetFilter" layoutX="530.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnAuswertungResetFilterPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
+                <Button fx:id="btnAuswertungCommit" layoutX="181.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnAuswertungCommitPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filtern" />
                 <Line endX="1087.0" endY="0.0" layoutX="129.0" layoutY="91.0" startX="-100.0" />
                 <Text layoutX="37.0" layoutY="41.0" scaleX="1.1212764138874183" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auswertung">
                   <font>
@@ -83,9 +83,9 @@
                   </font>
                 </Text>
                 <ChoiceBox fx:id="choiceAuswertungKategorie" blendMode="SRC_ATOP" layoutX="181.0" layoutY="166.0" mouseTransparent="false" pickOnBounds="false" style="" />
-                <Text font="$x3" layoutX="28.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
-                <Line endX="541.0" endY="0.0" layoutX="132.0" layoutY="403.0" startX="-102.0" startY="0.0" />
-                <PieChart id="PieChart" fx:id="chartAuswertung" layoutX="53.0" layoutY="438.0" prefHeight="237.0001220703125" prefWidth="378.0" />
+                <Text font="$x3" layoutX="28.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
+                <Line endX="541.0" endY="0.0" layoutX="132.0" layoutY="395.0" startX="-102.0" startY="0.0" />
+                <PieChart id="PieChart" fx:id="chartAuswertung" layoutX="53.0" layoutY="396.0" prefHeight="304.0" prefWidth="540.0" />
                 <TableView fx:id="tblAuswertung" layoutX="703.0" layoutY="108.0" prefHeight="519.0" prefWidth="514.0" />
                 <Text layoutX="703.0" layoutY="667.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summe:" />
                 <TextField fx:id="summeAuswertung" editable="false" layoutX="772.0" layoutY="647.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
@@ -109,11 +109,11 @@
                 <TextField fx:id="txtBelegBeschreibung" layoutX="739.0" layoutY="625.0" prefWidth="200.0" promptText="Beschreibung eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <TextField fx:id="txtBelegBetrag" layoutX="739.0" layoutY="664.0" prefWidth="200.0" promptText="Betrag eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text layoutX="629.0" layoutY="683.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Betrag:" y="0.0" />
-                <Button fx:id="btnAbrechnungsItemSave" layoutX="977.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemSavePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
-                <Button fx:id="btnKategorieEdit" layoutX="99.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieEditPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
-                <Button fx:id="btnKategorieNew" layoutX="27.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieNewPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
+                <Button fx:id="btnAbrechnungsItemSave" layoutX="960.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemSavePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
+                <Button fx:id="btnKategorieEdit" layoutX="238.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieEditPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
+                <Button fx:id="btnKategorieNew" layoutX="168.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieNewPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
                 <TableView fx:id="tblAbrechnungsItems" layoutX="629.0" layoutY="94.0" prefHeight="431.0" prefWidth="581.5" />
-                <Button fx:id="btnDeleteKategorie" layoutX="428.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
+                <Button fx:id="btnDeleteKategorie" layoutX="353.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" prefHeight="33.0" prefWidth="151.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
                 <Button fx:id="btnDeleteAbrechnungsItem" layoutX="1135.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
                 <CheckBox fx:id="checkShowDeletedItems" layoutX="992.0" layoutY="37.0" mnemonicParsing="false" style="&#10;-fx-cursor: hand;&#10;&#10;&#10;&#10;" text="Gelöschte Elemente anzeigen" />
               </children>

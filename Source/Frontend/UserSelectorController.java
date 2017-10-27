@@ -37,6 +37,7 @@ public class UserSelectorController extends Dialog {
         final Scene scene = new Scene(root, 600, 400);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.showAndWait();
 

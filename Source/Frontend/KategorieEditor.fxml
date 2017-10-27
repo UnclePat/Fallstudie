@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.KategorieEditorController">
+<AnchorPane id="AnchorPane" maxHeight="166.0" maxWidth="424.0" minHeight="166.0" minWidth="424.0" prefHeight="166.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.KategorieEditorController">
   <children>
-    <Label layoutX="37.0" layoutY="69.0" text="Name" />
-    <TextField fx:id="txtKategorieName" layoutX="100.0" layoutY="66.0" prefWidth="200.0" promptText="Name eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" />
-    <Label fx:id="txtHeader" layoutX="37.0" layoutY="23.0" prefHeight="22.0" prefWidth="339.0" text="Kategorie">
+    <Label layoutX="37.0" layoutY="64.0" text="Name" />
+    <TextField fx:id="txtKategorieName" layoutX="100.0" layoutY="60.0" prefHeight="33.0" prefWidth="272.0" promptText="Name eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" />
+    <Label fx:id="txtHeader" layoutX="37.0" layoutY="22.0" prefHeight="22.0" prefWidth="339.0" text="Kategorie">
       <font>
         <Font size="20.0" />
       </font>
     </Label>
-    <Button fx:id="btnKategorieSave" layoutX="122.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnKategorieSavePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
-    <Button fx:id="btnCancel" layoutX="224.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnCancelPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Abbrechen" />
+    <Button fx:id="btnKategorieSave" layoutX="172.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnKategorieSavePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
+    <Button fx:id="btnCancel" layoutX="276.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnCancelPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Abbrechen" />
   </children>
 </AnchorPane>
