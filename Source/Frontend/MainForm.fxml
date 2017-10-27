@@ -43,8 +43,8 @@
                     <NumberAxis side="LEFT" />
                   </yAxis>
                 </StackedBarChart>
-                <Line endX="1093.0" endY="0.0" layoutX="136.0" layoutY="76.0" startX="565.0" startY="-1.0" />
-                <TableView fx:id="tblRecentEntryTabView" layoutX="702.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
+                <Line endX="1077.0" endY="0.0" layoutX="136.0" layoutY="76.0" startX="565.0" startY="0.0" />
+                <TableView fx:id="tblRecentEntryTabView" layoutX="700.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
                 <PieChart id="PieChart" fx:id="pieStartLastExpenses" layoutX="40.0" layoutY="79.0" prefHeight="316.0" prefWidth="636.0" visible="true" />
                 <Text font="$x3" layoutX="39.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten Ausgaben" />
                 <Text font="$x3" layoutX="39.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jahresüberblick" />
@@ -57,38 +57,38 @@
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;">
               <children>
                 <DatePicker fx:id="dateAuswertungVon" layoutX="181.0" layoutY="112.0" prefWidth="187.00009999999747" promptText="TT.MM.JJJJ" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Text layoutX="29.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zeitraum:">
+                <Text layoutX="28.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zeitraum:">
                   <font>
                     <Font size="14.0" fx:id="x1" />
                   </font>
                 </Text>
                 <Text font="$x3" layoutX="28.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter" />
-                <Text font="$x1" layoutX="146.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Von" />
-                <Text font="$x1" layoutX="464.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bis" />
+                <Text font="$x1" layoutX="146.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Von" />
+                <Text font="$x1" layoutX="464.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bis" />
                 <DatePicker fx:id="dateAuswertungBis" layoutX="489.0" layoutY="114.0" prefWidth="186.0" promptText="TT.MM.JJJJ" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Text font="$x1" layoutX="29.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorie:" />
-                <Text font="$x1" layoutX="29.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Betrag:" />
-                <TextField fx:id="txtAuswertungBetragVon" layoutX="180.0" layoutY="219.0" prefWidth="187.00009999999747" promptText="00,00 €" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Text font="$x1" layoutX="146.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Von" />
-                <Text font="$x1" layoutX="464.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bis" />
+                <Text font="$x1" layoutX="29.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorie:" />
+                <Text font="$x1" layoutX="28.0" layoutY="239.0" scaleX="1.0065109738519402" scaleY="0.9463040172015943" strokeType="OUTSIDE" strokeWidth="0.0" text="Betrag:" />
+                <TextField fx:id="txtAuswertungBetragVon" layoutX="181.0" layoutY="219.0" prefWidth="187.00009999999747" promptText="00,00 €" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <Text font="$x1" layoutX="146.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Von" />
+                <Text font="$x1" layoutX="464.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bis" />
                 <TextField fx:id="txtAuswertungBetragBis" layoutX="488.0" layoutY="219.0" prefWidth="186.0" promptText="00,00 €" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Text font="$x1" layoutX="29.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suche:" />
+                <Text font="$x1" layoutX="28.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suche:" />
                 <TextField fx:id="txtAuswertungSearch" layoutX="181.0" layoutY="272.0" prefWidth="186.0078125" promptText="Suchbegriff eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Button fx:id="btnAuswertungResetFilter" layoutX="181.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnAuswertungResetFilterPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
-                <Button fx:id="btnAuswertungCommit" layoutX="368.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnAuswertungCommitPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="speichern" />
-                <Line endX="1093.0" endY="0.0" layoutX="129.0" layoutY="91.0" startX="-100.0" />
-                <Text layoutX="35.0" layoutY="41.0" scaleX="1.1212764138874183" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auswertung">
+                <Button fx:id="btnAuswertungResetFilter" layoutX="523.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnAuswertungResetFilterPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
+                <Button fx:id="btnAuswertungCommit" layoutX="181.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnAuswertungCommitPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filtern" />
+                <Line endX="1087.0" endY="0.0" layoutX="129.0" layoutY="91.0" startX="-100.0" />
+                <Text layoutX="37.0" layoutY="41.0" scaleX="1.1212764138874183" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auswertung">
                   <font>
                     <Font name="System Bold" size="25.0" fx:id="x2" />
                   </font>
                 </Text>
-                <ChoiceBox fx:id="choiceAuswertungKategorie" blendMode="SRC_ATOP" layoutX="181.0" layoutY="165.0" mouseTransparent="false" pickOnBounds="false" style="" />
-                <Text font="$x3" layoutX="29.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
-                <Line endX="1090.0" endY="0.0" layoutX="132.0" layoutY="410.0" startX="-100.0" />
+                <ChoiceBox fx:id="choiceAuswertungKategorie" blendMode="SRC_ATOP" layoutX="181.0" layoutY="166.0" mouseTransparent="false" pickOnBounds="false" style="" />
+                <Text font="$x3" layoutX="28.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umsatz" />
+                <Line endX="541.0" endY="0.0" layoutX="132.0" layoutY="403.0" startX="-102.0" startY="0.0" />
                 <PieChart id="PieChart" fx:id="chartAuswertung" layoutX="53.0" layoutY="438.0" prefHeight="237.0001220703125" prefWidth="378.0" />
-                <TableView fx:id="tblAuswertung" layoutX="702.0" layoutY="93.0" prefHeight="519.0" prefWidth="514.0" />
-                        <Text layoutX="702.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summe:" />
-                        <TextField fx:id="summeAuswertung" editable="false" layoutX="772.0" layoutY="631.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <TableView fx:id="tblAuswertung" layoutX="703.0" layoutY="108.0" prefHeight="519.0" prefWidth="514.0" />
+                <Text layoutX="703.0" layoutY="667.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summe:" />
+                <TextField fx:id="summeAuswertung" editable="false" layoutX="772.0" layoutY="647.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
               </children>
             </AnchorPane>
           </content>
@@ -99,23 +99,23 @@
               <children>
                 <Text font="$x2" layoutX="26.0" layoutY="41.0" scaleX="1.0" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Haushaltsbuch" />
                 <Text font="$x3" layoutX="26.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorien" />
-                <Line endX="1093.0" endY="0.0" layoutX="127.0" layoutY="77.0" startX="-100.0" />
-                <TreeView fx:id="kategorieTree" layoutX="31.0" layoutY="95.0" prefHeight="559.0" prefWidth="476.9998779296875" />
+                <Line endX="1081.0" endY="0.0" layoutX="127.0" layoutY="77.0" startX="-99.0" startY="0.0" />
+                <TreeView fx:id="kategorieTree" layoutX="27.0" layoutY="94.0" prefHeight="559.0" prefWidth="476.9998779296875" />
                 <Text font="$x3" layoutX="629.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neuer Eintrag" />
-                <Line endX="494.0" endY="0.0" layoutX="730.0" layoutY="578.0" startX="-100.0" />
+                <Line endX="480.0" endY="0.0" layoutX="730.0" layoutY="578.0" startX="-100.0" />
                 <DatePicker fx:id="dateBelegdatum" layoutX="739.0" layoutY="583.0" prefWidth="200.0" promptText="TT.MM.JJJJ" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" />
-                <Text layoutX="629.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum:" />
+                <Text layoutX="629.0" layoutY="603.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum:" />
                 <Text layoutX="629.0" layoutY="643.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beschreibung:" />
                 <TextField fx:id="txtBelegBeschreibung" layoutX="739.0" layoutY="625.0" prefWidth="200.0" promptText="Beschreibung eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <TextField fx:id="txtBelegBetrag" layoutX="739.0" layoutY="666.0" prefWidth="200.0" promptText="Betrag eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <TextField fx:id="txtBelegBetrag" layoutX="739.0" layoutY="664.0" prefWidth="200.0" promptText="Betrag eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text layoutX="629.0" layoutY="683.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Betrag:" y="0.0" />
                 <Button fx:id="btnAbrechnungsItemSave" layoutX="977.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemSavePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
-                <Button fx:id="btnKategorieEdit" layoutX="307.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnKategorieEditPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
-                <Button fx:id="btnKategorieNew" layoutX="231.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnKategorieNewPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
-                <TableView fx:id="tblAbrechnungsItems" layoutX="629.0" layoutY="95.0" prefHeight="431.0" prefWidth="581.5" />
-                <Button fx:id="btnDeleteKategorie" layoutX="426.0" layoutY="665.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
+                <Button fx:id="btnKategorieEdit" layoutX="99.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieEditPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
+                <Button fx:id="btnKategorieNew" layoutX="27.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieNewPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
+                <TableView fx:id="tblAbrechnungsItems" layoutX="629.0" layoutY="94.0" prefHeight="431.0" prefWidth="581.5" />
+                <Button fx:id="btnDeleteKategorie" layoutX="422.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
                 <Button fx:id="btnDeleteAbrechnungsItem" layoutX="1129.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
-                <CheckBox fx:id="checkShowDeletedItems" layoutX="1002.0" layoutY="37.0" mnemonicParsing="false" style="&#10;-fx-cursor: hand;&#10;&#10;&#10;&#10;" text="Gelöschte Elemente anzeigen" />
+                <CheckBox fx:id="checkShowDeletedItems" layoutX="992.0" layoutY="37.0" mnemonicParsing="false" style="&#10;-fx-cursor: hand;&#10;&#10;&#10;&#10;" text="Gelöschte Elemente anzeigen" />
               </children>
             </AnchorPane>
           </content>
@@ -125,31 +125,31 @@
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;&#10;">
               <children>
                 <Text font="$x2" layoutX="35.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Einstellungen" />
-                <Text font="$x3" layoutX="35.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort ändern" />
-                <Line endX="1094.0" endY="0.0" layoutX="136.0" layoutY="96.0" startX="-100.0" />
+                <Text font="$x3" layoutX="35.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort ändern" />
+                <Line endX="1094.0" endY="0.0" layoutX="136.0" layoutY="120.0" startX="-100.0" />
                 <Text font="$x1" layoutX="35.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
                 <Text font="$x1" layoutX="35.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="altes Passwort:" />
-                <Text font="$x1" layoutX="36.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neues Passwort:" />
-                <Text font="$x1" layoutX="36.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neues Passwort bestätigen:" />
+                <Text font="$x1" layoutX="35.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neues Passwort:" />
+                <Text font="$x1" layoutX="35.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="neues Passwort bestätigen:" />
                 <TextField fx:id="txtEditedUserName" layoutX="263.0" layoutY="132.0" prefWidth="200.0" promptText="Benutzername eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <PasswordField fx:id="txtEditedPasswordOld" layoutX="263.0" layoutY="183.0" prefWidth="200.0" promptText="Passwort eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <PasswordField fx:id="txtEditedUserPasswordNew" layoutX="264.0" layoutY="232.0" prefWidth="200.0" promptText="neues Passwort eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <PasswordField fx:id="txtEditedUserPasswordNewRetype" layoutX="264.0" layoutY="282.0" prefWidth="200.0" promptText="neues Passwort bestätigen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Button fx:id="btnEditedUserSave" layoutX="264.0" layoutY="324.0" mnemonicParsing="false" onAction="#btnEditedUserSavePressed" prefHeight="33.0" prefWidth="94.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
-                <Text fx:id="labelNewUser" font="$x3" layoutX="35.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzer anlegen" />
-                <Line fx:id="lineNewUser" endX="1092.0" endY="0.0" layoutX="137.0" layoutY="399.0" startX="-100.0" />
-                <Text fx:id="labelUserName" font="$x1" layoutX="35.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
-                <Text fx:id="labelUserPassword" font="$x1" layoutX="35.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort:" />
-                <TextField fx:id="txtUserNameNew" layoutX="263.0" layoutY="419.0" prefWidth="200.0" promptText="Benutzername erstellen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
-                <PasswordField fx:id="txtPasswordNew" layoutX="263.0" layoutY="461.0" prefWidth="200.0" promptText="Passwort eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <Text fx:id="labelNewUser" font="$x3" layoutX="35.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzer anlegen" />
+                <Line fx:id="lineNewUser" endX="1092.0" endY="0.0" layoutX="137.0" layoutY="401.0" startX="-100.0" />
+                <Text fx:id="labelUserName" font="$x1" layoutX="35.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername:" />
+                <Text fx:id="labelUserPassword" font="$x1" layoutX="35.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort:" />
+                <TextField fx:id="txtUserNameNew" layoutX="263.0" layoutY="413.0" prefWidth="200.0" promptText="Benutzername erstellen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <PasswordField fx:id="txtPasswordNew" layoutX="263.0" layoutY="457.0" prefWidth="200.0" promptText="Passwort eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text font="$x3" layoutX="35.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dateien sichern" />
                 <Line endX="1088.0" endY="0.0" layoutX="136.0" layoutY="607.0" startX="-100.0" />
-                <Button fx:id="btnBackup" layoutX="263.0" layoutY="660.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="94.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Sichern" />
+                <Button fx:id="btnBackup" layoutX="263.0" layoutY="659.0" mnemonicParsing="false" onAction="#btnBackupPressed" prefWidth="94.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Sichern" />
                 <TextField fx:id="txtBackupPath" layoutX="263.0" layoutY="619.0" prefWidth="200.0" promptText="Backuppfad angeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text layoutX="35.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Backuppfad:" />
                 <Text fx:id="Status" layoutX="393.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
-                <Text fill="GREY" layoutX="509.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: [installpath]\SSQL13.SQLEXPRESS\MSSQL\Backup" />
-                <Button fx:id="btnSelectUser" layoutX="481.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnSelectUserPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Benutzer Auswählen..." />
+                <Text fill="GREY" layoutX="482.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Falls kein Pfad angegeben: [installpath]\SSQL13.SQLEXPRESS\MSSQL\Backup" />
+                <Button fx:id="btnSelectUser" layoutX="482.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnSelectUserPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Benutzer Auswählen..." />
                 <TableView fx:id="tblUserAccessRights" layoutX="677.0" layoutY="132.0" prefHeight="204.0" prefWidth="514.0" visible="false">
                   <columns>
                     <TableColumn prefWidth="75.0" text="Column X" />
@@ -158,38 +158,33 @@
                 </TableView>
                 <Button fx:id="btnNewAccessRight" layoutX="1017.0" layoutY="345.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" visible="false" />
                 <Button fx:id="btnEditUserAcessRight" layoutX="1091.0" layoutY="345.0" mnemonicParsing="false" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" visible="false" />
-                <Button fx:id="btnNewUser" layoutX="263.0" layoutY="546.0" mnemonicParsing="false" onAction="#btnNewUserPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
-                <Text fx:id="labelUserPasswordRetype" font="$x1" layoutX="36.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort bestätigen:" />
-                <PasswordField fx:id="txtPasswordRetypeNew" layoutX="263.0" layoutY="505.0" prefHeight="26.0" prefWidth="200.0" promptText="neues Passwort bestätigen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
+                <Button fx:id="btnNewUser" layoutX="263.0" layoutY="541.0" mnemonicParsing="false" onAction="#btnNewUserPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
+                <Text fx:id="labelUserPasswordRetype" font="$x1" layoutX="36.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort bestätigen:" />
+                <PasswordField fx:id="txtPasswordRetypeNew" layoutX="263.0" layoutY="501.0" prefHeight="26.0" prefWidth="200.0" promptText="neues Passwort bestätigen" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Text fx:id="txtEditUserPasswordsNotEqual" fill="RED" layoutX="482.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen neuen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
                 <Text fx:id="txtEditUserNewPasswordEmpty" fill="RED" layoutX="482.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
-                <Text fx:id="txtNewUserInvalidUsername" fill="RED" layoutX="481.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzernamefeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
-                <Text fx:id="txtNewUserPasswordEmpty" fill="RED" layoutX="481.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
-                <Text fx:id="txtNewUserPasswordsNotEqual" fill="RED" layoutX="482.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
-                <Text fx:id="txtNewUserSuccessful" fill="GREEN" layoutX="393.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neuer Benutzer wurde angelegt!" wrappingWidth="473.6708984375" />
+                <Text fx:id="txtNewUserInvalidUsername" fill="RED" layoutX="482.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzernamefeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtNewUserPasswordEmpty" fill="RED" layoutX="482.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtNewUserPasswordsNotEqual" fill="RED" layoutX="482.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Die eingegebenen Passwörter stimmen nicht überein!" wrappingWidth="473.6708984375" />
+                <Text fx:id="txtNewUserSuccessful" fill="GREEN" layoutX="393.0" layoutY="561.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neuer Benutzer wurde angelegt!" wrappingWidth="473.6708984375" />
                 <Text fx:id="txtEditUserPasswordChangeSuccessful" fill="GREEN" layoutX="393.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortänderung erfolgreich!" wrappingWidth="473.6708984375" />
                 <Text fx:id="txtEditUserPasswordEmpty" fill="RED" layoutX="482.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwortfeld darf nicht leer sein!" wrappingWidth="399.6708984375" />
-                <Text fx:id="txtEditUserNoUserSelected" fill="RED" layoutX="630.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Es muss ein Benutzer ausgewählt werden!" wrappingWidth="399.6708984375" />
+                <Text fx:id="txtEditUserNoUserSelected" fill="RED" layoutX="667.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Es muss ein Benutzer ausgewählt werden!" wrappingWidth="399.6708984375" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
       </tabs>
     </TabPane>
-    <ImageView id="Logo.png" fitHeight="72.0" fitWidth="91.0001220703125" layoutX="33.0" layoutY="14.0">
+    <ImageView id="Logo.png" fitHeight="72.0" fitWidth="91.0001220703125" layoutX="39.0" layoutY="14.0">
       <image>
         <Image preserveRatio="true" smooth="true" url="@Logo.png" />
       </image>
     </ImageView>
-    <Text fill="WHITE" layoutX="230.0" layoutY="62.0" scaleX="2.063105775241048" scaleY="2.195314492575571" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: whitesmoke;" text="HouseLook 2018">
+    <Text fill="WHITE" layoutX="238.0" layoutY="62.0" scaleX="2.063105775241048" scaleY="2.195314492575571" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: whitesmoke;" text="HouseLook 2018">
       <font>
         <Font size="23.0" />
       </font>
     </Text>
-    <ImageView id="sign-out-logout-icon-0.png" fitHeight="50.41796875" fitWidth="50.0" layoutX="1177.0" layoutY="38.0">
-      <image>
-        <Image preserveRatio="true" smooth="true" url="@sign-out-logout-icon-0.png" />
-      </image>
-    </ImageView>
   </children>
 </AnchorPane>
