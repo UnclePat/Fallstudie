@@ -47,7 +47,7 @@
                 <TableView fx:id="tblRecentEntryTabView" layoutX="700.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
                 <PieChart id="PieChart" fx:id="pieStartLastExpenses" layoutX="40.0" layoutY="79.0" prefHeight="316.0" prefWidth="636.0" visible="true" />
                 <Text font="$x3" layoutX="39.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten Ausgaben" />
-                <Text font="$x3" layoutX="39.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jahresüberblick" />
+                <Text font="$x3" layoutX="39.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monatsüberblick" />
               </children>
             </AnchorPane>
           </content>
