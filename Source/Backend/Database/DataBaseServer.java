@@ -9,16 +9,18 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 
-//Hauptmethode für die Verbindung zur Datenbank.
-
+/**
+ * Enthält alle nötigen Methoden zur direkten Kommunikation mit der Datenbank und casht die Verbindung.
+ */
 public class DataBaseServer
 {
     private static Connection databaseConnection = null;
     private static final String DB_CONNECTION_STRING = "jdbc:sqlserver://localhost\\sqlexpress;user=sa;password=pwd4sa;databaseName=Haushaltsbuch;";
 
-    /*  Verbindung zur Datenbank. Sollte die Verbindung zu Stande gekommen sein, wird "Connected" angezeigt,
-        sollte dies nicht der Fall sein, zeigt sie "Connection attempt failed" an und bricht ab. */
-
+    /**
+     * Öffnet bei erstmaliger Ausführung eine Verbindung zur Datenbank. Die Verbindung wird gecasht. Bei weiteren
+     * Ausführungen wird die gecashte Verbindung verwendet, statt eine neue zu erzeugen.
+     */
     public static void dbConnect(){
         try {
             if (databaseConnection != null){
@@ -48,8 +50,17 @@ public class DataBaseServer
         DataBaseServer.dbConnect();
     }
 
-    /* Mit der Klasse ResultSet wird ein Statement abgesetzt, ob die Verbindung zu der Datenbank vollständig aufgebaut wurde oder nicht. */
-
+    /**
+     * Setzt ein Select Statement auf der Datenbank ab. Aus der angegebenen Query und der Value Liste wird hierbei ein
+     * preparedStatement generiert und ausgeführt.
+     * @param query
+     * Die Abfrage, die ausgeführt werden soll.
+     * @param values
+     * Liste der an die Abfrage anzuhängenden Werte um Parameter zu befüllen.
+     * @return
+     * Das Ergebnis der Abfrage.
+     * @throws SQLException
+     */
     public ResultSet select(String query, List<String> values) throws SQLException {
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query);
 
@@ -64,8 +75,17 @@ public class DataBaseServer
         return statement.executeQuery();
     }
 
-    /* */
-
+    /**
+     * Setzt ein Update Statement auf der Datenbank ab. Aus der angegebenen Query und der Value Liste wird hierbei ein
+     * preparedStatement generiert und ausgeführt.
+     * @param query
+     * Die Abfrage, die ausgeführt werden soll.
+     * @param values
+     * Liste der an die Abfrage anzuhängenden Werte um Parameter zu befüllen.
+     * @return
+     * Das Ergebnis der Abfrage.
+     * @throws SQLException
+     */
     public int update(String query, List<String> values) throws SQLException {
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query);
 
@@ -80,8 +100,17 @@ public class DataBaseServer
         return statement.executeUpdate();
     }
 
-    /* */
-
+    /**
+     * Setzt ein Insert Statement auf der Datenbank ab. Aus der angegebenen Query und der Value Liste wird hierbei ein
+     * preparedStatement generiert und ausgeführt. Das ergebnis der Abfrage ist der generierte Schlüßel der neuen Zeile.
+     * @param query
+     * Die Abfrage, die ausgeführt werden soll.
+     * @param values
+     * Liste der an die Abfrage anzuhängenden Werte um Parameter zu befüllen.
+     * @return
+     * Der erzeugte Schlüßel.
+     * @throws SQLException
+     */
     public int insert(String query, List<String> values) throws SQLException {
         PreparedStatement statement = DataBaseServer.databaseConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -101,8 +130,16 @@ public class DataBaseServer
         return rs.getInt(1);
     }
 
-    /* Mit den Klassen markAsDeleted und markAsNotDeleted wird jeweils ein SQL Befehl abgesetzt um zu überpürfen, welche Werte asl gelöscht markiert wurden und welche nicht. */
-
+    /**
+     * Markiert ein Element einer Tabelle als gelöscht.
+     * @param table
+     * Name der Tabelle von welcher ein Element als gelöscht markiert werden soll.
+     * @param key
+     * Schlüßel des als gelöscht zu markierenden Elements.
+     * @return
+     * Das Ergebnis der Abfrage.
+     * @throws SQLException
+     */
     public int markAsDeleted(String table, int key) throws SQLException {
         String sql = " UPDATE " + table +
                 " SET [boolDeletionFlag] = 1," +
@@ -118,6 +155,16 @@ public class DataBaseServer
         return statement.executeUpdate();
     }
 
+    /**
+     * Hebt die Löschmarkierung eines Elementes einer Tabelle auf.
+     * @param table
+     * Name der Tabelle von welcher ein Element als nicht gelöscht markiert werden soll.
+     * @param key
+     * Schlüßel des als nicht gelöscht zu markierenden Elements.
+     * @return
+     * Das Ergebnis der Abfrage.
+     * @throws SQLException
+     */
     public int markAsNotDeleted(String table, int key) throws SQLException{
         String sql = " UPDATE " + table +
                 " SET [boolDeletionFlag] = 0," +
@@ -133,8 +180,12 @@ public class DataBaseServer
         return statement.executeUpdate();
     }
 
-    /* Backup Funktion unserer Datenbank. Das Backup wird auf der Festplatte abgespeichert. */
-
+    /**
+     * Erstellt ein Backup der Datenbank in den übergebenen Pfad.
+     * @param path
+     * Pfad in den das Backup erstellt werden soll.
+     * @throws SQLException
+     */
     public void executeBackup(String path) throws SQLException {
         String backupStatement = "BACKUP DATABASE [Haushaltsbuch] TO DISK = '" + path + "' with INIT, NAME = N'SQL Voll'";
         Statement statement = DataBaseServer.databaseConnection.createStatement();
