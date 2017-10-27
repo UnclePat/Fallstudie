@@ -578,8 +578,10 @@ public class MainFormController extends Application {
             series.setName(kategorieName);
 
             for (BarChartInputAbrechnungsItemsProMonat item : AI) {
-                if (item.getBetrag() != 0)
-                    series.getData().add(new XYChart.Data(item.getMonatName(), item.getBetrag()));
+                if (item.getKategorieName().equals(kategorieName)) {
+                    if (item.getBetrag() != 0)
+                        series.getData().add(new XYChart.Data(item.getMonatName(), item.getBetrag()));
+                }
             }
 
             BarChartStart.getData().add(series);

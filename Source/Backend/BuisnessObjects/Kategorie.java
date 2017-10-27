@@ -302,7 +302,7 @@ public class Kategorie extends DatabaseItem{
                 "  WHERE [intFkeyKategorieParent] = ?";
 
             List<String> values = new ArrayList<String>();
-            values.add(this.key.toString());
+            values.add(kategorie.key.toString());
 
             DataBaseServer connection = new DataBaseServer();
 

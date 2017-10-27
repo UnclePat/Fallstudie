@@ -15,7 +15,7 @@
         <Font size="20.0" />
       </font>
     </Label>
-    <Button fx:id="btnKategorieSave" layoutX="142.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnKategorieSavePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
+    <Button fx:id="btnKategorieSave" layoutX="122.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnKategorieSavePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Speichern" />
     <Button fx:id="btnCancel" layoutX="224.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnCancelPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Abbrechen" />
   </children>
 </AnchorPane>
