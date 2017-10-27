@@ -576,15 +576,19 @@ public class MainFormController extends Application {
 
             XYChart.Series series = new XYChart.Series();
             series.setName(kategorieName);
+            boolean relevant = false;
 
             for (BarChartInputAbrechnungsItemsProMonat item : AI) {
                 if (item.getKategorieName().equals(kategorieName)) {
-                    if (item.getBetrag() != 0)
+                    if (item.getBetrag() != 0) {
                         series.getData().add(new XYChart.Data(item.getMonatName(), item.getBetrag()));
+                        relevant = true;
+                    }
                 }
             }
 
-            BarChartStart.getData().add(series);
+            if (relevant)
+                BarChartStart.getData().add(series);
         }
     }
 
