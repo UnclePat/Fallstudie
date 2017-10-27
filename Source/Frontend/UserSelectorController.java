@@ -27,8 +27,7 @@ import java.util.List;
 public class UserSelectorController extends Dialog {
     @FXML
     private TableView tableUserSelector;
-    @FXML
-    private Button btnSelectUser;
+
 
     private static User user = null;
 
@@ -44,6 +43,10 @@ public class UserSelectorController extends Dialog {
         return user;
     }
 
+    /**
+     * Initialisiert die Tabelle UserSelector. Setzt den Namen der Spalte und befüllt die Zeilen mit den Namen
+     * der Benutzer
+     */
     public void initialize() {
         //Init tableUserSelector
         TableColumn nameColumn = new TableColumn("Benutzername");
@@ -63,6 +66,12 @@ public class UserSelectorController extends Dialog {
         tableUserSelector.setItems(FXCollections.observableArrayList(userList));
     }
 
+    /**
+     * Diese Methode beschreibt die Aktion, was passiert wenn der Benutzer Auswahl Button geklickt wurde.
+     * Es wird der in der Tabelle ausgewählte Benutzer in die Variable Benutzer geschrieben, damit diese
+     * weiterverarbeitet werden kann. Anschließend wir das Fenster geschlossen.
+      * @param actionEvent
+     */
     public void btnSelectUserPressed(ActionEvent actionEvent){
         User selectedUser = (User) tableUserSelector.getSelectionModel().getSelectedItem();
 

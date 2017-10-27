@@ -6,12 +6,12 @@ import Backend.Database.DataBaseServer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-//Hauptmethode der User Funktionen-Klassen
-
-    public class User extends DatabaseItem{
+/**
+ * Repräsentiert einen Benutzer der Applikation.
+ */
+public class User extends DatabaseItem{
     private List<UserAccessRight> userGroups;
 
     public List<UserAccessRight> getUserGroups() {
@@ -55,8 +55,13 @@ import java.util.List;
         return "User";
     }
 
-    /* In der saveItem Klasse wird überprüft, ob der Wert schon gespeichert wurde und sofern benötigt, mit einem Key versehen. */
-
+    /**
+     * Speichert das Objekt. Ist bereits ein Schlüßel vorhanden, so wird davon ausgegangen, dass das Objekt noch nie
+     * gespeichert wurde, es wird CreateItem aufgerufen. Ist ein Schlüßel vorhanden, wird UpdateItem aufgerufen.
+     * War der Vorgang erfolgreich, wird true zurück gegeben andernfalls false.
+     * @return
+     * True falls erfolgreich, andernfalls false.
+     */
     @Override
     public boolean saveItem() {
         if (this.getKey() == null){
@@ -73,8 +78,11 @@ import java.util.List;
         }
     }
 
-    /* Mit createItem wird ein SQL befehl abgesetzt, der neue Werte in die Datenbank Tabelle einfügt. */
-
+    /**
+     * Erstellt das Objekt mittels insert-Statement auf der Datenbank und gibt den generierten Key zurück.
+     * @return
+     * Der generierte Key.
+     */
     @Override
     protected Integer createItem() {
         try {
@@ -112,8 +120,11 @@ import java.util.List;
         return null;
     }
 
-    /* Mit der Klasse updateItem werden die gewünschten Werte aus der SQL Tabelle, mit Hilfe eines SQL Befehls, mit den neuen Werten überschrieben. */
-
+    /**
+     * Aktualisiert mittels Update-Statement das Objekt auf der Datenbank.
+     * @return
+     * True falls erfolgreich, andernfalls false.
+     */
     @Override
     protected boolean updateItem() {
         try {
@@ -156,8 +167,13 @@ import java.util.List;
         }
     }
 
-    /* Die Klasse loadItem setzt einen SQL Befehl ab um die benötigten Werte aus der Datenbank anzeigen zu können. */
-
+    /**
+     * Lädt das Objekt, das durch den übergebenen Key identifiziert werden kann von der Datenbank.
+     * @param key
+     * Der Key des zu ladenenden Objekts.
+     * @return
+     * Das geladene Objekt.
+     */
     @Override
     public User loadItem(Integer key) {
         try {
@@ -203,8 +219,11 @@ import java.util.List;
         }
     }
 
-    /*  Mit der Klasse getAllKeys werden die Keys der Kategorien gesammelt. Dieses Bündel wird so in eine Liste eingetragen und übergeben. */
-
+    /**
+     * Ermittelt alle Keys aller angelegten Benutzer.
+     * @return
+     * Eine Liste, die alle ermittelten Schlüßel enthält.
+     */
     public static List<Integer> getAllKeys(){
         try {
             List<Integer> returnList = new ArrayList<Integer>();
@@ -230,8 +249,17 @@ import java.util.List;
         }
     }
 
-    /*  Mit loadItemLogin werden die Werte aus der Datenbank angezeigt, die der bei Login angegebene User angelegt hat. */
-
+    /**
+     * Abwandlung der loadItem Methode. Hierbei wird der zu ladende Benutzer nicht anhand des Schlüßels ermittelt,
+     * sondern mittels einer Kombination aus Benutzername und Passwort. Diese Methode wird nur während des Logins
+     * verwendet. Objekt, falls die Kombination existiert, andernfalls null.
+     * @param userName
+     * Der Name des zu prüfenden Benutzers.
+     * @param password
+     * Das Passwort des zu prüfenden Benutzers.
+     * @return
+     * Objekt, falls die Kombination existiert, andernfalls null.
+     */
     public static User loadItemLogin(String userName, String password) {
         try {
             String query = "SELECT [intKey]" +
@@ -276,8 +304,13 @@ import java.util.List;
         }
     }
 
-    /*  Mit checkUsernameUnique wird sichergestellt, dass es jeden User nur einmal so gibt um Komplikationen in der Datenbank zu verhindern. */
-
+    /**
+     * Prüft ob ein übergebener Benutzername bereits in der Datenbank existiert.
+     * @param username
+     * Der zu prüfende Benutzername
+     * @return
+     * True, falls der Wert einzigartig wäre, false, falls der Wert bereits existiert.
+     */
     public static boolean checkUsernameUnique(String username){
         boolean result = true;
 

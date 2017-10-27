@@ -3,9 +3,7 @@ package Backend.BuisnessObjects;
 import Backend.Base.Application;
 import Backend.Database.DataBaseServer;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;

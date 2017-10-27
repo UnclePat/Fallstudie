@@ -86,8 +86,6 @@ public class MainFormController extends Application {
     private Tab tabEinstellungen;
 
     @FXML
-    private Button btnAbrechnungsItemSave;
-    @FXML
     private Button btnNewUser;
     @FXML
     private Button btnSelectUser;
@@ -147,10 +145,6 @@ public class MainFormController extends Application {
     @FXML
     private TextField txtAuswertungSearch;
     @FXML
-    private Button btnAuswertungResetFilter;
-    @FXML
-    private Button btnAuswertungCommit;
-    @FXML
     private ChoiceBox choiceAuswertungKategorie;
     @FXML
     private TableView tblAuswertung;
@@ -173,6 +167,11 @@ public class MainFormController extends Application {
     }
     public static Auswertung currentAuswertung = null;
 
+    /**
+     * Diese Methode wird durch die Application aufgerufen und lädt die Oberfläche MainForm.fxml.
+     * @param primaryStage
+     * Die Stage auf die das MainForm geladen wird.
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -190,8 +189,14 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Initialisiert das MainForm
+     */
     @FXML
     protected void initialize(){
+        /**
+         * Prüft welcher Tab ausgewählt ist und ruft ggf. die refresh Methode auf, welche dann die Ansicht aktualisiert.
+         */
         mainTabControl.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
             if (newTab == tabHaushaltsbuch){
                 refreshHaushaltsbuch();
@@ -206,7 +211,10 @@ public class MainFormController extends Application {
                 refreshStart();
                 return;
             }
-
+            /**
+             * Bei Auswahl des Einstellungstabs wird direkt der aktuelle USer in die Variable editedUser geladen.
+             * Diese Variable wird im Textfeld Benutzer angezeigt, wessen Passwort geändert werden soll.
+             */
             if (newTab == tabEinstellungen){
                 editedUser = Backend.Base.Application.getCurrentUser();
                 resetTabEinstellungenLabels();
@@ -219,25 +227,36 @@ public class MainFormController extends Application {
                 initTabAuswertung();
             }
         });
-
+        /**
+         * Die Methode ermittelt das aktuelle ausgewählte Item im TreeView
+         */
         kategorieTree.getSelectionModel().selectedItemProperty().addListener((observable, oldTreeItem, newTreeItem) -> {
             TreeItem<Kategorie> item = (TreeItem<Kategorie>) newTreeItem;
             if (item == null){
                 return;
             }
-
+            /**
+             * Durch diese Konsolenausgabe kann während der Laufzeit in der Entwicklungsumgebung geprüft werden,
+             * ob das richtige TreeItem ausgewählt ist. Die Variable currentKategorie wird mit dem aktuell ausgewählten
+             * Item befüllt.
+             */
             System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
             refreshAbrechnungsItemView(item.getValue());
             MainFormController.currentKategorie = item.getValue();
             MainFormController.currentItemKategorieTree = item;
-
+            /**
+             * Wenn das aktuell ausgewählt TreeItem bereits gelöscht wurde (ein DeletionFlag besitzt), wird der Button
+             * als Wiederherstllungsbutton angezeigt. Andernfalls wir der Löschen Button dargestellt.
+             */
             if (currentKategorie.getDeletionFlag()){
                 btnDeleteKategorie.setText("Wiederherstellen");
             }else{
                 btnDeleteKategorie.setText("Löschen");
             }
         });
-
+        /**
+         * Färbt die TreeItems je nach Zustand (gelöscht, nicht gelöscht) rot oder schwarz.
+         */
         kategorieTree.setCellFactory(tv ->  new TreeCell<Kategorie>() {
             @Override
             public void updateItem(Kategorie item, boolean empty) {
@@ -259,7 +278,9 @@ public class MainFormController extends Application {
             }
         });
 
-        //Init tblAbrechnungsItems
+        /**
+         * Initialisiert TableView der Abrechnungsitems
+         */
         TableColumn dateColumn = new TableColumn("Datum");
         TableColumn beschreibungColumn = new TableColumn("Beschreibung");
         TableColumn betragColumn = new TableColumn("Betrag");
@@ -274,12 +295,15 @@ public class MainFormController extends Application {
 
         tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
 
+        /**
+         * Wenn das aktuell ausgewählt AbrechnungsItem bereits gelöscht wurde (ein DeletionFlag besitzt), wird der Button
+         * als Wiederherstllungsbutton angezeigt. Andernfalls wir der Löschen-Button dargestellt.
+         */
         tblAbrechnungsItems.getSelectionModel().selectedItemProperty().addListener((observable, oldTableItem, newTableItem) -> {
             AbrechnungsItem item = (AbrechnungsItem) newTableItem;
             if (item == null){
                 return;
             }
-
             System.out.println("Selected Key : " + item.getKey() + " Selected Item: " + item.getBeschreibung());
             MainFormController.currentAbrechnungsItem = item;
 
@@ -289,7 +313,9 @@ public class MainFormController extends Application {
                 btnDeleteAbrechnungsItem.setText("Löschen");
             }
         });
-
+        /**
+         * Färbt die AbrechnungsItems je nach Zustand (gelöscht, nicht gelöscht) rot oder schwarz.
+         */
         tblAbrechnungsItems.setRowFactory(row -> new TableRow<AbrechnungsItem>(){
             @Override
             public void updateItem(AbrechnungsItem item, boolean empty){
@@ -310,7 +336,11 @@ public class MainFormController extends Application {
                 }
             }
         });
-
+        /**
+         * Folgende drei Lambdas stellen sicher, dass in den Textboxen "txtBelegBetrag", "txtAuswertungBetragVon" und
+         * "txtAuswertungBetragBis" nur numerische Werte mit maximal 2 Nachkommastellen eingegeben
+         * werden können.
+         */
         txtBelegBetrag.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
                 txtBelegBetrag.setText(oldValue);
@@ -332,7 +362,9 @@ public class MainFormController extends Application {
         //Set EditUserFields
         txtEditedUserName.setEditable(false);
 
-        //TabStart Table Init
+        /**
+         * Initialisiert den TableView, welcher die letzten 10 Abrechnungsitems anzeigt.
+         */
         TableColumn RecentBetragColumn = new TableColumn("Betrag");
         TableColumn RecentBeschreibungColumn = new TableColumn("Beschreibung");
         TableColumn RecentDateColumn = new TableColumn ("Datum");
@@ -346,16 +378,17 @@ public class MainFormController extends Application {
 
         tblRecentEntryTabView.getColumns().addAll(RecentDateColumn, RecentBeschreibungColumn, RecentBetragColumn);
         refreshStart();
-
-        checkShowDeletedItems.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                refreshKategorieView();
-                kategorieTreeReselectLastItem();
-            }
+        /**
+         * Prüft ob die Checkbox des Haushaltsbuchtabs zur Anzeige der gelöschten Items gesetzt ist oder nicht.
+         */
+        checkShowDeletedItems.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            refreshKategorieView();
+            kategorieTreeReselectLastItem();
         });
 
-        //Init Table Auswertungen
+        /**
+         * Initialisiert die Auswertungstabelle des Auswertungstabs
+         */
         TableColumn AuswertungBetragColumn = new TableColumn("Betrag");
         TableColumn AuswertungBeschreibungColumn = new TableColumn("Beschreibung");
         TableColumn AuswertungDateColumn = new TableColumn ("Datum");
@@ -370,6 +403,10 @@ public class MainFormController extends Application {
         tblAuswertung.getColumns().addAll(AuswertungDateColumn, AuswertungBeschreibungColumn, AuswertungBetragColumn);
     }
 
+    /**
+     * Prüft ob der aktuelle User ein Administrator ist. Falls dies nicht der Fall ist, wird der Userauswahl-Button
+     * nicht angezeigt.
+     */
     private void initChangePassword() {
         txtEditedUserName.setText(editedUser.getName());
         if (Backend.Base.Application.getCurrentUser().getAdmin()){
@@ -379,6 +416,10 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Prüft ob der aktuelle User ein Administrator ist. Falls dies nicht der Fall ist, werden sämtliche Elemente der
+     * User-anlegen Section nicht angezeigt.
+     */
     private void initNewUser(){
         if (Backend.Base.Application.getCurrentUser().getAdmin()){
             labelNewUser.setVisible(true);
@@ -403,6 +444,9 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Diese Methode setzt sämtliche Meldungen des Einstellungstabs zurück.
+     */
     private void resetTabEinstellungenLabels(){
         txtEditUserNoUserSelected.setVisible(false);
         txtEditUserPasswordsNotEqual.setVisible(false);
@@ -416,7 +460,10 @@ public class MainFormController extends Application {
         txtNewUserSuccessful.setVisible(false);
     }
 
-
+    /**
+     * Diese Methode aktualisiert den Tab Haushaltsbuch (TreeView zur Anzeige der Kategorien und den TableView zur Anzeige
+     * der Abrechnungsitems zu den Kategorien.
+     */
     public void refreshHaushaltsbuch(){
         System.out.println("Call tab Haushaltsbuch");
         refreshKategorieView();
@@ -424,23 +471,32 @@ public class MainFormController extends Application {
         txtBelegBetrag.setText("0.0");
 }
 
+    /**
+     * Methode, welche den Tableview der Abrechnunsgitems der Startseite zurücksetzt.
+     */
     private void clearTblAbrechnungsItems() {
         for ( int i = 0; i < tblAbrechnungsItems.getItems().size(); i++) {
             tblAbrechnungsItems.getItems().clear();
         }
     }
 
+    /**
+     * Methode, welche den TableView auf der Auswertungsseite zurücksetzt.
+     */
     private void clearTblAuswertung() {
         tblAuswertung.getItems().clear();
     }
 
-    // Is here to build a tree item
     private TreeItem<Kategorie> makeTreeItem(Kategorie item) {
         TreeItem<Kategorie> node = new TreeItem<>(item);
         return node;
-
     }
 
+    /**
+     * Diese Methode befüllt den TableView der Abrechnungsitems mit den Abrechnungsitems der ausgewählten Kategorie.
+     * @param kategorie
+     * Die Kategorie ist die, welche im TreeItem ausgewählt ist und für welche die Abrechnungsitems angezeigt werden.
+     */
     void refreshAbrechnungsItemView(Kategorie kategorie){
         System.out.println("Call refreshAbrechnungsItemView");
         clearTblAbrechnungsItems();
@@ -451,6 +507,9 @@ public class MainFormController extends Application {
         btnDeleteAbrechnungsItem.setText("Löschen");
     }
 
+    /**
+     * Diese Methode befüllt den TableView der Kategorien aus der Datenbank.
+     */
     @FXML void refreshKategorieView(){
         List<Integer> kategorieKeys;
 
@@ -487,6 +546,10 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Diese Methode aktualisiert den kompletten Start Tab, da er auch die Methoden zur Aktualisierung des PieCharts,
+     * des BarCharts und des TableViews der letzten 10 Abrechnungsitems aufruft.
+     */
     public void refreshStart() {
         System.out.println("Call tab Start");
         refreshRecentItemView();
@@ -494,6 +557,9 @@ public class MainFormController extends Application {
         refreshBarChartStart();
     }
 
+    /**
+     * Diese Methode befüllt die anzuzeigenden Daten im PieChart des Start Tabs.
+     */
     private void refreshBarChartStart() {
         System.out.println("Call refreshBarChartStart.");
         BarChartStart.getData().clear();
@@ -520,11 +586,12 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Diese Methode befüllt die anzuzeigenden Daten im BarChart des Start Tabs.
+     */
     private void refreshPieChart() {
         System.out.println("Call refreshPieChart.");
-
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-
         try {
             List<Integer> katKeys = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
             for (Integer key : katKeys) {
@@ -532,20 +599,26 @@ public class MainFormController extends Application {
                 if (kat.getSum() != 0 && !kat.getDeletionFlag())
                     pieChartData.add(new PieChart.Data(kat.getName(), kat.getSum()));
             }
-
             pieStartLastExpenses.setData(pieChartData);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Durch diese Methode wird die Tabelle der letzten Abrechungsitems aktualisiert.
+     */
     public void refreshRecentItemView() {
         System.out.println("RefreshRecentItems");
         List<AbrechnungsItem> AbrechnungsItems = AbrechnungsItem.getRecentItems();
         tblRecentEntryTabView.setItems(FXCollections.observableArrayList(AbrechnungsItems));
     }
 
+    /**
+     * Diese Methode führt ein Backup aus. Es wird je nachdem ob das Backup erfolgreich war oder nicht ein Label angezeigt
+     * mit der jeweiligen Meldung ausgegeben. Es wird falls ein Pfad angegeben wurde dieser als Backupfad verwendet.
+     * Anschließend wir dem Backupfile noch eine Datumsangabe angefügt, damit Backups nicht überschrieben werden.
+     * @param actionEvent
+     */
     public void btnBackupPressed(ActionEvent actionEvent){
         System.out.println("Backup started.");
         Status.setVisible(false);
@@ -569,6 +642,11 @@ public class MainFormController extends Application {
 
     }
 
+    /**
+     * Durch diese Methode wird ein neues Fenster zur Auswahl des Users angezeigt. Sobald das Fenster geschlossen wird,
+     * wird der zu ändernde Benutzer in die Variable editedUser geschrieben.
+     * @param actionEvent
+     */
     public void btnSelectUserPressed(ActionEvent actionEvent){
         resetTabEinstellungenLabels();
         UserSelectorController selector = new UserSelectorController();
@@ -583,6 +661,11 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Erzeugt einen neuen KategorieEditor, um den Namen der bestehenden Kategorie zu ändern. Nach Schließen des Editors
+     * wird die Kategorie gespeichert und der KategorieTree aktualisiert.
+     * @param actionEvent
+     */
     public void btnKategorieEditPressed(ActionEvent actionEvent){
         KategorieEditorController editor = new KategorieEditorController();
         KategorieEditorController.setKategorie(currentKategorie);
@@ -596,6 +679,11 @@ public class MainFormController extends Application {
         selectKategorie(kat);
     }
 
+    /**
+     * Erzeugt einen neuen KategorieEditor, um den Namen der neuen Kategorie zu vergeben. Nach Schließen des Editors
+     * wird die Kategorie gespeichert und der KategorieTree aktualisiert.
+     * @param actionEvent
+     */
     public void btnKategorieNewPressed(ActionEvent actionEvent){
         KategorieEditorController editor = new KategorieEditorController();
         KategorieEditorController.setKategorie(null);
@@ -608,6 +696,11 @@ public class MainFormController extends Application {
         kategorieTreeReselectLastItem();
     }
 
+    /**
+     * Validiert die Angaben die der Benutzer gemacht hat. Sind diese ungültig, so werden entsprechende Meldungen
+     * angezeigt. Andernfalls wird das neue AbrechnungsItem an der Datenbank erzeugt.
+     * @param actionEvent
+     */
     public void btnAbrechnungsItemSavePressed(ActionEvent actionEvent) {
         System.out.println("Call btnAbrechnungsItemSave");
         boolean valid = true;
@@ -687,6 +780,11 @@ public class MainFormController extends Application {
         kategorieTreeReselectLastItem();
     }
 
+    /**
+     * Validiert die Angaben die der Benutzer gemacht hat. Sind diese ungültig, so werden entsprechende Meldungen
+     * angezeigt. Andernfalls wird der neue Benutzer an der Datenbank erzeugt.
+     * @param actionEvent
+     */
     public void btnNewUserPressed(ActionEvent actionEvent) {
         System.out.println("Call btnNewUserPressed");
         boolean valid = true;
@@ -755,6 +853,10 @@ public class MainFormController extends Application {
         txtNewUserSuccessful.setVisible(true);
     }
 
+    /**
+     * Markiert das im KategorieTree markierte Element als gelöscht und aktualisiert den Tree.
+     * @param actionEvent
+     */
     public void btnKategorieDeletePressed(ActionEvent actionEvent) {
         try {
             System.out.println("Call btnKategorieDeletePressed.");
@@ -774,6 +876,10 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Markiert das in der AbrechnungsItem Tabelle markierte Element als gelöscht und aktualisiert die Tabelle.
+     * @param actionEvent
+     */
     public void btnAbrechnungsItemDeletePressed(ActionEvent actionEvent) {
         try {
             System.out.println("Call btnAbrechnungsItemDeletePressed.");
@@ -790,6 +896,11 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Speichert den Benutzer der aktuell in der Bearbeitung ist. Validiert die Angaben des Benutzers, falls dies
+     * erfolgreich ist, wird der Benutzer gespeichert. Andernfalls werden an entsprechender Stelle Meldungen angezeigt.
+     * @param actionEvent
+     */
     public void btnEditedUserSavePressed(ActionEvent actionEvent) {
         System.out.println("Call btnEditedUserSavePressed");
         boolean valid = true;
@@ -863,6 +974,11 @@ public class MainFormController extends Application {
         kategorieTree.getSelectionModel().select( row );
     }
 
+    /**
+     * Selektiert die angegebene Kategorie im Baum, falls diese gefunden werden kann.
+     * @param kategorie
+     * Kategorie, die selektiert werden soll.
+     */
     private void selectKategorie(Kategorie kategorie){
         TreeItem<Kategorie> nodeToSelect = searchKategorieInTree(kategorieTree.getRoot(), kategorie);
 
@@ -870,6 +986,15 @@ public class MainFormController extends Application {
         kategorieTree.getSelectionModel().select( row );
     }
 
+    /**
+     * Durchsucht rekursiv den Kategorie Baum nach einer definierten Kategorie.
+     * @param item
+     * Item in welchem gesucht werden soll.
+     * @param searchedKategorie
+     * Kategorie, die gefunden werden soll.
+     * @return
+     * Das TreeItem, falls es gefunden wurde, andernfalls null.
+     */
     TreeItem<Kategorie> searchKategorieInTree(TreeItem<Kategorie> item, Kategorie searchedKategorie) {
 
         if(item.getValue().equals(searchedKategorie)) return item; // hit!
@@ -885,6 +1010,12 @@ public class MainFormController extends Application {
         return null;
     }
 
+    /**
+     * Setzt alle Ausgabefelder zurück.
+     * Überträgt die angegebenen Filtereinstellungen an ein neues Objekt der Klasse Auwertung. Dieses wertet aus, das
+     * Ergebnis dieser Auswertung wird anschließend im Tab dargsetellt.
+     * @param actionEvent
+     */
     @FXML
     public void btnAuswertungCommitPressed(ActionEvent actionEvent){
         clearTblAuswertung();
@@ -950,6 +1081,10 @@ public class MainFormController extends Application {
         initTabAuswertung();
     }
 
+    /**
+     * Initialisiert das Tab Auswertungen. Alle Textfelder werden geleert und die Kategorien des angemeldeten Benutzers
+     * in die Auswahlliste geladen.
+     */
     private void initTabAuswertung() {
         try {
             currentAuswertung = null;
