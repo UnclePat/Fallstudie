@@ -378,16 +378,17 @@ public class MainFormController extends Application {
 
         tblRecentEntryTabView.getColumns().addAll(RecentDateColumn, RecentBeschreibungColumn, RecentBetragColumn);
         refreshStart();
-
-        checkShowDeletedItems.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                refreshKategorieView();
-                kategorieTreeReselectLastItem();
-            }
+        /**
+         * Prüft ob die Checkbox des Haushaltsbuchtabs zur Anzeige der gelöschten Items gesetzt ist oder nicht.
+         */
+        checkShowDeletedItems.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            refreshKategorieView();
+            kategorieTreeReselectLastItem();
         });
 
-        //Init Table Auswertungen
+        /**
+         * Initialisiert die Auswertungstabelle des Auswertungstabs
+         */
         TableColumn AuswertungBetragColumn = new TableColumn("Betrag");
         TableColumn AuswertungBeschreibungColumn = new TableColumn("Beschreibung");
         TableColumn AuswertungDateColumn = new TableColumn ("Datum");
@@ -402,6 +403,10 @@ public class MainFormController extends Application {
         tblAuswertung.getColumns().addAll(AuswertungDateColumn, AuswertungBeschreibungColumn, AuswertungBetragColumn);
     }
 
+    /**
+     * Prüft ob der aktuelle User ein Administrator ist. Falls dies nicht der Fall ist, wird der Userauswahl-Button
+     * nicht angezeigt.
+     */
     private void initChangePassword() {
         txtEditedUserName.setText(editedUser.getName());
         if (Backend.Base.Application.getCurrentUser().getAdmin()){
@@ -411,6 +416,10 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Prüft ob der aktuelle User ein Administrator ist. Falls dies nicht der Fall ist, werden sämtliche Elemente der
+     * User-anlegen Section nicht angezeigt.
+     */
     private void initNewUser(){
         if (Backend.Base.Application.getCurrentUser().getAdmin()){
             labelNewUser.setVisible(true);
@@ -435,6 +444,9 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Diese Methode setzt sämtliche Meldungen des Einstellungstabs zurück.
+     */
     private void resetTabEinstellungenLabels(){
         txtEditUserNoUserSelected.setVisible(false);
         txtEditUserPasswordsNotEqual.setVisible(false);
@@ -448,7 +460,10 @@ public class MainFormController extends Application {
         txtNewUserSuccessful.setVisible(false);
     }
 
-
+    /**
+     * Diese Methode aktualisiert den Tab Haushaltsbuch (TreeView zur Anzeige der Kategorien und den TableView zur Anzeige
+     * der Abrechnungsitems zu den Kategorien.
+     */
     public void refreshHaushaltsbuch(){
         System.out.println("Call tab Haushaltsbuch");
         refreshKategorieView();
@@ -456,23 +471,32 @@ public class MainFormController extends Application {
         txtBelegBetrag.setText("0.0");
 }
 
+    /**
+     * Methode, welche den Tableview der Abrechnunsgitems der Startseite zurücksetzt.
+     */
     private void clearTblAbrechnungsItems() {
         for ( int i = 0; i < tblAbrechnungsItems.getItems().size(); i++) {
             tblAbrechnungsItems.getItems().clear();
         }
     }
 
+    /**
+     * Methode, welche den TableView auf der Auswertungsseite zurücksetzt.
+     */
     private void clearTblAuswertung() {
         tblAuswertung.getItems().clear();
     }
 
-    // Is here to build a tree item
     private TreeItem<Kategorie> makeTreeItem(Kategorie item) {
         TreeItem<Kategorie> node = new TreeItem<>(item);
         return node;
-
     }
 
+    /**
+     * Diese Methode befüllt den TableView der Abrechnungsitems mit den Abrechnungsitems der ausgewählten Kategorie.
+     * @param kategorie
+     * Die Kategorie ist die, welche im TreeItem ausgewählt ist und für welche die Abrechnungsitems angezeigt werden.
+     */
     void refreshAbrechnungsItemView(Kategorie kategorie){
         System.out.println("Call refreshAbrechnungsItemView");
         clearTblAbrechnungsItems();
@@ -483,6 +507,9 @@ public class MainFormController extends Application {
         btnDeleteAbrechnungsItem.setText("Löschen");
     }
 
+    /**
+     * Diese Methode befüllt den TableView der Kategorien aus der Datenbank.
+     */
     @FXML void refreshKategorieView(){
         List<Integer> kategorieKeys;
 
@@ -519,6 +546,10 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Diese Methode aktualisiert den kompletten Start Tab, da er auch die Methoden zur Aktualisierung des PieCharts,
+     * des BarCharts und des TableViews der letzten 10 Abrechnungsitems aufruft.
+     */
     public void refreshStart() {
         System.out.println("Call tab Start");
         refreshRecentItemView();
@@ -526,6 +557,9 @@ public class MainFormController extends Application {
         refreshBarChartStart();
     }
 
+    /**
+     * Diese Methode befüllt die anzuzeigenden Daten im PieChart des Start Tabs.
+     */
     private void refreshBarChartStart() {
         System.out.println("Call refreshBarChartStart.");
         BarChartStart.getData().clear();
@@ -552,11 +586,12 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Diese Methode befüllt die anzuzeigenden Daten im BarChart des Start Tabs.
+     */
     private void refreshPieChart() {
         System.out.println("Call refreshPieChart.");
-
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-
         try {
             List<Integer> katKeys = Kategorie.getKategorieKeysForUser(Backend.Base.Application.getCurrentUser());
             for (Integer key : katKeys) {
@@ -564,20 +599,26 @@ public class MainFormController extends Application {
                 if (kat.getSum() != 0 && !kat.getDeletionFlag())
                     pieChartData.add(new PieChart.Data(kat.getName(), kat.getSum()));
             }
-
             pieStartLastExpenses.setData(pieChartData);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Durch diese Methode wird die Tabelle der letzten Abrechungsitems aktualisiert.
+     */
     public void refreshRecentItemView() {
         System.out.println("RefreshRecentItems");
         List<AbrechnungsItem> AbrechnungsItems = AbrechnungsItem.getRecentItems();
         tblRecentEntryTabView.setItems(FXCollections.observableArrayList(AbrechnungsItems));
     }
 
+    /**
+     * Diese Methode führt ein Backup aus. Es wird je nachdem ob das Backup erfolgreich war oder nicht ein Label angezeigt
+     * mit der jeweiligen Meldung ausgegeben. Es wird falls ein Pfad angegeben wurde dieser als Backupfad verwendet.
+     * Anschließend wir dem Backupfile noch eine Datumsangabe angefügt, damit Backups nicht überschrieben werden.
+     * @param actionEvent
+     */
     public void btnBackupPressed(ActionEvent actionEvent){
         System.out.println("Backup started.");
         Status.setVisible(false);
@@ -601,6 +642,11 @@ public class MainFormController extends Application {
 
     }
 
+    /**
+     * Durch diese Methode wird ein neues Fenster zur Auswahl des Users angezeigt. Sobald das Fenster geschlossen wird,
+     * wird der zu ändernde Benutzer in die Variable editedUser geschrieben.
+     * @param actionEvent
+     */
     public void btnSelectUserPressed(ActionEvent actionEvent){
         resetTabEinstellungenLabels();
         UserSelectorController selector = new UserSelectorController();
