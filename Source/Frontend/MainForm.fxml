@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -15,14 +17,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.DatePicker?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MainFormController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0000999999975" prefWidth="1259.0001220703125" style="-fx-background-color: darkgray;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Frontend.MainFormController">
   <children>
     <TabPane fx:id="mainTabControl" layoutX="0.0" layoutY="105.0" prefHeight="771.0" prefWidth="1311.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
@@ -30,7 +37,7 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: whitesmoke;">
               <children>
-                <Text layoutX="700.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten 10 Einträge">
+                <Text layoutX="700.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten 10 Einträge">
                   <font>
                     <Font size="20.0" fx:id="x3" />
                   </font>
@@ -46,8 +53,10 @@
                 <Line endX="1077.0" endY="0.0" layoutX="136.0" layoutY="76.0" startX="565.0" startY="0.0" />
                 <TableView fx:id="tblRecentEntryTabView" layoutX="700.0" layoutY="93.0" prefHeight="596.0" prefWidth="513.5" />
                 <PieChart id="PieChart" fx:id="pieStartLastExpenses" layoutX="40.0" layoutY="79.0" prefHeight="316.0" prefWidth="636.0" visible="true" />
-                <Text font="$x3" layoutX="39.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten Ausgaben" />
+                <Text font="$x3" layoutX="39.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ihre letzten Ausgaben" />
                 <Text font="$x3" layoutX="39.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monatsüberblick" />
+                <Line endX="530.0" endY="0.0" layoutX="140.0" layoutY="76.0" startX="-100.0" />
+                <Line endX="530.0" endY="0.0" layoutX="140.0" layoutY="436.0" startX="-100.0" />
               </children>
             </AnchorPane>
           </content>
@@ -75,7 +84,7 @@
                 <Text font="$x1" layoutX="28.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suche:" />
                 <TextField fx:id="txtAuswertungSearch" layoutX="181.0" layoutY="272.0" prefWidth="186.0078125" promptText="Suchbegriff eingeben" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: text;&#10;-fx-border-color:darkgrey;&#10;" />
                 <Button fx:id="btnAuswertungResetFilter" layoutX="488.0" layoutY="273.0" mnemonicParsing="false" onAction="#btnAuswertungResetFilterPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filter zurücksetzen" />
-                <Button fx:id="btnAuswertungCommit" layoutX="181.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnAuswertungCommitPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filtern" />
+                <Button fx:id="btnAuswertungCommit" layoutX="181.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnAuswertungCommitPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Filtern" />
                 <Line endX="1087.0" endY="0.0" layoutX="129.0" layoutY="91.0" startX="-100.0" />
                 <Text layoutX="37.0" layoutY="41.0" scaleX="1.1212764138874183" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auswertung">
                   <font>
@@ -113,7 +122,7 @@
                 <Button fx:id="btnKategorieEdit" layoutX="238.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieEditPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Bearbeiten" />
                 <Button fx:id="btnKategorieNew" layoutX="168.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieNewPressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Neu" />
                 <TableView fx:id="tblAbrechnungsItems" layoutX="629.0" layoutY="94.0" prefHeight="431.0" prefWidth="581.5" />
-                <Button fx:id="btnDeleteKategorie" layoutX="353.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" prefHeight="33.0" prefWidth="151.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
+                <Button fx:id="btnDeleteKategorie" layoutX="353.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnKategorieDeletePressed" prefHeight="29.0" prefWidth="151.0" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
                 <Button fx:id="btnDeleteAbrechnungsItem" layoutX="1135.0" layoutY="534.0" mnemonicParsing="false" onAction="#btnAbrechnungsItemDeletePressed" style="-fx-border-radius: 0 0 0 0;&#10;-fx-background-radius: 00 00 0 0;&#10;-fx-background-color:white;&#10;-fx-cursor: hand;&#10;-fx-border-color:darkgrey;&#10;" text="Löschen" />
                 <CheckBox fx:id="checkShowDeletedItems" layoutX="992.0" layoutY="37.0" mnemonicParsing="false" style="&#10;-fx-cursor: hand;&#10;&#10;&#10;&#10;" text="Gelöschte Elemente anzeigen" />
               </children>
@@ -178,7 +187,7 @@
     </TabPane>
     <ImageView id="Logo.png" fitHeight="72.0" fitWidth="91.0001220703125" layoutX="39.0" layoutY="14.0">
       <image>
-        <Image preserveRatio="true" smooth="true" url="@Logo.png" />
+        <Image url="@Logo.png" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <Text fill="WHITE" layoutX="238.0" layoutY="62.0" scaleX="2.063105775241048" scaleY="2.195314492575571" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: whitesmoke;" text="HouseLook 2018">
