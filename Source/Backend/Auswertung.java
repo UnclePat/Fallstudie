@@ -32,6 +32,11 @@ public class Auswertung {
         this.filterKategorie = kategorie;
     }
 
+    /**
+     * Ermittelt anhand der bei der Erstellung des Objektes angegebenen Filtern das Ergebnis der Auswertung.
+     * @return
+     * Die Liste der AbrechnungsItems, die anhand der Filter ermittelt werden konnten.
+     */
     public List<AbrechnungsItem> getResult(){
         try {
             List<AbrechnungsItem> resultList = new ArrayList<>();
@@ -87,6 +92,11 @@ public class Auswertung {
         }
     }
 
+    /**
+     * Erzeugt zum Zweck der Auswertung ein Mapping von KategorieKeys zu deren Namen.
+     * @return
+     * Map mit Zuordnung KategorieKey zu Name.
+     */
     public Map<Integer, String> getKategorieKeyNameMapping(){
         Map<Integer, String> resultMap = new HashMap<>();
 
