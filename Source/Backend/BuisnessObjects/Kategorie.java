@@ -194,7 +194,8 @@ public class Kategorie extends DatabaseItem{
 
         String query = "SELECT [intKey]" +
                 "  FROM [dbo].[Kategorie]" +
-                "  WHERE [intFkeyUser] = ?";
+                "  WHERE [intFkeyUser] = ?" +
+                "  ORDER BY [strName] ASC";
 
         DataBaseServer connection = new DataBaseServer();
 
