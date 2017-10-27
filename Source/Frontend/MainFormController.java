@@ -86,8 +86,6 @@ public class MainFormController extends Application {
     private Tab tabEinstellungen;
 
     @FXML
-    private Button btnAbrechnungsItemSave;
-    @FXML
     private Button btnNewUser;
     @FXML
     private Button btnSelectUser;
@@ -147,10 +145,6 @@ public class MainFormController extends Application {
     @FXML
     private TextField txtAuswertungSearch;
     @FXML
-    private Button btnAuswertungResetFilter;
-    @FXML
-    private Button btnAuswertungCommit;
-    @FXML
     private ChoiceBox choiceAuswertungKategorie;
     @FXML
     private TableView tblAuswertung;
@@ -173,6 +167,11 @@ public class MainFormController extends Application {
     }
     public static Auswertung currentAuswertung = null;
 
+    /**
+     * Diese Methode wird durch die Application aufgerufen und lädt die Oberfläche MainForm.fxml.
+     * @param primaryStage
+     * Die Stage auf die das MainForm geladen wird.
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -190,8 +189,14 @@ public class MainFormController extends Application {
         }
     }
 
+    /**
+     * Initialisiert das MainForm
+     */
     @FXML
     protected void initialize(){
+        /**
+         * Prüft welcher Tab ausgewählt ist und ruft ggf. die refresh Methode auf, welche dann die Ansicht aktualisiert.
+         */
         mainTabControl.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
             if (newTab == tabHaushaltsbuch){
                 refreshHaushaltsbuch();
@@ -206,7 +211,10 @@ public class MainFormController extends Application {
                 refreshStart();
                 return;
             }
-
+            /**
+             * Bei Auswahl des Einstellungstabs wird direkt der aktuelle USer in die Variable editedUser geladen.
+             * Diese Variable wird im Textfeld Benutzer angezeigt, wessen Passwort geändert werden soll.
+             */
             if (newTab == tabEinstellungen){
                 editedUser = Backend.Base.Application.getCurrentUser();
                 resetTabEinstellungenLabels();
@@ -219,25 +227,36 @@ public class MainFormController extends Application {
                 initTabAuswertung();
             }
         });
-
+        /**
+         * Die Methode ermittelt das aktuelle ausgewählte Item im TreeView
+         */
         kategorieTree.getSelectionModel().selectedItemProperty().addListener((observable, oldTreeItem, newTreeItem) -> {
             TreeItem<Kategorie> item = (TreeItem<Kategorie>) newTreeItem;
             if (item == null){
                 return;
             }
-
+            /**
+             * Durch diese Konsolenausgabe kann während der Laufzeit in der Entwicklungsumgebung geprüft werden,
+             * ob das richtige TreeItem ausgewählt ist. Die Variable currentKategorie wird mit dem aktuell ausgewählten
+             * Item befüllt.
+             */
             System.out.println("Selected Key : " + item.getValue().getKey() + " Selected Item: " + item.getValue().toString());
             refreshAbrechnungsItemView(item.getValue());
             MainFormController.currentKategorie = item.getValue();
             MainFormController.currentItemKategorieTree = item;
-
+            /**
+             * Wenn das aktuell ausgewählt TreeItem bereits gelöscht wurde (ein DeletionFlag besitzt), wird der Button
+             * als Wiederherstllungsbutton angezeigt. Andernfalls wir der Löschen Button dargestellt.
+             */
             if (currentKategorie.getDeletionFlag()){
                 btnDeleteKategorie.setText("Wiederherstellen");
             }else{
                 btnDeleteKategorie.setText("Löschen");
             }
         });
-
+        /**
+         * Färbt die TreeItems je nach Zustand (gelöscht, nicht gelöscht) rot oder schwarz.
+         */
         kategorieTree.setCellFactory(tv ->  new TreeCell<Kategorie>() {
             @Override
             public void updateItem(Kategorie item, boolean empty) {
@@ -259,7 +278,9 @@ public class MainFormController extends Application {
             }
         });
 
-        //Init tblAbrechnungsItems
+        /**
+         * Initialisiert TableView der Abrechnungsitems
+         */
         TableColumn dateColumn = new TableColumn("Datum");
         TableColumn beschreibungColumn = new TableColumn("Beschreibung");
         TableColumn betragColumn = new TableColumn("Betrag");
@@ -274,12 +295,15 @@ public class MainFormController extends Application {
 
         tblAbrechnungsItems.getColumns().addAll(dateColumn, beschreibungColumn, betragColumn);
 
+        /**
+         * Wenn das aktuell ausgewählt AbrechnungsItem bereits gelöscht wurde (ein DeletionFlag besitzt), wird der Button
+         * als Wiederherstllungsbutton angezeigt. Andernfalls wir der Löschen-Button dargestellt.
+         */
         tblAbrechnungsItems.getSelectionModel().selectedItemProperty().addListener((observable, oldTableItem, newTableItem) -> {
             AbrechnungsItem item = (AbrechnungsItem) newTableItem;
             if (item == null){
                 return;
             }
-
             System.out.println("Selected Key : " + item.getKey() + " Selected Item: " + item.getBeschreibung());
             MainFormController.currentAbrechnungsItem = item;
 
@@ -289,7 +313,9 @@ public class MainFormController extends Application {
                 btnDeleteAbrechnungsItem.setText("Löschen");
             }
         });
-
+        /**
+         * Färbt die AbrechnungsItems je nach Zustand (gelöscht, nicht gelöscht) rot oder schwarz.
+         */
         tblAbrechnungsItems.setRowFactory(row -> new TableRow<AbrechnungsItem>(){
             @Override
             public void updateItem(AbrechnungsItem item, boolean empty){
@@ -310,7 +336,11 @@ public class MainFormController extends Application {
                 }
             }
         });
-
+        /**
+         * Folgende drei Lambdas stellen sicher, dass in den Textboxen "txtBelegBetrag", "txtAuswertungBetragVon" und
+         * "txtAuswertungBetragBis" nur numerische Werte mit maximal 2 Nachkommastellen eingegeben
+         * werden können.
+         */
         txtBelegBetrag.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d{0,16}([\\.|\\,]\\d{0,2})?")) {
                 txtBelegBetrag.setText(oldValue);
@@ -332,7 +362,9 @@ public class MainFormController extends Application {
         //Set EditUserFields
         txtEditedUserName.setEditable(false);
 
-        //TabStart Table Init
+        /**
+         * Initialisiert den TableView, welcher die letzten 10 Abrechnungsitems anzeigt.
+         */
         TableColumn RecentBetragColumn = new TableColumn("Betrag");
         TableColumn RecentBeschreibungColumn = new TableColumn("Beschreibung");
         TableColumn RecentDateColumn = new TableColumn ("Datum");
